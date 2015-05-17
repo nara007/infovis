@@ -1,14 +1,22 @@
 package ontos.infovis.service;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 
-import org.glassfish.grizzly.http.server.HttpServer;
+import ontos.infovis.service.db.FilesystemService;
+import ontos.infovis.service.db.IPersistenceService;
 
+import org.apache.jena.atlas.json.JsonObject;
+import org.glassfish.grizzly.http.server.HttpServer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
 
 public class MyResourceTest {
@@ -42,6 +50,23 @@ public class MyResourceTest {
      */
     @Test
     public void testGetIt() {
+    	// test filesystem service
+    	try {
+	    	IPersistenceService pService = new FilesystemService();
+	    	
+			File testFile = new File("ontology/local.xml");
+			URL testURL = testFile.toURI().toURL();
+	    	
+	    	JsonObject testComponent = new JsonObject();
+	    	testComponent.put("title", "thisIsATest");
+	    	
+	    	pService.saveComponent(testURL, testComponent);
+    	}
+    	catch(MalformedURLException mUrlEx) {
+    		System.out.println(mUrlEx);
+    	}
+
+    	// test response
         String responseMsg = target.path("myresource").request().get(String.class);
         assertEquals("Got it!", responseMsg);
     }
