@@ -1,9 +1,18 @@
 package ontos.infovis.service;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+import ontos.infovis.service.db.FilesystemService;
+import ontos.infovis.service.db.IPersistenceService;
+
+import org.apache.jena.atlas.json.JsonObject;
 
 /**
  * Root resource (exposed at "myresource" path)
@@ -20,6 +29,22 @@ public class MyResource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String getIt() {
-        return "Got it!";
+    	// test filesystem service
+    	try {
+	    	IPersistenceService pService = new FilesystemService();
+	    	
+			File testFile = new File("ontology/local.xml");
+			URL testURL = testFile.toURI().toURL();
+	    	
+	    	JsonObject testComponent = new JsonObject();
+	    	testComponent.put("title", "thisIsATest");
+	    	
+	    	pService.saveComponent(testURL, testComponent);
+    	}
+    	catch(MalformedURLException mUrlEx) {
+    		System.out.println(mUrlEx);
+    	}
+    	
+        return "Test";
     }
 }

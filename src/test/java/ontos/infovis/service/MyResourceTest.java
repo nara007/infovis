@@ -50,22 +50,6 @@ public class MyResourceTest {
      */
     @Test
     public void testGetIt() {
-    	// test filesystem service
-    	try {
-	    	IPersistenceService pService = new FilesystemService();
-	    	
-			File testFile = new File("ontology/local.xml");
-			URL testURL = testFile.toURI().toURL();
-	    	
-	    	JsonObject testComponent = new JsonObject();
-	    	testComponent.put("title", "thisIsATest");
-	    	
-	    	pService.saveComponent(testURL, testComponent);
-    	}
-    	catch(MalformedURLException mUrlEx) {
-    		System.out.println(mUrlEx);
-    	}
-
     	// test response
         String responseMsg = target.path("myresource").request().get(String.class);
         assertEquals("Got it!", responseMsg);
