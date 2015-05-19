@@ -1,0 +1,1 @@
+[ <http://example.org/title>  "\"thisIsATest\""^^<java:org.apache.jena.atlas.json.JsonString> ] .

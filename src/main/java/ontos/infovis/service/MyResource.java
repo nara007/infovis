@@ -33,7 +33,7 @@ public class MyResource {
     	try {
 	    	IPersistenceService pService = new FilesystemService();
 	    	
-			File testFile = new File("ontology/local.xml");
+			File testFile = new File("ontology/local.ttl"); System.out.println(testFile.toURL());
 			URL testURL = testFile.toURI().toURL();
 	    	
 	    	JsonObject testComponent = new JsonObject();

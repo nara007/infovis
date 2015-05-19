@@ -9,6 +9,7 @@ import java.net.URL;
 
 import org.apache.jena.atlas.json.JsonArray;
 import org.apache.jena.atlas.json.JsonObject;
+import org.apache.jena.riot.system.stream.StreamManager;
 
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
@@ -22,12 +23,12 @@ import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import com.hp.hpl.jena.util.FileManager;
 
 public class FilesystemService implements IPersistenceService {
-	private Model readModel(URL fileURL) {
+	private Model readModel(URL fileURL) {		
 		// create an empty RDF model
 		Model model = ModelFactory.createDefaultModel();
-		
+
 		// read all resources from the local TTL file into the model
-		InputStream inStream = FileManager.get().open(fileURL.getFile());
+		InputStream inStream = FileManager.get().open("ontology/local.ttl");
 		if (inStream == null) {
 			throw new IllegalArgumentException("File: " + fileURL + " not found");
 		}
