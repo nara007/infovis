@@ -46,7 +46,7 @@ public class MyResource {
 	    	//pService.saveComponent(testURL, testComponent);
 	    	
 	    	// test loading
-	    	Query testQuery = QueryFactory.create("SELECT ?title WHERE{}");
+	    	Query testQuery = QueryFactory.create("SELECT ?title WHERE { <http://example.org/book/book1> <http://purl.org/dc/elements/1.1/title> ?title .}  ");
 	    	return pService.loadComponent(testURL, testQuery).toString();
     	}
     	catch(MalformedURLException mUrlEx) {

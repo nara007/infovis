@@ -1,1 +1,1 @@
-[ <http://example.org/title>  "\"thisIsATest\""^^<java:org.apache.jena.atlas.json.JsonString> ] .
+<http://example.org/book/book1> <http://purl.org/dc/elements/1.1/title> "SPARQL Tutorial" .
