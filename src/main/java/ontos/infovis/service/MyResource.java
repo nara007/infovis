@@ -14,6 +14,9 @@ import ontos.infovis.service.db.IPersistenceService;
 
 import org.apache.jena.atlas.json.JsonObject;
 
+import com.hp.hpl.jena.query.Query;
+import com.hp.hpl.jena.query.QueryFactory;
+
 /**
  * Root resource (exposed at "myresource" path)
  */
@@ -33,13 +36,18 @@ public class MyResource {
     	try {
 	    	IPersistenceService pService = new FilesystemService();
 	    	
-			File testFile = new File("ontology/local.ttl"); System.out.println(testFile.toURL());
+			File testFile = new File("ontology/local.ttl");
 			URL testURL = testFile.toURI().toURL();
 	    	
 	    	JsonObject testComponent = new JsonObject();
 	    	testComponent.put("title", "thisIsATest");
 	    	
-	    	pService.saveComponent(testURL, testComponent);
+	    	// test writing
+	    	//pService.saveComponent(testURL, testComponent);
+	    	
+	    	// test loading
+	    	Query testQuery = QueryFactory.create("SELECT ?title WHERE{}");
+	    	return pService.loadComponent(testURL, testQuery).toString();
     	}
     	catch(MalformedURLException mUrlEx) {
     		System.out.println(mUrlEx);

@@ -3,6 +3,7 @@ package ontos.infovis.service.db;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -24,19 +25,27 @@ import com.hp.hpl.jena.util.FileManager;
 
 public class FilesystemService implements IPersistenceService {
 	private Model readModel(URL fileURL) {		
-		// create an empty RDF model
-		Model model = ModelFactory.createDefaultModel();
+		try {
+			// create an empty RDF model
+			Model model = ModelFactory.createDefaultModel();
 
-		// read all resources from the local TTL file into the model
-		InputStream inStream = FileManager.get().open("ontology/local.ttl");
-		if (inStream == null) {
-			throw new IllegalArgumentException("File: " + fileURL + " not found");
+			// read all resources from the local TTL file into the model
+			InputStream inStream = FileManager.get().open("ontology/local.ttl");
+			if (inStream == null) {
+				throw new IllegalArgumentException("File: " + fileURL + " not found");
+			}
+			model.read(inStream, null, "TTL");
+			
+			// TODO: Close stream?
+			inStream.close();
+			
+			return model;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		model.read(inStream, null, "TTL");
 		
-		// TODO: Close stream?
-		
-		return model;
+		return null;
 	}
 	
 	private boolean saveModel(URL fileURL, Model model) {
@@ -47,15 +56,20 @@ public class FilesystemService implements IPersistenceService {
 			// create an output stream and write to it
 			FileOutputStream outStream = new FileOutputStream(outFile);
 			model.write(outStream, "TTL");
+			
+			// TODO: Close stream?
+			outStream.close();
+			
 		} catch (URISyntaxException e) {
 			// TODO Handle URISyntaxException.
 			return false;
 		} catch (FileNotFoundException e) {
 			// TODO Handle FileNotFoundException.
 			return false;
+		} catch (IOException e) {
+			// TODO Handle IOException
+			return false;
 		}
-		
-		// TODO: Close stream?
 		
 		return true;
 	}
@@ -64,23 +78,24 @@ public class FilesystemService implements IPersistenceService {
 	public JsonArray loadComponent(URL sourceURL, Query searchQuery) {
 		// read an existing or empty model from the file 
 		Model model = readModel(sourceURL);
-		
+			
 		// create a result array
 		JsonArray jsonResults = new JsonArray();
 		
 		// execute query on the loaded model, execSelect() returns multiple results
 		try (QueryExecution queryExec = QueryExecutionFactory.create(searchQuery, model)) {
-			ResultSet results = queryExec.execSelect() ;
+			
+			ResultSet results = queryExec.execSelect();
 			
 			// iterate through all results
 			while(results.hasNext()) {
-				QuerySolution querySoln = results.nextSolution() ;
-				
+				QuerySolution querySoln = results.nextSolution();
+				System.out.println("querySoln: "+querySoln);
 				// try to convert the results into JSON // TODO: Try ResultParser instead.
 				JsonObject jsonResult = new JsonObject();
 				
 				// TODO: Remove this and get the correct component values.
-				jsonResult.put("title", querySoln.getLiteral("title").getString());
+				//jsonResult.put("title", querySoln.getLiteral("title").getString());
 				/*
 				RDFNode x = querySoln.get("varName") ;       // Get a result variable by name.
 				Resource r = querySoln.getResource("VarR") ; // Get a result variable - must be a resource
@@ -108,7 +123,7 @@ public class FilesystemService implements IPersistenceService {
 	public boolean saveComponent(URL targetURL, JsonObject component) {
 		// read an existing or empty model from the file
 		Model model = readModel(targetURL);
-
+		
 		// add the new resource
 		Resource res = model.createResource();
 		res.addLiteral(ResourceFactory.createProperty(BASE_URL, "title"), component.get("title"));
