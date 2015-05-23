@@ -9,9 +9,10 @@
             $("#b01").click(function(){
 
                 $.ajax({
-                    type:'get',
+                    type:'POST',
                     url:'http://localhost:8080/resources/component',
-                    data:{},
+                    data:'hello xiaoming',
+                    contentType:'text/plain',
                     cache:false,
                     dataType:'json',
                     success:function(data){
@@ -19,11 +20,47 @@
                     }
                 });
             });
+
+            $("#b02").click(function(){
+                $.ajax({
+                    type:'PUT',
+                    url:'http://localhost:8080/resources/component',
+                    data:'hello xiaohong',
+                    contentType:'text/plain',
+                    cache:false,
+                    dataType:'json',
+                    success:function(data){
+                        console.log(data);
+                    }
+                });
+            });
+
+            $("#b03").click(function(){
+                $.ajax({
+                    type:'GET',
+                    url:'http://localhost:8080/resources/component',
+                    data:{'id':'xiaojun','version':'1.0.0'},
+                    contentType:'application/json',
+                    cache:false,
+                    dataType:'json',
+                    success:function(data){
+                        console.log(data);
+                    }
+                });
+            });
+
         });
     </script>
 </head>
 <body>
-<div id="myDiv"><h2>get response json</h2></div>
+<div id="myDiv"><h2>post request json</h2></div>
 <button id="b01" type="button">get json</button>
+
+<div id="myDiv2"><h2>put request json</h2></div>
+<button id="b02" type="button">get json</button>
+
+<div id="myDiv3"><h2>get request json</h2></div>
+<button id="b03" type="button">get json</button>
+
 </body>
 </html>

@@ -3,11 +3,17 @@ package ontos.infovis.service;
 import org.glassfish.jersey.server.ResourceConfig;
 
 /**
- * Created by root on 15-5-22.
+ * @author Ye Song
+ * @description register rest resources.
+ * @date 15-5-23
+ * @copyright infovis@tu-dresden.de
  */
 public class ResourcesConfiguration extends ResourceConfig {
 
-    public ResourcesConfiguration() {
-        register(ComponentResource.class);
-    }
+  /**
+   * register all rest resources
+   */
+  public ResourcesConfiguration() {
+    register(ComponentResource.class);
+  }
 }
