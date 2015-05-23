@@ -1,6 +1,8 @@
 package ontos.infovis.service;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -12,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 import ontos.infovis.service.db.FilesystemService;
 import ontos.infovis.service.db.IPersistenceService;
 
+import org.apache.jena.atlas.json.JSON;
 import org.apache.jena.atlas.json.JsonObject;
 
 import com.hp.hpl.jena.query.Query;
@@ -36,17 +39,22 @@ public class MyResource {
     	try {
 	    	IPersistenceService pService = new FilesystemService();
 	    	
+	    	// test file
 			File testFile = new File("ontology/local.ttl");
 			URL testURL = testFile.toURI().toURL();
 	    	
-	    	JsonObject testComponent = new JsonObject();
-	    	testComponent.put("title", "thisIsATest");
+			// test writing
+			String jsonString = "{\"http://example.org/book/book4\" : {\"http://purl.org/dc/elements/1.1/title\" : [{\"type\" : \"literal\", \"value\" : \"ThisIsATest\"}]}}";
+	        InputStream inStream = new ByteArrayInputStream(jsonString.getBytes());
+	    	JsonObject testComponent = JSON.parse(inStream);
 	    	
-	    	// test writing
-	    	//pService.saveComponent(testURL, testComponent);
+	    	pService.saveComponent(testURL, testComponent);
 	    	
 	    	// test loading
-	    	Query testQuery = QueryFactory.create("SELECT ?title WHERE { <http://example.org/book/book1> <http://purl.org/dc/elements/1.1/title> ?title .}  ");
+	    	Query testQuery = QueryFactory.create("DESCRIBE ?book WHERE {?book <http://purl.org/dc/elements/1.1/title> ?title .}");
+	    	testQuery.setLimit(20);
+	    	testQuery.setOffset(0);
+	    	
 	    	return pService.loadComponent(testURL, testQuery).toString();
     	}
     	catch(MalformedURLException mUrlEx) {
