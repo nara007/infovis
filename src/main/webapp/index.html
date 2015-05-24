@@ -49,6 +49,18 @@
                 });
             });
 
+            $("#b04").click(function(){
+                $.ajax({
+                    type:'GET',
+                    url:'http://localhost:8080/resources/allComponents',
+                    cache:false,
+                    dataType:'json',
+                    success:function(data){
+                        console.log(data);
+                    }
+                });
+            });
+
         });
     </script>
 </head>
@@ -61,6 +73,9 @@
 
 <div id="myDiv3"><h2>get request json</h2></div>
 <button id="b03" type="button">get json</button>
+
+<div id="myDiv4"><h2>get json array</h2></div>
+<button id="b04" type="button">get json array</button>
 
 </body>
 </html>
