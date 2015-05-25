@@ -12,6 +12,10 @@ import org.apache.jena.riot.RDFDataMgr;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 
+/**
+ * @author Franz
+ * This class provides helper functions for parsing Jena Models into JSON and back again.
+ */
 public class JSONModelParser {
 	/**
 	 * @param model the {@link Model}, which will be parsed into a {@link JsonObject}
