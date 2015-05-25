@@ -4,19 +4,23 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+import org.apache.jena.riot.Lang;
+import org.apache.jena.riot.RDFDataMgr;
+
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.util.FileManager;
 
 /**
  * @author Franz
  * This class provides helper functions for reading/writing models into TTL files.
  */
 public class FilesystemManager {
+	// format of the written an read files
+	static public Lang fileLang = Lang.TTL;
+	
 	/**
 	 * @param fileURL the {@link URL} to the local file, from which the model is read
 	 * @return {@link Model} the whole ontology saved at the given file 
@@ -27,17 +31,11 @@ public class FilesystemManager {
 		
 		try {
 			// read all resources from the local TTL file into the model
-			InputStream inStream = FileManager.get().open("ontology/local.ttl");
-			if (inStream == null) {
-				throw new IllegalArgumentException("File: " + fileURL + " not found");
-			}
-			model.read(inStream, null, "TTL");
-			
-			// close stream
-			inStream.close();
-		} 
-		catch (IOException e) {
-			// TODO handle IOException
+			model = RDFDataMgr.loadModel(fileURL.toURI().getPath(), fileLang) ;
+		}
+		catch (URISyntaxException uriSynEx) {
+			// TODO handle URISyntaxException
+			uriSynEx.printStackTrace(System.out);
 		}
 		
 		return model;
@@ -55,24 +53,38 @@ public class FilesystemManager {
 		
 			// create an output stream and write to it
 			FileOutputStream outStream = new FileOutputStream(outFile);
-			model.write(outStream, "TTL");
+			RDFDataMgr.write(outStream, model, fileLang);
 			
 			// close stream
 			outStream.close();
 		}
-		catch (URISyntaxException e) {
+		catch (URISyntaxException uriSynEx) {
 			// TODO handle URISyntaxException
+			uriSynEx.printStackTrace(System.out);
 			return false;
 		}
-		catch (FileNotFoundException e) {
+		catch (FileNotFoundException fileEx) {
 			// TODO handle FileNotFoundException
+			fileEx.printStackTrace(System.out);
 			return false;
 		}
-		catch (IOException e) {
+		catch (IOException ioEx) {
 			// TODO handle IOException
+			ioEx.printStackTrace(System.out);
 			return false;
 		}
 		
 		return true;
+	}
+	
+	/**
+	 * @param fileURL the {@link URL} to the local file which shall be cleared
+	 * @return boolean true if an empty model has been saved to this file
+	 */
+	static public boolean clearFile(URL fileURL) {
+		// create an empty model an save it into the file
+		Model model = ModelFactory.createDefaultModel();
+		
+		return saveModel(fileURL, model);
 	}
 }

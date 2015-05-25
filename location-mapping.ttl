@@ -1,7 +1,0 @@
-@prefix lm: <http://jena.hpl.hp.com/2004/08/location-mapping#>
-
-. [] lm:mapping
-   [ lm:name "file:local.ttl" ;      lm:altName "file:ontology/local.ttl" ] ,
-   [ lm:prefix "file:ontology/" ;       lm:altPrefix "file:ONTOLOGY/" ] ,
-   [ lm:name "file:ontology/local.ttl" ;  lm:altName "file:DIR/local.ttl" ]
-   .

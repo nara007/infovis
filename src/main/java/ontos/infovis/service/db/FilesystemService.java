@@ -14,7 +14,7 @@ import com.hp.hpl.jena.rdf.model.Model;
  * This class handles all load/save calls for components and compositions from/into the filesystem.
  * All calls address a local TTL file - it is intended to use only one file for each ontology.
  */
-public class FilesystemService implements IPersistenceService {
+public class FilesystemService implements IPersistenceService {	
 	/**
 	 * @param sourceURL the {@link URL} to the local TTL file from which the components are read
 	 * @param searchQuery a SPARQL {@link Query} to find an component by ID and version, will be used as a DESCRIBE query
