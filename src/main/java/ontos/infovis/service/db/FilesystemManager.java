@@ -13,11 +13,15 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.util.FileManager;
 
 public class FilesystemManager {
+	/**
+	 * @param fileURL the {@link URL} to the local file, from which the model is read
+	 * @return {@link Model} the whole ontology saved at the given file 
+	 */
 	static public Model readModel(URL fileURL) {		
+		// create an empty RDF model
+		Model model = ModelFactory.createDefaultModel();
+		
 		try {
-			// create an empty RDF model
-			Model model = ModelFactory.createDefaultModel();
-
 			// read all resources from the local TTL file into the model
 			InputStream inStream = FileManager.get().open("ontology/local.ttl");
 			if (inStream == null) {
@@ -27,16 +31,19 @@ public class FilesystemManager {
 			
 			// close stream
 			inStream.close();
-			
-			return model;
 		} 
 		catch (IOException e) {
-			// TODO: Handle IOException.
+			// TODO handle IOException
 		}
 		
-		return null;
+		return model;
 	}
 	
+	/**
+	 * @param fileURL the {@link URL} to the local file, into which the model is saved
+	 * @param model the {@link Model} the whole ontology which will be written into the given file 
+	 * @return boolean true if the model has been saved
+	 */
 	static public boolean saveModel(URL fileURL, Model model) {
 		try {
 			// get the reference to the output file
@@ -47,18 +54,18 @@ public class FilesystemManager {
 			model.write(outStream, "TTL");
 			
 			// close stream
-			outStream.close();	
+			outStream.close();
 		}
 		catch (URISyntaxException e) {
-			// TODO Handle URISyntaxException.
+			// TODO handle URISyntaxException
 			return false;
 		}
 		catch (FileNotFoundException e) {
-			// TODO Handle FileNotFoundException.
+			// TODO handle FileNotFoundException
 			return false;
 		}
 		catch (IOException e) {
-			// TODO Handle IOException.
+			// TODO handle IOException
 			return false;
 		}
 		

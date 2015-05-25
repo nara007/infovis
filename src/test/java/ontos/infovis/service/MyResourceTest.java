@@ -1,23 +1,15 @@
 package ontos.infovis.service;
 
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
+import static org.junit.Assert.assertEquals;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 
-import ontos.infovis.service.db.FilesystemService;
-import ontos.infovis.service.db.IPersistenceService;
-
-import org.apache.jena.atlas.json.JsonObject;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class MyResourceTest {
 
@@ -42,7 +34,7 @@ public class MyResourceTest {
 
     @After
     public void tearDown() throws Exception {
-        server.stop();
+        server.shutdownNow();
     }
 
     /**

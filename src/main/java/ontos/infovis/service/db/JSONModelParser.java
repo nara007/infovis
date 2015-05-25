@@ -13,6 +13,10 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 
 public class JSONModelParser {
+	/**
+	 * @param model the {@link Model}, which will be parsed into a {@link JsonObject}
+	 * @returns {@link JsonObject} the JSON representation of the model in RDFJSON format
+	 */
     static public JsonObject parseAsJsonObject(Model model) {
     	// create an OutputStream and write the model into it
     	ByteArrayOutputStream outStream = new ByteArrayOutputStream() ;
@@ -25,6 +29,10 @@ public class JSONModelParser {
     	return jsonObject;
     }
     
+	/**
+	 * @param jsonObject the {@link JsonObject} in RDFJSON format, which will be parsed into a {@link Model}
+	 * @returns {@link Model} the model representation of the JSON
+	 */
     static public Model parseAsModel(JsonObject jsonObject) {
     	// create an InputStream from the JSON as String
     	byte[] inBytes = jsonObject.toString().getBytes();
