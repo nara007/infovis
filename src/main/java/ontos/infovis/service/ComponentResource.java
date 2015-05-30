@@ -1,9 +1,8 @@
 package ontos.infovis.service;
 
-import ontos.infovis.pojo.Bool;
 import ontos.infovis.pojo.Component;
-import ontos.infovis.pojo.POJOFactory;
-import ontos.infovis.serviceimpl.ComponentManager;
+import ontos.infovis.pojo.Response;
+import ontos.infovis.util.ApplicationManager;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -13,7 +12,7 @@ import java.util.List;
 
 /**
  * @author Ye Song
- * @description Root resource (exposed at "myresource" path).
+ * @description component resources
  * @date 15-5-23
  * @copyright infovis@tu-dresden.de
  */
@@ -24,58 +23,65 @@ public class ComponentResource {
    * Method handling HTTP POST requests. The returned object will be sent to the client as "json"
    * media type.Method registers a component.
    * 
-   * @param componentURI String
-   * @return Bool indicates if a component has been registered successfully.
+   * @param Component POJO (converted from json automatically)
+   * @return Response object(converted to json automatically)
    */
   @POST
-  @Path("component")
-  @Consumes(MediaType.TEXT_PLAIN)
+  @Path("components")
+  @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  public Bool registerComponent(String componentURI) {
+  public Response registerComponent(Component cmp) {
 
-    ComponentManager cm =
-        (ComponentManager) POJOFactory.POJOContext.getSpringContext().getBean("componentManager");
-    System.out.println("param: " + componentURI);
-    return cm.registerComponent(componentURI);
+    System.out.println(cmp);
+    Response response =
+        (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+    response.setBool(true);
+    response.setError("registerComponent no error");
+    response.setException("registerComponent no exception");
+
+    return response;
   }
 
   /**
    * Method handling HTTP PUT requests. The returned object will be sent to the client as "json"
    * media type.Method updates a component.
    *
-   * @param componentURI String
-   * @return Bool indicates if a specific component has been updated successfully.
+   * @param Component POJO (converted from json automatically)
+   * @return Response object(converted to json automatically)
    */
   @PUT
-  @Path("component")
-  @Consumes(MediaType.TEXT_PLAIN)
+  @Path("components")
+  @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  public Bool updateComponent(String componentURI) {
-    ComponentManager cm =
-        (ComponentManager) POJOFactory.POJOContext.getSpringContext().getBean("componentManager");
-    System.out.println("param2: " + componentURI);
-    return cm.registerComponent(componentURI);
+  public Response updateComponent(Component cmp) {
+    System.out.println(cmp);
+    Response response =
+        (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+    response.setBool(true);
+    response.setError("updateComponent no error");
+    response.setException("updateComponent no exception");
+    return response;
   }
 
   /**
    * Method handling HTTP GET requests. The returned object will be sent to the client as "json"
    * media type.Method returns a specific component.
    *
-   * @param identity String
+   * @param uri String
    * @param version String
    * @return Component
    */
   @GET
-  @Path("component")
-  @Consumes(MediaType.APPLICATION_JSON)
+  @Path("components")
+  @Consumes(MediaType.TEXT_PLAIN)
   @Produces(MediaType.APPLICATION_JSON)
-  public Component getComponent(@QueryParam("id") String identity,
-      @QueryParam("version") String version) {
+  public Component getComponent(@QueryParam("uri") String uri,
+      @DefaultValue("1.0.0") @QueryParam("version") String version) {
+    // Component component
+    // =(Component)ApplicationManager.appManager.getSpringContext().getBean("component");
     Component component =
-        (Component) POJOFactory.POJOContext.getSpringContext().getBean("component");
-    component.setIdentity("xiaojun");
-    component.setVersion("1.0.0");
-    System.out.println(identity + " " + version);
+        (Component) ApplicationManager.appManager.getSpringContext().getBean("component");
+    System.out.println(uri + " " + version);
     return component;
   }
 
@@ -86,22 +92,13 @@ public class ComponentResource {
    * @return List<Component>
    */
   @GET
-  @Path("allComponents")
+  @Path("allcomponents")
   @Produces(MediaType.APPLICATION_JSON)
   public List<Component> getAllComponents() {
 
-    Component component1 =
-        (Component) POJOFactory.POJOContext.getSpringContext().getBean("component");
-    component1.setVersion("1.0");
-    component1.setIdentity("max");
-    Component component2 =
-        (Component) POJOFactory.POJOContext.getSpringContext().getBean("component");
-    component2.setVersion("2.0");
-    component2.setIdentity("makus");
-    Component component3 =
-        (Component) POJOFactory.POJOContext.getSpringContext().getBean("component");
-    component3.setVersion("3.0");
-    component3.setIdentity("peter");
+    Component component1 = null;
+    Component component2 = null;
+    Component component3 = null;
     List<Component> list = new ArrayList<Component>();
     list.add(component1);
     list.add(component2);
@@ -120,17 +117,9 @@ public class ComponentResource {
   @Path("searchedComponents")
   @Produces(MediaType.APPLICATION_JSON)
   public List<Component> searchComponent(String conditions) {
-    Component component1 =
-        (Component) POJOFactory.POJOContext.getSpringContext().getBean("component");
-    component1.setVersion("4.0");
-    component1.setIdentity("Bill");
-    Component component2 =
-        (Component) POJOFactory.POJOContext.getSpringContext().getBean("component");
-    component2.setVersion("5.0");
-    component2.setIdentity("Willy");
+    Component component1 = null;
     List<Component> list = new ArrayList<Component>();
     list.add(component1);
-    list.add(component2);
     return list;
   }
 
@@ -142,8 +131,8 @@ public class ComponentResource {
    * @param version String
    * @return Bool indicates if a specific component has been deleted successfully.
    */
-  public Bool deleteComponent(String identifier, String version) {
-    Bool bool = (Bool) POJOFactory.POJOContext.getSpringContext().getBean("bool");
-    return bool;
+  public void deleteComponent(String identifier, String version) {
+    // Bool bool = (Bool) ApplicationManager.appManager.getSpringContext().getBean("bool");
+    // return bool;
   }
 }

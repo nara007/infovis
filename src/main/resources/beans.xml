@@ -2,10 +2,16 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id="bool" class="ontos.infovis.pojo.Bool" scope="prototype">
-    </bean>
-    <bean id="componentManager" class="ontos.infovis.serviceimpl.ComponentManager" scope="singleton">
-    </bean>
+    <!--<bean id="bool" class="ontos.infovis.pojo.Bool" scope="prototype">-->
+    <!--</bean>-->
+    <!--<bean id="componentManager" class="ontos.infovis.serviceimpl.ComponentManager" scope="singleton">-->
+    <!--</bean>-->
     <bean id="component" class="ontos.infovis.pojo.Component" scope="prototype">
+    </bean>
+    <!--<bean id="dependency" class="ontos.infovis.pojo.ComponentDependency" scope="prototype">-->
+    <!--</bean>-->
+    <!--&lt;!&ndash;<bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper" scope="singleton">&ndash;&gt;-->
+    <!--&lt;!&ndash;</bean>&ndash;&gt;-->
+    <bean id="response" class="ontos.infovis.pojo.Response" scope="prototype">
     </bean>
 </beans>

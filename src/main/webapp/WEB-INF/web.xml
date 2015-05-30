@@ -23,6 +23,6 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>ONTOS_SERVER</servlet-name>
-        <url-pattern>/resources/*</url-pattern>
+        <url-pattern>/rest/*</url-pattern>
     </servlet-mapping>
 </web-app>
