@@ -1,0 +1,21 @@
+<http://example.org/book/book5>
+        <http://purl.org/dc/elements/1.1/title>
+                "JustAddedThisOne" .
+
+<http://example.org/book/book3>
+        <http://purl.org/dc/elements/1.1/title>
+                "ATestValue" .
+
+<http://example.org/book/book1>
+        <http://purl.org/dc/elements/1.1/title>
+                "SPARQL Tutorial 2" , "SPARQL Tutorial" .
+
+<http://example.org/book/book4>
+        <http://purl.org/dc/elements/1.1/title>
+                "ThisIsATest" .
+
+<http://example.org/book/book2>
+        <http://purl.org/dc/elements/1.1/someOther>
+                "Value" ;
+        <http://purl.org/dc/elements/1.1/title>
+                "Test" .
