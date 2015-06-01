@@ -1,6 +1,7 @@
 package ontos.infovis.service;
 
 import ontos.infovis.pojo.Component;
+import ontos.infovis.pojo.Param;
 import ontos.infovis.pojo.Response;
 import ontos.infovis.util.ApplicationManager;
 
@@ -131,8 +132,17 @@ public class ComponentResource {
    * @param version String
    * @return Bool indicates if a specific component has been deleted successfully.
    */
-  public void deleteComponent(String identifier, String version) {
-    // Bool bool = (Bool) ApplicationManager.appManager.getSpringContext().getBean("bool");
-    // return bool;
+  @DELETE
+  @Path("components")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+//  public Response deleteComponent(@QueryParam("uri") String uri, @QueryParam("version") String version) {
+      public Response deleteComponent(Param param){
+      Response response =
+              (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+      response.setBool(true);
+      response.setError("deleteComponent no errors");
+      response.setException("deleteComponent no exceptions");
+      return response;
   }
 }

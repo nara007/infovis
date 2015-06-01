@@ -116,6 +116,19 @@
                 });
             });
 
+            $("#b05").click(function(){
+                $.ajax({
+                    type:'DELETE',
+                    url:'http://localhost:8080/rest/components',
+                    cache:false,
+                    data:JSON.stringify({"uri":"myuri","version":"1.0"}),
+                    contentType:"application/json",
+                    dataType:'json',
+                    success:function(data){
+                        console.log(data);
+                    }
+                });
+            });
         });
     </script>
 </head>
@@ -131,6 +144,9 @@
 
 <div id="myDiv4"><h2>get json array</h2></div>
 <button id="b04" type="button">get json array</button>
+
+<div id="myDiv5"><h2>delete a component</h2></div>
+<button id="b05" type="button">delete</button>
 
 </body>
 </html>
