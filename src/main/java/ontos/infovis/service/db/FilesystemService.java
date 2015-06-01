@@ -20,7 +20,6 @@ public class FilesystemService implements IPersistenceService {
 	 * @param searchQuery a SPARQL {@link Query} to find an component by ID and version, will be used as a DESCRIBE query
 	 * @return {@link JsonObject} containing all found components in RDFJSON format
 	 */
-	@Override
 	public JsonObject loadComponent(URL sourceURL, Query searchQuery) {
 		// read an existing or empty model from the file 
 		Model model = FilesystemManager.readModel(sourceURL);
@@ -44,7 +43,6 @@ public class FilesystemService implements IPersistenceService {
 	 * @param searchQuery a SPARQL {@link Query} to find an composition by ID and version, will be used as a DESCRIBE query
 	 * @return {@link JsonObject} containing all found compositions in RDFJSON format
 	 */
-	@Override
 	public JsonObject loadComposition(URL sourceURL, Query searchQuery) {
 		// this delegates to loadComponent
 		return loadComponent(sourceURL, searchQuery);
@@ -55,7 +53,6 @@ public class FilesystemService implements IPersistenceService {
 	 * @param component a {@link JsonObject} containing one or more components in RDFJSON format
 	 * @return boolean true if the components have been saved
 	 */
-	@Override
 	public boolean saveComponent(URL targetURL, JsonObject component) {
 		// read an existing or empty model from the file
 		Model model = FilesystemManager.readModel(targetURL);
@@ -73,7 +70,6 @@ public class FilesystemService implements IPersistenceService {
 	 * @param composition a {@link JsonObject} containing one or more compositions in RDFJSON format
 	 * @return boolean true if the compositions have been saved
 	 */
-	@Override
 	public boolean saveComposition(URL targetURL, JsonObject composition) {
 		// this delegates to saveComponent
 		return saveComponent(targetURL, composition);
