@@ -12,7 +12,6 @@ https://jersey.java.net/documentation/latest/getting-started.html
 
 
 ================
-
 jetty:run
 
 This starts Jetty and serves up the project on http://localhost:8080/.
@@ -21,3 +20,7 @@ Jetty continues to run until you stop it. While it runs, it periodically scans f
 You can terminate the plugin with in the terminal window where it is running.
 
 
+=================
+WAR
+
+-> For more information visit: http://crunchify.com/how-to-create-a-war-file-from-eclipse-using-maven-plugin-apache-maven-war-plugin-usage/
