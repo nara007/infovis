@@ -12,8 +12,9 @@ import java.util.List;
 
 
 /**
+ * component resources rest service
+ *
  * @author Ye Song
- * @description component resources
  * @date 15-5-23
  * @copyright infovis@tu-dresden.de
  */
@@ -70,7 +71,7 @@ public class ComponentResource {
    *
    * @param uri String
    * @param version String
-   * @return Component
+   * @return Component if succeed otherwise null
    */
   @GET
   @Path("components")
@@ -125,11 +126,10 @@ public class ComponentResource {
   }
 
   /**
-   * Method handling HTTP GET requests. The returned object will be sent to the client as "json"
-   * media type.Method deletes a specific component.
+   * Method handling HTTP DELETE requests.
+   * Method deletes a specific component.
    *
-   * @param identifier String
-   * @param version String
+   * @param Param POJO
    * @return Bool indicates if a specific component has been deleted successfully.
    */
   @DELETE

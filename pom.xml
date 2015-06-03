@@ -37,34 +37,19 @@
             <artifactId>spring-context</artifactId>
             <version>4.1.6.RELEASE</version>
         </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
-        </dependency>
     </dependencies>
 
     <build>
         <plugins>
-<!--             <plugin> -->
-<!--             <groupId>org.apache.maven.plugins</groupId> -->
-<!--             <artifactId>maven-compiler-plugin</artifactId> -->
-<!--             <version>2.5.1</version> -->
-<!--             <inherited>true</inherited> -->
-<!--             <configuration> -->
-<!--             <source>1.7</source> -->
-<!--             <target>1.7</target> -->
-<!--             </configuration> -->
-<!--             </plugin> -->
             <plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<inherited>true</inherited>
-				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
-				</configuration>
-			</plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <inherited>true</inherited>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
@@ -73,14 +58,14 @@
                     <scanIntervalSeconds>10</scanIntervalSeconds>
                 </configuration>
             </plugin>
-             <plugin>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.4</version>
-				<configuration>
-					<warSourceDirectory>WebContent</warSourceDirectory>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
-				</configuration>
-			</plugin>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <warSourceDirectory>WebContent</warSourceDirectory>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
