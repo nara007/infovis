@@ -4,9 +4,11 @@ import ontos.infovis.pojo.Component;
 import ontos.infovis.pojo.Param;
 import ontos.infovis.pojo.Response;
 import ontos.infovis.util.ApplicationManager;
+import ontos.infovis.util.MyContainer;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +36,12 @@ public class ComponentResource {
   @Produces(MediaType.APPLICATION_JSON)
   public Response registerComponent(Component cmp) {
 
-    System.out.println(cmp);
+   // System.out.println(cmp);
+    	
+    MyContainer.myContainer.add(cmp);
+   
+    System.out.println(MyContainer.myContainer.get(0));
+    
     Response response =
         (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
     response.setBool(true);
@@ -137,12 +144,24 @@ public class ComponentResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
 //  public Response deleteComponent(@QueryParam("uri") String uri, @QueryParam("version") String version) {
+  
+  	  
       public Response deleteComponent(Param param){
-      Response response =
-              (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-      response.setBool(true);
-      response.setError("deleteComponent no errors");
-      response.setException("deleteComponent no exceptions");
-      return response;
+	  
+	  if(MyContainer.myContainer.isEmpty())
+	  {
+		  return null;
+	  }
+	  else
+	  {
+		  MyContainer.myContainer.remove(0);
+	      Response response =
+	              (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+	      response.setBool(true);
+	      response.setError("deleteComponent no errors");
+	      response.setException("deleteComponent no exceptions");
+	      return response;
+	  }
+
   }
 }

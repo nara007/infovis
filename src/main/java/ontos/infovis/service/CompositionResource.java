@@ -4,9 +4,11 @@ import ontos.infovis.pojo.Composition;
 import ontos.infovis.pojo.Param;
 import ontos.infovis.pojo.Response;
 import ontos.infovis.util.ApplicationManager;
+import ontos.infovis.util.MyContainer;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +38,10 @@ public class CompositionResource {
   public Response createComposition(Composition composition) {
 
     System.out.println(composition);
+    
+    MyContainer.myCompositionContainer.add(composition);
+    
+    System.out.println(MyContainer.myCompositionContainer.get(0));
 
     Response response =
         (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
@@ -84,6 +90,8 @@ public class CompositionResource {
   @Produces(MediaType.APPLICATION_JSON)
   public Composition getComposition(@QueryParam("uri") String uri,
       @DefaultValue("1.0.0") @QueryParam("version") String version) {
+	  
+	  MyContainer.myCompositionContainer.get(0);
     System.out.println(uri + " " + version);
 
     Composition composition =
