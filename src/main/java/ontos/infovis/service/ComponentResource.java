@@ -4,6 +4,7 @@ import ontos.infovis.pojo.Component;
 import ontos.infovis.pojo.Param;
 import ontos.infovis.pojo.Response;
 import ontos.infovis.util.ApplicationManager;
+import ontos.infovis.util.MyContainer;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -35,6 +36,10 @@ public class ComponentResource {
   public Response registerComponent(Component cmp) {
 
     System.out.println(cmp);
+      MyContainer.myContainer.add(cmp);
+
+      System.out.println( MyContainer.myContainer.get(0));
+
     Response response =
         (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
     response.setBool(true);
@@ -81,9 +86,13 @@ public class ComponentResource {
       @DefaultValue("1.0.0") @QueryParam("version") String version) {
     // Component component
     // =(Component)ApplicationManager.appManager.getSpringContext().getBean("component");
-    Component component =
-        (Component) ApplicationManager.appManager.getSpringContext().getBean("component");
-    System.out.println(uri + " " + version);
+//    Component component =
+//        (Component) ApplicationManager.appManager.getSpringContext().getBean("component");
+//    System.out.println(uri + " " + version);
+
+
+      Component component =MyContainer.myContainer.get(0);
+
     return component;
   }
 
