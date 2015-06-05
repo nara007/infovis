@@ -14,4 +14,7 @@
     <!--&lt;!&ndash;</bean>&ndash;&gt;-->
     <bean id="response" class="ontos.infovis.pojo.Response" scope="prototype">
     </bean>
+    <bean id="composition" class="ontos.infovis.pojo.Composition" scope="prototype">
+    </bean>
+
 </beans>

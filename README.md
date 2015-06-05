@@ -9,3 +9,18 @@ http://localhost:8080/myapp/myresource
 
 -> For more information about the test project visit:
 https://jersey.java.net/documentation/latest/getting-started.html
+
+
+================
+jetty:run
+
+This starts Jetty and serves up the project on http://localhost:8080/.
+Jetty continues to run until you stop it. While it runs, it periodically scans for changes to your project files, so if you save changes and recompile your class files, Jetty redeploys your webapp, and you can instantly test the changes you just made.
+
+You can terminate the plugin with in the terminal window where it is running.
+
+
+=================
+WAR
+
+-> For more information visit: http://crunchify.com/how-to-create-a-war-file-from-eclipse-using-maven-plugin-apache-maven-war-plugin-usage/
