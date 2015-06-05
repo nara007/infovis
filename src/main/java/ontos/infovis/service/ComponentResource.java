@@ -3,10 +3,14 @@ package ontos.infovis.service;
 import ontos.infovis.pojo.Component;
 import ontos.infovis.pojo.Param;
 import ontos.infovis.pojo.Response;
+import ontos.infovis.service.db.FilesystemService;
+import ontos.infovis.service.db.IPersistenceService;
 import ontos.infovis.util.ApplicationManager;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,11 +36,14 @@ public class ComponentResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public Response registerComponent(Component cmp) {
-
+	  IPersistenceService pService = new FilesystemService();
+	  URL targetURL = null; //TODO
+	  Component[] components = {cmp};
+	  
     System.out.println(cmp);
     Response response =
         (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-    response.setBool(true);
+    response.setBool(pService.saveComponents(targetURL, components));
     response.setError("registerComponent no error");
     response.setException("registerComponent no exception");
 
