@@ -10,6 +10,8 @@ import ontos.infovis.util.ApplicationManager;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
+import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,13 +40,19 @@ public class ComponentResource {
   @Produces(MediaType.APPLICATION_JSON)
   public Response registerComponent(Component cmp) {
 	  IPersistenceService pService = new FilesystemService();
-	  URL targetURL = null; //TODO
+	  URL fileURL = null;
+	  
+	  try {
+		  fileURL = new File("ontology/test.ttl").toURI().toURL();
+	  } catch (MalformedURLException e) {
+		  e.printStackTrace();
+	  }
 	  Component[] components = {cmp};
 	  
     System.out.println(cmp);
     Response response =
         (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-    response.setBool(pService.saveComponents(targetURL, components));
+    response.setBool(pService.saveComponents(fileURL, components));
     response.setError("registerComponent no error");
     response.setException("registerComponent no exception");
 

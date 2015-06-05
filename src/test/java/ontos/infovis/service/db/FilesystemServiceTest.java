@@ -2,16 +2,12 @@ package ontos.infovis.service.db;
 
 import static org.junit.Assert.*;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 import junit.framework.Assert;
 
-import org.apache.jena.atlas.json.JSON;
-import org.apache.jena.atlas.json.JsonObject;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -52,16 +48,6 @@ public class FilesystemServiceTest {
 	
     @Test
     public void testFilesystemService() {
-		// parse the JSON component into a JsonObject
-	    InputStream inStream = new ByteArrayInputStream(json.getBytes());
-	    JsonObject component = JSON.parse(inStream);
-	    	
-	    // check if the component has been saved
-	    boolean saved = pService.saveComponent(fileURL, component);
-	    assertTrue("component saved", saved);
-	    	
-	    // check if the loaded component matches the previously saved
-	    JsonObject loadedComponent = pService.loadComponent(fileURL, query);
-	    assertEquals("loaded component", component, loadedComponent);
+		// TODO write new test using Beans
     }
 }

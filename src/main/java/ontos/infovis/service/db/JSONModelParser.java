@@ -13,10 +13,13 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 
 /**
- * @author Franz
  * This class provides helper functions for parsing Jena Models into JSON and back again.
+ * @author Franz
  */
 public class JSONModelParser {
+	// JSON format to parse from / into
+	static public Lang jsonLang = Lang.RDFJSON;
+	
 	/**
 	 * @param model the {@link Model}, which will be parsed into a {@link JsonObject}
 	 * @returns {@link JsonObject} the JSON representation of the model in RDFJSON format
@@ -24,7 +27,7 @@ public class JSONModelParser {
     static public JsonObject parseAsJsonObject(Model model) {
     	// create an OutputStream and write the model into it
     	ByteArrayOutputStream outStream = new ByteArrayOutputStream() ;
-        RDFDataMgr.write(outStream, model, Lang.RDFJSON) ;
+        RDFDataMgr.write(outStream, model, jsonLang) ;
         
         // turn the stream into an InputStream and parse JSON from it
         InputStream inStream = new ByteArrayInputStream(outStream.toByteArray());
@@ -44,7 +47,7 @@ public class JSONModelParser {
 		
     	// create an empty model and fill it with the read model
 		Model model = ModelFactory.createDefaultModel();
-		RDFDataMgr.read(model, inStream, Lang.RDFJSON);
+		RDFDataMgr.read(model, inStream, jsonLang);
     	
     	return model;
     }

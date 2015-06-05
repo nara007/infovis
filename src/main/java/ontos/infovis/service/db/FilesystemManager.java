@@ -14,8 +14,8 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 
 /**
- * @author Franz
  * This class provides helper functions for reading/writing models into TTL files.
+ * @author Franz
  */
 public class FilesystemManager {
 	// format of the written an read files

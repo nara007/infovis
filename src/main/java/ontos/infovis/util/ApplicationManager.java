@@ -17,6 +17,9 @@ public class ApplicationManager {
    * private constructor to achieve singleton.
    */
   private ApplicationManager() {
+	// basic logging with log4j
+	org.apache.log4j.BasicConfigurator.configure();
+	  
     this.springContext = new ClassPathXmlApplicationContext("beans.xml");
     System.out.println("spring context initialized...\n");
   }
