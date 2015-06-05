@@ -4,7 +4,7 @@ import ontos.infovis.pojo.Composition;
 import ontos.infovis.pojo.Param;
 import ontos.infovis.pojo.Response;
 import ontos.infovis.util.ApplicationManager;
-import ontos.infovis.util.MyContainer;
+import ontos.infovis.util.DummyData;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -31,26 +31,26 @@ public class CompositionResource {
    * @param Composition POJO (converted from json automatically)
    * @return Response object(converted to json automatically)
    */
-  @POST
-  @Path("compositions")
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response createComposition(Composition composition) {
-
-    System.out.println(composition);
-    
-    MyContainer.myCompositionContainer.add(composition);
-    
-    System.out.println(MyContainer.myCompositionContainer.get(0));
-
-    Response response =
-        (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-    response.setBool(true);
-    response.setError("createComposition  no error");
-    response.setException("createComposition  no exception");
-
-    return response;
-  }
+//  @POST
+//  @Path("compositions")
+//  @Consumes(MediaType.APPLICATION_JSON)
+//  @Produces(MediaType.APPLICATION_JSON)
+//  public Response createComposition(Composition composition) {
+//
+//    System.out.println(composition);
+//
+//    DummyData.myCompositionContainer.add(composition);
+//
+//    System.out.println(DummyData.myCompositionContainer.get(0));
+//
+//    Response response =
+//        (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+//    response.setBool(true);
+//    response.setError("createComposition  no error");
+//    response.setException("createComposition  no exception");
+//
+//    return response;
+//  }
 
   /**
    * Method handling HTTP PUT request. The returned object will be sent to the client as "json"
@@ -84,21 +84,21 @@ public class CompositionResource {
    * @param version String
    * @return Composition if succeed otherwise null
    */
-  @GET
-  @Path("compositions")
-  @Consumes(MediaType.TEXT_PLAIN)
-  @Produces(MediaType.APPLICATION_JSON)
-  public Composition getComposition(@QueryParam("uri") String uri,
-      @DefaultValue("1.0.0") @QueryParam("version") String version) {
-	  
-	  MyContainer.myCompositionContainer.get(0);
-    System.out.println(uri + " " + version);
-
-    Composition composition =
-        (Composition) ApplicationManager.appManager.getSpringContext().getBean("composition");
-    System.out.println(uri + " " + version);
-    return composition;
-  }
+//  @GET
+//  @Path("compositions")
+//  @Consumes(MediaType.TEXT_PLAIN)
+//  @Produces(MediaType.APPLICATION_JSON)
+//  public Composition getComposition(@QueryParam("uri") String uri,
+//      @DefaultValue("1.0.0") @QueryParam("version") String version) {
+//
+//	  DummyData.myCompositionContainer.get(0);
+//    System.out.println(uri + " " + version);
+//
+//    Composition composition =
+//        (Composition) ApplicationManager.appManager.getSpringContext().getBean("composition");
+//    System.out.println(uri + " " + version);
+//    return composition;
+//  }
 
   /**
    * Method handling HTTP DELETE requests. Method deletes a specific composition.
