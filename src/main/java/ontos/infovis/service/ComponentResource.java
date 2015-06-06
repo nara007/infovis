@@ -106,9 +106,9 @@ public class ComponentResource {
       @DefaultValue("1.0.0") @QueryParam("version") String version) {
     // Component component
     // =(Component)ApplicationManager.appManager.getSpringContext().getBean("component");
-	String fullUri = PojoModelParser.BASE_URL+uri;
-	Query searchQuery = QueryFactory.create("DESCRIBE ?p ?o WHERE {<"+fullUri+"> ?p ?o .}");
-	  
+	uri = "dummy-communes";
+	Query searchQuery = QueryFactory.create("CONSTRUCT {<"+uri+"> ?p ?o .} WHERE{?s ?p ?o .}");
+	
 	Component[] components = this.pService.loadComponents(fileURL, searchQuery);
     System.out.println(uri + " " + version);
     return components[0];

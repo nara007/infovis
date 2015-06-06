@@ -1,4 +1,5 @@
-<dummy-communes>  a                     "http://ontos.infovis/Component" ;
+<http://ontos.infovis/dummy-communes>
+        a                               "http://ontos.infovis/Component" ;
         <http://ontos.infovis/creationDate>
                 "128734535"^^<http://www.w3.org/2001/XMLSchema#int> ;
         <http://ontos.infovis/description>
