@@ -31,7 +31,7 @@ public class FilesystemService implements IPersistenceService {
 		searchQuery.setQueryConstructType();
 		QueryExecution queryExec = QueryExecutionFactory.create(searchQuery, model);
 		Model m = queryExec.execConstruct();
-		
+
 		// parse the result model into Component Beans
 		return PojoModelParser.parseAsComponents(m);
 	}

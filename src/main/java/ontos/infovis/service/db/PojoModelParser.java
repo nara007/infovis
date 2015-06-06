@@ -17,7 +17,7 @@ import com.hp.hpl.jena.vocabulary.RDF;
  */
 public class PojoModelParser {
 	// namespace
-	static private final String BASE_URL = "http://ontos.infovis/";
+	static public final String BASE_URL = "http://ontos.infovis/";
 	
 	/**
 	 * @param model the {@link Model} containing components, which will be parsed into a {@link Component} Array

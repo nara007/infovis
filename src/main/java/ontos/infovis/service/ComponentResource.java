@@ -5,10 +5,14 @@ import ontos.infovis.pojo.Param;
 import ontos.infovis.pojo.Response;
 import ontos.infovis.service.db.FilesystemService;
 import ontos.infovis.service.db.IPersistenceService;
+import ontos.infovis.service.db.PojoModelParser;
 import ontos.infovis.util.ApplicationManager;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+
+import com.hp.hpl.jena.query.Query;
+import com.hp.hpl.jena.query.QueryFactory;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -26,7 +30,20 @@ import java.util.List;
  */
 @Path("/")
 public class ComponentResource {
-
+	IPersistenceService pService;
+	URL fileURL;
+	
+	public ComponentResource() {
+		  this.pService = new FilesystemService();
+		  this.fileURL = null;
+		  
+		  try {
+			  this.fileURL = new File("ontology/test.ttl").toURI().toURL();
+		  } catch (MalformedURLException e) {
+			  e.printStackTrace();
+		  }
+	}
+	
   /**
    * Method handling HTTP POST requests. The returned object will be sent to the client as "json"
    * media type.Method registers a component.
@@ -39,20 +56,13 @@ public class ComponentResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public Response registerComponent(Component cmp) {
-	  IPersistenceService pService = new FilesystemService();
-	  URL fileURL = null;
-	  
-	  try {
-		  fileURL = new File("ontology/test.ttl").toURI().toURL();
-	  } catch (MalformedURLException e) {
-		  e.printStackTrace();
-	  }
-	  Component[] components = {cmp};
-	  
+	Component[] components = {cmp};
+	boolean savedComponent = this.pService.saveComponents(this.fileURL, components);
+	
     System.out.println(cmp);
     Response response =
         (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-    response.setBool(pService.saveComponents(fileURL, components));
+    response.setBool(savedComponent);
     response.setError("registerComponent no error");
     response.setException("registerComponent no exception");
 
@@ -96,10 +106,12 @@ public class ComponentResource {
       @DefaultValue("1.0.0") @QueryParam("version") String version) {
     // Component component
     // =(Component)ApplicationManager.appManager.getSpringContext().getBean("component");
-    Component component =
-        (Component) ApplicationManager.appManager.getSpringContext().getBean("component");
+	String fullUri = PojoModelParser.BASE_URL+uri;
+	Query searchQuery = QueryFactory.create("DESCRIBE ?p ?o WHERE {<"+fullUri+"> ?p ?o .}");
+	  
+	Component[] components = this.pService.loadComponents(fileURL, searchQuery);
     System.out.println(uri + " " + version);
-    return component;
+    return components[0];
   }
 
   /**
