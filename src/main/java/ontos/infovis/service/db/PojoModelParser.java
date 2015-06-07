@@ -16,6 +16,8 @@ import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.XSD;
 
+//TODO remove redundant code 
+
 /**
  * This class provides helper functions for parsing Jena Models into Pojo Objects and back again.
  * @author Franz
@@ -39,13 +41,13 @@ public class PojoModelParser {
     	while(resIt.hasNext()) {
     		Component c = new Component();
 
-    		// the local name of the found component is its ID
+    		// the URI of the parent component is the ID
     		Resource r = resIt.next();
-    		c.setId(r.getLocalName());
+    		Statement parent = r.getProperty(model.createProperty(BASE_URL, "parent"));
+    		c.setId(parent.asTriple().getObject().getLocalName());
     		
-    		// the model is needed for iteration over all triples
-    		Model m = r.getModel();
-    		StmtIterator stmtIt = m.listStatements();
+    		// iterate over all triples
+    		StmtIterator stmtIt = r.listProperties();
     		while(stmtIt.hasNext()) {
     			Statement s = stmtIt.next();
     			
@@ -70,7 +72,6 @@ public class PojoModelParser {
     			}
     		}
     		
-    		//c.setTitle(title.getValue().toString());
     		components.add(c);
     	}
     	
@@ -87,11 +88,22 @@ public class PojoModelParser {
     	
 		// iterate trough all components
 		for(Component c: components) {
-			// create a resource for this component
+			// create or get a resource for all versions of this component
 			Resource r = model.createResource(BASE_URL+c.getId());
 			
-			// set the type of this resource
-			r.addProperty(RDF.type, BASE_URL+"Component");
+			// a resource of type Component represents this version of the component
+			Resource componentResource = model.createResource(BASE_URL+c.getId()+"/"+c.getVersion());
+			componentResource.addProperty(RDF.type, BASE_URL+"Component");
+			componentResource.addProperty(model.createProperty(BASE_URL, "parent"), r);
+			
+			// add this version and set it as the latest
+			Property versions = model.createProperty(BASE_URL, "versions");
+			r.addProperty(versions, componentResource);
+			// TODO: This is currently overwritten by the model merge in FilesystemManager.java
+			Property latestVersion = model.createProperty(BASE_URL, "latestVersion");
+			r.removeAll(latestVersion);
+			r.addProperty(latestVersion, componentResource);
+			
 			
 			// get all fields and turn them into literals
 			Literal title = model.createTypedLiteral(c.getTitle(), XSD.xstring.getURI());
@@ -115,16 +127,132 @@ public class PojoModelParser {
 			//Property dependenciesProp = model.createProperty(BASE_URL, "dependencies");
 			//Property resourcesProp = model.createProperty(BASE_URL, "resources");
 			
-			// add all literals with their properties
-			r.addLiteral(titleProp, title);
-			r.addLiteral(descriptionProp, description);
-			r.addLiteral(versionProp, version);
-			r.addLiteral(ownerProp, owner);
-			r.addLiteral(creationDateProp, creationDate);
-			r.addLiteral(lastUpdateProp, lastUpdate);
-			r.addLiteral(screenshotProp, screenshot);
-			//r.addLiteral(dependenciesProp, dependencies);
-			//r.addLiteral(resourcesProp, resources);
+			// the blank node holds all literals with their properties
+			componentResource.addLiteral(titleProp, title);
+			componentResource.addLiteral(descriptionProp, description);
+			componentResource.addLiteral(versionProp, version);
+			componentResource.addLiteral(ownerProp, owner);
+			componentResource.addLiteral(creationDateProp, creationDate);
+			componentResource.addLiteral(lastUpdateProp, lastUpdate);
+			componentResource.addLiteral(screenshotProp, screenshot);
+			//componentResource.addLiteral(dependenciesProp, dependencies);
+			//componentResource.addLiteral(resourcesProp, resources);
+		}
+		
+    	return model;
+    }
+
+	/**
+	 * @param model the {@link Model} containing compositions, which will be parsed into a {@link Composition} Array
+	 * @returns {@link Composition} all Compositions found in the model
+	 */
+    static public Composition[] parseAsCompositions(Model model) {
+    	// the return array
+    	ArrayList<Composition> compositions= new ArrayList<Composition>();
+
+    	// find all resources of the given type
+    	ResIterator resIt = model.listSubjectsWithProperty(RDF.type, BASE_URL+"Composition");
+    	
+    	// parse all found resources into a composition
+    	while(resIt.hasNext()) {
+    		Composition c = new Composition();
+
+    		// the URI of the parent component is the ID
+    		Resource r = resIt.next();
+    		Statement parent = r.getProperty(model.createProperty(BASE_URL, "parent"));
+    		c.setId(parent.asTriple().getObject().getLocalName());
+    		
+    		// iterate over all triples
+    		StmtIterator stmtIt = r.listProperties();
+    		while(stmtIt.hasNext()) {
+    			Statement s = stmtIt.next();
+    			
+    			// all triples that end with a literal might be composition property
+    			if(s.getObject().isLiteral()) {
+    				Property p = s.getPredicate();
+        			Literal l = s.getObject().asLiteral();
+        			
+        			// switch depending on the property name
+        			switch(p.getLocalName()) {
+        				case "title": c.setTitle(l.getString()); break;
+        				case "description": c.setDescription(l.getString()); break;
+        				case "version": c.setVersion(l.getString()); break;
+        				case "owner": c.setOwner(l.getString()); break;
+        				case "creationDate": c.setCreation_date(l.getInt()); break;
+        				case "lastUpdate": c.setLast_update(l.getInt()); break;
+        				case "structure": c.setStructure(l.getString()); break;
+        				//case "rights": break;
+        				//case "components": break;
+        				default: break; // properties that do not match a model field are ignored
+        			}
+    			}
+    		}
+    		
+    		compositions.add(c);
+    	}
+    	
+    	return compositions.toArray(new Composition[compositions.size()]);
+    }
+    
+	/**
+	 * @param compositions the {@link Composition} Array, which will be parsed into a {@link Model}
+	 * @returns {@link Model} the model containing all compositions
+	 */
+    static public Model parseAsModel(Composition[] compositions) {
+    	// create an empty model
+		Model model = ModelFactory.createDefaultModel();
+    	
+		// iterate trough all compositions
+		for(Composition c: compositions) {
+			// create or get a resource for all versions of this composition
+			Resource r = model.createResource(BASE_URL+c.getId());
+			
+			// a resource of type Composition represents this version of the composition
+			Resource compositionResource = model.createResource(BASE_URL+c.getId()+"/"+c.getVersion());
+			compositionResource.addProperty(RDF.type, BASE_URL+"Composition");
+			compositionResource.addProperty(model.createProperty(BASE_URL, "parent"), r);
+			
+			// add this version and set it as the latest
+			Property versions = model.createProperty(BASE_URL, "versions");
+			r.addProperty(versions, compositionResource);
+			// TODO: This is currently overwritten by the model merge in FilesystemManager.java
+			Property latestVersion = model.createProperty(BASE_URL, "latestVersion");
+			r.removeAll(latestVersion);
+			r.addProperty(latestVersion, compositionResource);
+			
+			
+			// get all fields and turn them into literals
+			Literal title = model.createTypedLiteral(c.getTitle(), XSD.xstring.getURI());
+			Literal description = model.createTypedLiteral(c.getDescription(), XSD.xstring.getURI());
+			Literal version = model.createTypedLiteral(c.getVersion(), XSD.xstring.getURI());
+			Literal owner = model.createTypedLiteral(c.getOwner(), XSD.xstring.getURI());
+			Literal creationDate = model.createTypedLiteral(c.getCreation_date(), XSD.xint.getURI());
+			Literal lastUpdate = model.createTypedLiteral(c.getLast_update(), XSD.xint.getURI());
+			Literal structure = model.createTypedLiteral(c.getStructure(), XSD.xstring.getURI());
+			//Literal rights = model.createTypedLiteral(c.getRights(), XSD.xstring.getURI());
+			//Literal components = model.createTypedLiteral(c.getComponents(), XSD.xstring.getURI());
+			
+			// create matching properties
+			Property titleProp = model.createProperty(BASE_URL, "title");
+			Property descriptionProp = model.createProperty(BASE_URL, "description");
+			Property versionProp = model.createProperty(BASE_URL, "version");
+			Property ownerProp = model.createProperty(BASE_URL, "owner");
+			Property creationDateProp = model.createProperty(BASE_URL, "creationDate");
+			Property lastUpdateProp = model.createProperty(BASE_URL, "lastUpdate");
+			Property structureProp = model.createProperty(BASE_URL, "structure");
+			//Property rightsProp = model.createProperty(BASE_URL, "rights");
+			//Property componentsProp = model.createProperty(BASE_URL, "components");
+			
+			// the blank node holds all literals with their properties
+			compositionResource.addLiteral(titleProp, title);
+			compositionResource.addLiteral(descriptionProp, description);
+			compositionResource.addLiteral(versionProp, version);
+			compositionResource.addLiteral(ownerProp, owner);
+			compositionResource.addLiteral(creationDateProp, creationDate);
+			compositionResource.addLiteral(lastUpdateProp, lastUpdate);
+			compositionResource.addLiteral(structureProp, structure);
+			//compositionResource.addLiteral(rightsProp, rights);
+			//compositionResource.addLiteral(componentsProp, components);
 		}
 		
     	return model;

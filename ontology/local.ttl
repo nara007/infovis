@@ -1,21 +1,35 @@
-<http://example.org/book/book5>
-        <http://purl.org/dc/elements/1.1/title>
-                "JustAddedThisOne" .
+<http://ontos.infovis/dummy-communes>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/dummy-communes/0.0.1c> , <http://ontos.infovis/dummy-communes/0.0.1b> ;
+        <http://ontos.infovis/versions>
+                <http://ontos.infovis/dummy-communes/0.0.1c> , <http://ontos.infovis/dummy-communes/0.0.1b> .
 
-<http://example.org/book/book3>
-        <http://purl.org/dc/elements/1.1/title>
-                "ATestValue" .
+<http://ontos.infovis/dummy-communes/0.0.1c>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/creationDate>
+                "128734535"^^<http://www.w3.org/2001/XMLSchema#int> ;
+        <http://ontos.infovis/description>
+                "my first cool component"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/lastUpdate>
+                "12334234"^^<http://www.w3.org/2001/XMLSchema#int> ;
+        <http://ontos.infovis/owner>    "Max Muster"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/parent>   <http://ontos.infovis/dummy-communes> ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/title>    "Dummy Component for Communes"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "0.0.1c"^^<http://www.w3.org/2001/XMLSchema#string> .
 
-<http://example.org/book/book1>
-        <http://purl.org/dc/elements/1.1/title>
-                "SPARQL Tutorial 2" , "SPARQL Tutorial" .
-
-<http://example.org/book/book4>
-        <http://purl.org/dc/elements/1.1/title>
-                "ThisIsATest" .
-
-<http://example.org/book/book2>
-        <http://purl.org/dc/elements/1.1/someOther>
-                "Value" ;
-        <http://purl.org/dc/elements/1.1/title>
-                "Test" .
+<http://ontos.infovis/dummy-communes/0.0.1b>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/creationDate>
+                "0"^^<http://www.w3.org/2001/XMLSchema#int> ;
+        <http://ontos.infovis/description>
+                "got the wrong component"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/lastUpdate>
+                "0"^^<http://www.w3.org/2001/XMLSchema#int> ;
+        <http://ontos.infovis/owner>    "got the wrong component"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/parent>   <http://ontos.infovis/dummy-communes> ;
+        <http://ontos.infovis/screenshot>
+                "got the wrong component"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/title>    "got the wrong component"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "0.0.1b"^^<http://www.w3.org/2001/XMLSchema#string> .

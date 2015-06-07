@@ -3,13 +3,14 @@ package ontos.infovis.service.db;
 import java.net.URL;
 
 import ontos.infovis.pojo.Component;
+import ontos.infovis.pojo.Composition;
 
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.rdf.model.Model;
 
-// TODO replace Object by Composition
+// TODO remove redundant code 
 
 /**
  * This class handles all load/save calls for components and compositions from/into the filesystem.
@@ -43,9 +44,17 @@ public class FilesystemService implements IPersistenceService {
 	 * @return {@link Composition} Array containing all found compositions
 	 */
 	@Override
-	public Object[] loadCompositions(URL sourceURL, Query searchQuery) {
-		// TODO do not delegate to loadComponents
-		return loadComponents(sourceURL, searchQuery);
+	public Composition[] loadCompositions(URL sourceURL, Query searchQuery) {
+		// read an existing or empty model from the file 
+		Model model = FilesystemManager.readModel(sourceURL);
+		
+		// execute as construct query on the loaded model, returns all results as a model
+		searchQuery.setQueryConstructType();
+		QueryExecution queryExec = QueryExecutionFactory.create(searchQuery, model);
+		Model m = queryExec.execConstruct();
+
+		// parse the result model into Component Beans
+		return PojoModelParser.parseAsCompositions(m);
 	}
 
 	/**
@@ -72,8 +81,15 @@ public class FilesystemService implements IPersistenceService {
 	 * @return boolean true if the compositions have been saved
 	 */
 	@Override
-	public boolean saveCompositions(URL targetURL, Object[] compositions) {
-		// TODO implement this
-		return false;
+	public boolean saveCompositions(URL targetURL, Composition[] compositions) {
+		// read an existing or empty model from the file
+		Model model = FilesystemManager.readModel(targetURL);
+		
+		// read JSON object and add it to the model		
+		Model compositionModel = PojoModelParser.parseAsModel(compositions);
+		model = model.union(compositionModel);
+		
+		// save back to the file		
+		return FilesystemManager.saveModel(targetURL, model);
 	}
 }

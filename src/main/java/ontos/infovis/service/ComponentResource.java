@@ -1,24 +1,21 @@
 package ontos.infovis.service;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.DefaultValue;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+
 import ontos.infovis.pojo.Component;
 import ontos.infovis.pojo.Param;
 import ontos.infovis.pojo.Response;
-import ontos.infovis.service.db.FilesystemService;
-import ontos.infovis.service.db.IPersistenceService;
-import ontos.infovis.service.db.PojoModelParser;
+import ontos.infovis.serviceimpl.EntryManager;
 import ontos.infovis.util.ApplicationManager;
-
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-
-import com.hp.hpl.jena.query.Query;
-import com.hp.hpl.jena.query.QueryFactory;
-
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -29,21 +26,7 @@ import java.util.List;
  * @copyright infovis@tu-dresden.de
  */
 @Path("/")
-public class ComponentResource {
-	IPersistenceService pService;
-	URL fileURL;
-	
-	public ComponentResource() {
-		  this.pService = new FilesystemService();
-		  this.fileURL = null;
-		  
-		  try {
-			  this.fileURL = new File("ontology/test.ttl").toURI().toURL();
-		  } catch (MalformedURLException e) {
-			  e.printStackTrace();
-		  }
-	}
-	
+public class ComponentResource {	
   /**
    * Method handling HTTP POST requests. The returned object will be sent to the client as "json"
    * media type.Method registers a component.
@@ -55,14 +38,11 @@ public class ComponentResource {
   @Path("components")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  public Response registerComponent(Component cmp) {
-	Component[] components = {cmp};
-	boolean savedComponent = this.pService.saveComponents(this.fileURL, components);
-	
-    System.out.println(cmp);
-    Response response =
-        (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-    response.setBool(savedComponent);
+  public Response registerComponent(Component cmp) { cmp.setVersion("0.0.1c");
+	boolean registeredComponent = EntryManager.getInstance().registerComponent(cmp);
+    
+    Response response = (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+    response.setBool(registeredComponent);
     response.setError("registerComponent no error");
     response.setException("registerComponent no exception");
 
@@ -81,12 +61,13 @@ public class ComponentResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public Response updateComponent(Component cmp) {
-    System.out.println(cmp);
-    Response response =
-        (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-    response.setBool(true);
+	boolean updatedComponent = EntryManager.getInstance().updateComponent(cmp);
+	  
+	Response response = (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+    response.setBool(updatedComponent);
     response.setError("updateComponent no error");
     response.setException("updateComponent no exception");
+    
     return response;
   }
 
@@ -102,16 +83,8 @@ public class ComponentResource {
   @Path("components")
   @Consumes(MediaType.TEXT_PLAIN)
   @Produces(MediaType.APPLICATION_JSON)
-  public Component getComponent(@QueryParam("uri") String uri,
-      @DefaultValue("1.0.0") @QueryParam("version") String version) {
-    // Component component
-    // =(Component)ApplicationManager.appManager.getSpringContext().getBean("component");
-	uri = "dummy-communes";
-	Query searchQuery = QueryFactory.create("CONSTRUCT {<"+uri+"> ?p ?o .} WHERE{?s ?p ?o .}");
-	
-	Component[] components = this.pService.loadComponents(fileURL, searchQuery);
-    System.out.println(uri + " " + version);
-    return components[0];
+  public Component getComponent(@QueryParam("uri") String uri, @DefaultValue("1.0.0") @QueryParam("version") String version) {
+    return  EntryManager.getInstance().getComponent(uri, version);
   }
 
   /**
@@ -123,16 +96,8 @@ public class ComponentResource {
   @GET
   @Path("allcomponents")
   @Produces(MediaType.APPLICATION_JSON)
-  public List<Component> getAllComponents() {
-
-    Component component1 = null;
-    Component component2 = null;
-    Component component3 = null;
-    List<Component> list = new ArrayList<Component>();
-    list.add(component1);
-    list.add(component2);
-    list.add(component3);
-    return list;
+  public Component[] getAllComponents() {
+    return EntryManager.getInstance().getAllComponents();
   }
 
   /**
@@ -145,11 +110,8 @@ public class ComponentResource {
   @GET
   @Path("searchedComponents")
   @Produces(MediaType.APPLICATION_JSON)
-  public List<Component> searchComponent(String conditions) {
-    Component component1 = null;
-    List<Component> list = new ArrayList<Component>();
-    list.add(component1);
-    return list;
+  public Component[] searchComponent(String conditions) {
+    return EntryManager.getInstance().searchComponent(conditions);
   }
 
   /**
@@ -165,9 +127,10 @@ public class ComponentResource {
   @Produces(MediaType.APPLICATION_JSON)
 //  public Response deleteComponent(@QueryParam("uri") String uri, @QueryParam("version") String version) {
       public Response deleteComponent(Param param){
-      Response response =
-              (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-      response.setBool(true);
+	  boolean deletedComponent = EntryManager.getInstance().deleteComponent(param);
+	  
+      Response response = (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+      response.setBool(deletedComponent);
       response.setError("deleteComponent no errors");
       response.setException("deleteComponent no exceptions");
       return response;

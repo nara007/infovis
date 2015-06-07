@@ -3,10 +3,10 @@ package ontos.infovis.service.db;
 import java.net.URL;
 
 import ontos.infovis.pojo.Component;
+import ontos.infovis.pojo.Composition;
 
 import com.hp.hpl.jena.query.Query;
 
-// TODO replace Object by Composition
 
 /**
  * This interface represents all load/save calls for components and compositions.
@@ -26,7 +26,7 @@ public interface IPersistenceService {
 	 * @param searchQuery a SPARQL {@link Query} to find compositions by ID and version
 	 * @return {@link Composition} Array containing all found compositions
 	 */
-	public Object[] loadCompositions(URL sourceURL, Query searchQuery);
+	public Composition[] loadCompositions(URL sourceURL, Query searchQuery);
 	
 	/**
 	 * @param targetURL the {@link URL} to the TTL file or SPARQL endpoint into which the components are saved
@@ -40,5 +40,5 @@ public interface IPersistenceService {
 	 * @param compositions a {@link Composition} Array containing one or more compositions
 	 * @return boolean true if the compositions have been saved, false if not
 	 */
-	public boolean saveCompositions(URL targetURL, Object[] compositions);
+	public boolean saveCompositions(URL targetURL, Composition[] compositions);
 }
