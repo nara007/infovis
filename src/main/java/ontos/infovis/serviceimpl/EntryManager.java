@@ -4,18 +4,17 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import com.hp.hpl.jena.query.Query;
-import com.hp.hpl.jena.query.QueryFactory;
-import com.hp.hpl.jena.update.Update;
-import com.hp.hpl.jena.update.UpdateFactory;
-import com.hp.hpl.jena.update.UpdateRequest;
-
 import ontos.infovis.pojo.Component;
 import ontos.infovis.pojo.Composition;
 import ontos.infovis.pojo.Param;
 import ontos.infovis.service.db.FilesystemService;
 import ontos.infovis.service.db.IPersistenceService;
 import ontos.infovis.service.db.PojoModelParser;
+
+import com.hp.hpl.jena.query.Query;
+import com.hp.hpl.jena.query.QueryFactory;
+import com.hp.hpl.jena.update.UpdateFactory;
+import com.hp.hpl.jena.update.UpdateRequest;
 
 //TODO remove redundant code 
 

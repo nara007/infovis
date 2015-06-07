@@ -1,14 +1,21 @@
 package ontos.infovis.service;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.DefaultValue;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+
 import ontos.infovis.pojo.Composition;
 import ontos.infovis.pojo.Param;
 import ontos.infovis.pojo.Response;
+import ontos.infovis.serviceimpl.EntryManager;
 import ontos.infovis.util.ApplicationManager;
-
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * composition resources rest service
@@ -34,12 +41,10 @@ public class CompositionResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public Response createComposition(Composition composition) {
+	boolean registeredComposition = EntryManager.getInstance().registerComposition(composition);
 
-    System.out.println(composition);
-
-    Response response =
-        (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-    response.setBool(true);
+    Response response = (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+    response.setBool(registeredComposition);
     response.setError("createComposition  no error");
     response.setException("createComposition  no exception");
 
@@ -58,12 +63,10 @@ public class CompositionResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public Response updateComposition(Composition composition) {
+    boolean updatedComposition = EntryManager.getInstance().updateComposition(composition);
 
-    System.out.println(composition);
-
-    Response response =
-        (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-    response.setBool(true);
+    Response response = (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+    response.setBool(updatedComposition);
     response.setError("updateComposition no error");
     response.setException("updateComposition no error");
 
@@ -82,14 +85,8 @@ public class CompositionResource {
   @Path("compositions")
   @Consumes(MediaType.TEXT_PLAIN)
   @Produces(MediaType.APPLICATION_JSON)
-  public Composition getComposition(@QueryParam("uri") String uri,
-      @DefaultValue("1.0.0") @QueryParam("version") String version) {
-    System.out.println(uri + " " + version);
-
-    Composition composition =
-        (Composition) ApplicationManager.appManager.getSpringContext().getBean("composition");
-    System.out.println(uri + " " + version);
-    return composition;
+  public Composition getComposition(@QueryParam("uri") String uri, @DefaultValue("1.0.0") @QueryParam("version") String version) {
+    return EntryManager.getInstance().getComposition(uri, version);
   }
 
   /**
@@ -104,11 +101,10 @@ public class CompositionResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public Response deleteComposition(Param param) {
-
-    System.out.println(param.getUri() + " " + param.getVersion());
-    Response response =
-        (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-    response.setBool(true);
+    boolean deletedComposition = EntryManager.getInstance().deleteComposition(param);
+	  
+    Response response = (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+    response.setBool(deletedComposition);
     response.setError("deleteComposition no errors");
     response.setException("deleteComposition no errors");
     return response;
@@ -123,15 +119,7 @@ public class CompositionResource {
   @GET
   @Path("allcompositions")
   @Produces(MediaType.APPLICATION_JSON)
-  public List<Composition> getAllComponents() {
-
-    Composition composition1 = new Composition();
-    Composition composition2 = new Composition();
-    Composition composition3 = new Composition();
-    List<Composition> list = new ArrayList<Composition>();
-    list.add(composition1);
-    list.add(composition2);
-    list.add(composition3);
-    return list;
+  public Composition[] getAllCompositions() {
+    return EntryManager.getInstance().getAllCompositions();
   }
 }

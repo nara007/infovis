@@ -1,6 +1,5 @@
 package ontos.infovis.pojo;
 
-import java.util.List;
 
 /**
  * This is a POJO which represents component instance within Composition model on server side.
