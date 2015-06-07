@@ -24,11 +24,11 @@ public class DummyData {
   }
 
   private Map<String, Component> componentContainer = new HashMap<String, Component>();
-  private List<Composition> compositionContainer = new ArrayList<Composition>();
+  private Map<String, Composition> compositionContainer = new HashMap<String, Composition>();
 
   /**
    * Add a component into the container
-   * 
+   *
    * @param cmp
    * @return false if failed,otherwise true
    */
@@ -51,7 +51,7 @@ public class DummyData {
 
   /**
    * Update a component in the container
-   * 
+   *
    * @param cmp
    * @return false if failed,otherwise true
    */
@@ -71,9 +71,9 @@ public class DummyData {
 
   /**
    * get a component in the container
-   * 
-   * @param uri, version
-   * @return false if failed, otherwise true
+   *
+   * @param uri,version
+   * @return false if failed,otherwise true
    */
   public Component getComponent(String uri, String version) {
     String key = uri + version;
@@ -92,7 +92,7 @@ public class DummyData {
 
   /**
    * get all available components in the container.
-   * 
+   *
    * @return ArrayList of available components in the container.
    */
   public List<Component> getAllComponents() {
@@ -108,7 +108,7 @@ public class DummyData {
 
   /**
    * delete a specific component in the container.
-   * 
+   *
    * @param uri
    * @param version
    * @return false if failed,otherwise true
@@ -125,6 +125,110 @@ public class DummyData {
         return false;
       } else {
         componentContainer.remove(key);
+        return true;
+      }
+    }
+  }
+
+  /**
+   * Add a composition into the container
+   *
+   * @param cmp
+   * @return false if failed,otherwise true
+   */
+  public boolean addComposition(Composition cmp) {
+
+    String key = cmp.getId() + cmp.getVersion();
+    if (key == null) {
+      System.out.println("key of the composition is null !");
+      return false;
+    } else {
+      if (compositionContainer.get(key) != null) {
+        System.out.println("key of the composition already exists!");
+        return false;
+      } else {
+        compositionContainer.put(key, cmp);
+        return true;
+      }
+    }
+  }
+
+  /**
+   * Update a composition in the container
+   *
+   * @param cmp
+   * @return false if failed,otherwise true
+   */
+  public boolean updateComposition(Composition cmp) {
+
+    String key = cmp.getId() + cmp.getVersion();
+
+    if (key == null || compositionContainer.get(key) == null) {
+      System.out.println("the composition does not exist... ");
+      return false;
+    } else {
+      compositionContainer.put(key, cmp);
+      return true;
+    }
+
+  }
+
+  /**
+   * get a composition in the container
+   *
+   * @param uri,version
+   * @return false if failed,otherwise true
+   */
+  public Composition getComposition(String uri, String version) {
+    String key = uri + version;
+    if (key == null) {
+      System.out.println("key of the composition is null...");
+      return null;
+    } else {
+      if (compositionContainer.get(key) == null) {
+        System.out.println("composition does not exist...");
+        return null;
+      } else {
+        return compositionContainer.get(key);
+      }
+    }
+  }
+
+  /**
+   * get all available composition in the container.
+   *
+   * @return ArrayList of available composition in the container.
+   */
+  public List<Composition> getAllCompositions() {
+
+    List<Composition> compositionList = new ArrayList<Composition>();
+    Iterator<String> iterator = compositionContainer.keySet().iterator();
+    while (iterator.hasNext()) {
+      String key = iterator.next();
+      compositionList.add(compositionContainer.get(key));
+    }
+    return compositionList;
+  }
+
+  /**
+   * delete a specific composition in the container.
+   *
+   * @param uri
+   * @param version
+   * @return false if failed,otherwise true
+   */
+  public boolean deleteComposition(String uri, String version) {
+
+    String key = uri + version;
+    if (key == null) {
+      System.out.println("key of composition is null...");
+      return false;
+    } else {
+      if (compositionContainer.get(key) == null) {
+        System.out.println("composition does not exist...");
+        return false;
+      } else {
+        compositionContainer.remove(key);
         return true;
       }
     }

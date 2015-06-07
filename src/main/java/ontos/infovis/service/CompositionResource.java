@@ -4,6 +4,7 @@ import ontos.infovis.pojo.Composition;
 import ontos.infovis.pojo.Param;
 import ontos.infovis.pojo.Response;
 import ontos.infovis.util.ApplicationManager;
+import ontos.infovis.util.DummyData;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -30,26 +31,29 @@ public class CompositionResource {
    * @param Composition POJO (converted from json automatically)
    * @return Response object(converted to json automatically)
    */
-//  @POST
-//  @Path("compositions")
-//  @Consumes(MediaType.APPLICATION_JSON)
-//  @Produces(MediaType.APPLICATION_JSON)
-//  public Response createComposition(Composition composition) {
-//
-//    System.out.println(composition);
-//
-//    DummyData.myCompositionContainer.add(composition);
-//
-//    System.out.println(DummyData.myCompositionContainer.get(0));
-//
-//    Response response =
-//        (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-//    response.setBool(true);
-//    response.setError("createComposition  no error");
-//    response.setException("createComposition  no exception");
-//
-//    return response;
-//  }
+	  @POST
+	  @Path("compositions")
+	  @Consumes(MediaType.APPLICATION_JSON)
+	  @Produces(MediaType.APPLICATION_JSON)
+	  public Response createComposition(Composition composition) {
+
+	    if (!DummyData.dummyData.addComposition(composition)) {
+	      Response response =
+	          (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+	      response.setBool(false);
+	      response.setError("Composition already exists...");
+	      response.setException("Composition already exists...");
+	      return response;
+	    } else {
+	      Response response =
+	          (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+	      response.setBool(true);
+	      response.setError("registerComposition no error");
+	      response.setException("registerComposition no exception");
+	      return response;
+
+	    }
+	  }
 
   /**
    * Method handling HTTP PUT request. The returned object will be sent to the client as "json"
@@ -64,15 +68,21 @@ public class CompositionResource {
   @Produces(MediaType.APPLICATION_JSON)
   public Response updateComposition(Composition composition) {
 
-    System.out.println(composition);
-
-    Response response =
-        (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-    response.setBool(true);
-    response.setError("updateComposition no error");
-    response.setException("updateComposition no error");
-
-    return response;
+	  if (!DummyData.dummyData.updateComposition(composition)) {
+	      Response response =
+	          (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+	      response.setBool(false);
+	      response.setError("updateComposition failed");
+	      response.setException("updateComposition failed");
+	      return response;
+	    } else {
+	      Response response =
+	          (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+	      response.setBool(true);
+	      response.setError("updateComposition no error");
+	      response.setException("updateComposition no exception");
+	      return response;
+	    }
   }
 
   /**
@@ -83,21 +93,15 @@ public class CompositionResource {
    * @param version String
    * @return Composition if succeed otherwise null
    */
-//@GET
-//@Path("compositions")
-//@Consumes(MediaType.TEXT_PLAIN)
-//@Produces(MediaType.APPLICATION_JSON)
-//public Composition getComposition(@QueryParam("uri") String uri,
-//    @DefaultValue("1.0.0") @QueryParam("version") String version) {
-//
-//	  DummyData.myCompositionContainer.get(0);
-//  System.out.println(uri + " " + version);
-//
-//  Composition composition =
-//      (Composition) ApplicationManager.appManager.getSpringContext().getBean("composition");
-//  System.out.println(uri + " " + version);
-//  return composition;
-//}
+  @GET
+  @Path("compositions")
+  @Consumes(MediaType.TEXT_PLAIN)
+  @Produces(MediaType.APPLICATION_JSON)
+  public Composition getComposition(@QueryParam("uri") String uri,
+      @DefaultValue("1.0.0") @QueryParam("version") String version) {
+
+    return DummyData.dummyData.getComposition(uri, version);
+  }
 
   /**
    * Method handling HTTP DELETE requests. Method deletes a specific composition.
@@ -112,13 +116,20 @@ public class CompositionResource {
   @Produces(MediaType.APPLICATION_JSON)
   public Response deleteComposition(Param param) {
 
-    System.out.println(param.getUri() + " " + param.getVersion());
-    Response response =
-        (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-    response.setBool(true);
-    response.setError("deleteComposition no errors");
-    response.setException("deleteComposition no errors");
-    return response;
+	  if (!DummyData.dummyData.deleteComposition(param.getUri(), param.getVersion())) {
+	      Response response =
+	          (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+	      response.setBool(false);
+	      response.setError("deleteComposition failed...");
+	      response.setException("deleteComposition failed...");
+	      return response;
+	    } else {
+	      Response response =
+	          (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+	      response.setBool(true);
+	      response.setError("deleteComposition no errors");
+	      response.setException("deleteComposition no exceptions");
+	      return
   }
 
   /**
@@ -132,13 +143,6 @@ public class CompositionResource {
   @Produces(MediaType.APPLICATION_JSON)
   public List<Composition> getAllComponents() {
 
-    Composition composition1 = new Composition();
-    Composition composition2 = new Composition();
-    Composition composition3 = new Composition();
-    List<Composition> list = new ArrayList<Composition>();
-    list.add(composition1);
-    list.add(composition2);
-    list.add(composition3);
-    return list;
+	return DummyData.dummyData.getAllCompositions();
   }
 }
