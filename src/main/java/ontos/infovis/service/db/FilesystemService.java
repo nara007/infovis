@@ -9,6 +9,12 @@ import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.update.GraphStore;
+import com.hp.hpl.jena.update.GraphStoreFactory;
+import com.hp.hpl.jena.update.UpdateAction;
+import com.hp.hpl.jena.update.UpdateExecutionFactory;
+import com.hp.hpl.jena.update.UpdateProcessor;
+import com.hp.hpl.jena.update.UpdateRequest;
 
 // TODO remove redundant code 
 
@@ -88,6 +94,40 @@ public class FilesystemService implements IPersistenceService {
 		// read JSON object and add it to the model		
 		Model compositionModel = PojoModelParser.parseAsModel(compositions);
 		model = model.union(compositionModel);
+		
+		// save back to the file		
+		return FilesystemManager.saveModel(targetURL, model);
+	}
+
+	/**
+	 * @param targetURL the {@link URL} to the TTL file from which the components are deleted
+	 * @param searchQuery a SPARQL {@link UpdateRequest} to delete components by ID and version
+	 * @return boolean true if the components have been deleted, false if not
+	 */
+	@Override
+	public boolean deleteComponents(URL targetURL, UpdateRequest deleteUpdateRequest) {
+		// read an existing or empty model from the file
+		Model model = FilesystemManager.readModel(targetURL);
+
+		// execute the update
+		UpdateAction.execute(deleteUpdateRequest, model);
+		
+		// save back to the file		
+		return FilesystemManager.saveModel(targetURL, model);
+	}
+
+	/**
+	 * @param targetURL the {@link URL} to the TTL file from which the compositions are deleted
+	 * @param searchQuery a SPARQL {@link UpdateRequest} to delete compositions by ID and version
+	 * @return boolean true if the compositions have been deleted, false if not
+	 */
+	@Override
+	public boolean deleteCompositions(URL targetURL, UpdateRequest deleteUpdateRequest) {
+		// read an existing or empty model from the file
+		Model model = FilesystemManager.readModel(targetURL);
+
+		// execute the update
+		UpdateAction.execute(deleteUpdateRequest, model);
 		
 		// save back to the file		
 		return FilesystemManager.saveModel(targetURL, model);

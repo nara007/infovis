@@ -6,6 +6,9 @@ import java.net.URL;
 
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryFactory;
+import com.hp.hpl.jena.update.Update;
+import com.hp.hpl.jena.update.UpdateFactory;
+import com.hp.hpl.jena.update.UpdateRequest;
 
 import ontos.infovis.pojo.Component;
 import ontos.infovis.pojo.Composition;
@@ -80,8 +83,18 @@ public class EntryManager {
 	}
 
 	public boolean deleteComponent(Param param) {
-		// TODO implement this
-		return false;
+		String uri = param.getUri();
+		String version = param.getVersion();
+		
+		uri = "dummy-communes";
+		version = "0.0.1a";
+		
+		String versionUri = PojoModelParser.BASE_URL + "version";
+		String versionsUri = PojoModelParser.BASE_URL + "versions";
+		uri = PojoModelParser.BASE_URL + uri;
+		UpdateRequest deleteUpdateRequest = UpdateFactory.create("DELETE WHERE{<"+uri+"> <"+versionsUri+"> ?version . ?version ?p ?o . ?version <"+versionUri+"> \""+version+"\" .}");
+		
+		return pService.deleteComponents(this.targetURL, deleteUpdateRequest);
 	}
 	
 	/* manage compositions */
@@ -119,7 +132,14 @@ public class EntryManager {
 	}
 
 	public boolean deleteComposition(Param param) {
-		// TODO implement this
-		return false;
+		String uri = param.getUri();
+		String version = param.getVersion();
+		
+		String versionUri = PojoModelParser.BASE_URL + "version";
+		String versionsUri = PojoModelParser.BASE_URL + "versions";
+		uri = PojoModelParser.BASE_URL + uri;
+		UpdateRequest deleteUpdateRequest = UpdateFactory.create("DELETE WHERE{<"+uri+"> <"+versionsUri+"> ?version . ?version ?p ?o . ?version <"+versionUri+"> \""+version+"\" .}");
+		
+		return pService.deleteCompositions(this.targetURL, deleteUpdateRequest);
 	}
 }

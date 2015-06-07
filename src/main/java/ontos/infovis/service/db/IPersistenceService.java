@@ -6,6 +6,7 @@ import ontos.infovis.pojo.Component;
 import ontos.infovis.pojo.Composition;
 
 import com.hp.hpl.jena.query.Query;
+import com.hp.hpl.jena.update.UpdateRequest;
 
 
 /**
@@ -41,4 +42,18 @@ public interface IPersistenceService {
 	 * @return boolean true if the compositions have been saved, false if not
 	 */
 	public boolean saveCompositions(URL targetURL, Composition[] compositions);
+	
+	/**
+	 * @param sourceURL the {@link URL} to the TTL file or SPARQL endpoint from which the components are deleted
+	 * @param searchQuery a SPARQL {@link UpdateRequest} to delete components by ID and version
+	 * @return boolean true if the components have been deleted, false if not
+	 */
+	public boolean deleteComponents(URL sourceURL, UpdateRequest deleteUpdateRequest);
+	
+	/**
+	 * @param sourceURL the {@link URL} to the TTL file or SPARQL endpoint from which the compositions are deleted
+	 * @param searchQuery a SPARQL {@link UpdateRequest} to delete compositions by ID and version
+	 * @return boolean true if the compositions have been deleted, false if not
+	 */
+	public boolean deleteCompositions(URL sourceURL, UpdateRequest deleteUpdateRequest);
 }
