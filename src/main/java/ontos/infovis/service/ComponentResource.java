@@ -4,7 +4,7 @@ import ontos.infovis.pojo.Component;
 import ontos.infovis.pojo.Param;
 import ontos.infovis.pojo.Response;
 import ontos.infovis.util.ApplicationManager;
-import ontos.infovis.util.MyContainer;
+import ontos.infovis.util.DummyData;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -36,19 +36,22 @@ public class ComponentResource {
   @Produces(MediaType.APPLICATION_JSON)
   public Response registerComponent(Component cmp) {
 
-   // System.out.println(cmp);
-    	
-    MyContainer.myContainer.add(cmp);
-   
-    System.out.println(MyContainer.myContainer.get(0));
-    
-    Response response =
-        (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-    response.setBool(true);
-    response.setError("registerComponent no error");
-    response.setException("registerComponent no exception");
+	  if (!DummyData.dummyData.addComponent(cmp)) {
+	      Response response =
+	          (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+	      response.setBool(false);
+	      response.setError("Component already exists...");
+	      response.setException("Component already exists...");
+	      return response;
+	    } else {
+	      Response response =
+	          (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+	      response.setBool(true);
+	      response.setError("registerComponent no error");
+	      response.setException("registerComponent no exception");
+	      return response;
 
-    return response;
+	    }
   }
 
   /**
@@ -63,13 +66,21 @@ public class ComponentResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public Response updateComponent(Component cmp) {
-    System.out.println(cmp);
-    Response response =
-        (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-    response.setBool(true);
-    response.setError("updateComponent no error");
-    response.setException("updateComponent no exception");
-    return response;
+	  if (!DummyData.dummyData.updateComponent(cmp)) {
+	      Response response =
+	          (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+	      response.setBool(false);
+	      response.setError("updateComponent failed");
+	      response.setException("updateComponent failed");
+	      return response;
+	    } else {
+	      Response response =
+	          (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+	      response.setBool(true);
+	      response.setError("updateComponent no error");
+	      response.setException("updateComponent no exception");
+	      return response;
+	    }
   }
 
   /**
@@ -86,12 +97,8 @@ public class ComponentResource {
   @Produces(MediaType.APPLICATION_JSON)
   public Component getComponent(@QueryParam("uri") String uri,
       @DefaultValue("1.0.0") @QueryParam("version") String version) {
-    // Component component
-    // =(Component)ApplicationManager.appManager.getSpringContext().getBean("component");
-    Component component =
-        (Component) ApplicationManager.appManager.getSpringContext().getBean("component");
-    System.out.println(uri + " " + version);
-    return component;
+	  
+	  return DummyData.dummyData.getComponent(uri, version);
   }
 
   /**
@@ -105,14 +112,7 @@ public class ComponentResource {
   @Produces(MediaType.APPLICATION_JSON)
   public List<Component> getAllComponents() {
 
-    Component component1 = null;
-    Component component2 = null;
-    Component component3 = null;
-    List<Component> list = new ArrayList<Component>();
-    list.add(component1);
-    list.add(component2);
-    list.add(component3);
-    return list;
+	  return DummyData.dummyData.getAllComponents();
   }
 
   /**
@@ -126,10 +126,10 @@ public class ComponentResource {
   @Path("searchedComponents")
   @Produces(MediaType.APPLICATION_JSON)
   public List<Component> searchComponent(String conditions) {
-    Component component1 = null;
-    List<Component> list = new ArrayList<Component>();
-    list.add(component1);
-    return list;
+	  Component component1 = null;
+	  List<Component> list = new ArrayList<Component>();
+	  list.add(component1);
+	  return list;
   }
 
   /**
@@ -143,25 +143,27 @@ public class ComponentResource {
   @Path("components")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-//  public Response deleteComponent(@QueryParam("uri") String uri, @QueryParam("version") String version) {
-  
-  	  
-      public Response deleteComponent(Param param){
-	  
-	  if(MyContainer.myContainer.isEmpty())
-	  {
-		  return null;
+//public Response deleteComponent(@QueryParam("uri") String uri, @QueryParam("version") String
+ // version) {
+  	public Response deleteComponent(Param param) {
+	
+	  if (!DummyData.dummyData.deleteComponent(param.getUri(), param.getVersion())) {
+	     Response response =
+	         (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+	     response.setBool(false);
+	     response.setError("deleteComponent failed...");
+	     response.setException("deleteComponent failed...");
+	     return response;
+	  } else {
+	     Response response =
+	         (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+	     response.setBool(true);
+	     response.setError("deleteComponent no errors");
+	     response.setException("deleteComponent no exceptions");
+	     return response;
 	  }
-	  else
-	  {
-		  MyContainer.myContainer.remove(0);
-	      Response response =
-	              (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-	      response.setBool(true);
-	      response.setError("deleteComponent no errors");
-	      response.setException("deleteComponent no exceptions");
-	      return response;
-	  }
+	
+	}
 
-  }
 }
+

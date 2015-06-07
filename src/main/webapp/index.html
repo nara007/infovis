@@ -58,28 +58,61 @@
                 $.ajax({
                     type: 'PUT',
                     url: 'http://localhost:8080/rest/components',
+//                    data: JSON.stringify({
+//                        "id": "dummy-weather",
+//                        "title": "Dummy Weather Component",
+//                        "description": "Dummy for Weather",
+//                        "version": "0.1.1b",
+//                        "owner": "Max Mustermann",
+//                        "creation_date": 12123535,
+//                        "last_update": 12367634,
+//                        "screenshot": "http://image.pic/134",
+//                        "dependencies": [],
+//                        "resources": [
+//                            {
+//                                "type": "js",
+//                                "path": "scripts/widgets/weather/weather.js"
+//                            },
+//                            {
+//                                "type": "html",
+//                                "path": "scripts/widgets/weather/weather.html"
+//                            }
+//                        ]
+//                    }),
                     data: JSON.stringify({
-                        "id": "dummy-weather",
-                        "title": "Dummy Weather Component",
-                        "description": "Dummy for Weather",
-                        "version": "0.1.1b",
-                        "owner": "Max Mustermann",
-                        "creation_date": 12123535,
-                        "last_update": 12367634,
-                        "screenshot": "http://image.pic/134",
-                        "dependencies": [],
+                        "id": "dummy-communes",
+                        "title": "Dummy Component for Communes",
+                        "description": "my first cool component",
+                        "version": "0.0.1b",
+                        "owner": "Max Muster",
+                        "creation_date": 128734535,
+                        "last_update": 12334234,
+                        "screenshot": "http://image.pic/1234",
+                        "dependencies": [
+                            {
+                                "name": "highcharts",
+                                "path": "http://code.highcharts.com/highcharts.js"
+                            },
+                            {
+                                "name": "highcharts-ng",
+                                "path": "http://wwwpub.zih.tu-dresden.de/~s9504022/highcharts-ng.js"
+                            }
+                        ],
                         "resources": [
                             {
                                 "type": "js",
-                                "path": "scripts/widgets/weather/weather.js"
+                                "path": "scripts/widgets/communes/communes.js"
+                            },
+                            {
+                                "type": "css",
+                                "path": "components/bootstrap/dist/css/bootstrap.css"
                             },
                             {
                                 "type": "html",
-                                "path": "scripts/widgets/weather/weather.html"
+                                "path": "scripts/widgets/communes/communes.html"
                             }
                         ]
                     }),
-//                    contentType:'text/plain',
                     contentType: 'application/json',
                     cache: false,
                     dataType: 'json',
@@ -93,7 +126,7 @@
                 $.ajax({
                     type: 'GET',
                     url: 'http://localhost:8080/rest/components',
-                    data: {"uri": "abc", "version": "1.0"},
+                    data: {"uri": "dummy-communes", "version": "0.0.1b"},
                     contentType: 'text/plain',
                     cache: false,
                     dataType: 'json',
@@ -120,7 +153,8 @@
                     type: 'DELETE',
                     url: 'http://localhost:8080/rest/components',
                     cache: false,
-                    data: JSON.stringify({"uri": "myuri", "version": "1.0"}),
+//                    data: JSON.stringify({"uri": "myuri", "version": "1.0"}),
+                    data: JSON.stringify({"uri": "dummy-communes", "version": "0.0.1b"}),
                     contentType: "application/json",
                     dataType: 'json',
                     success: function (data) {
@@ -249,19 +283,19 @@
     </script>
 </head>
 <body>
-<div id="myDiv"><h2>post request json</h2></div>
+<div id="myDiv"><h2>post request json       "register a component"</h2></div>
 <button id="b01" type="button">get json</button>
 
-<div id="myDiv2"><h2>put request json</h2></div>
+<div id="myDiv2"><h2>put request json       "update a component"</h2></div>
 <button id="b02" type="button">get json</button>
 
-<div id="myDiv3"><h2>get request json</h2></div>
+<div id="myDiv3"><h2>get request json "getComponent"</h2></div>
 <button id="b03" type="button">get json</button>
 
-<div id="myDiv4"><h2>get json array</h2></div>
+<div id="myDiv4"><h2>get json array  "getAllComponents"</h2></div>
 <button id="b04" type="button">get json array</button>
 
-<div id="myDiv5"><h2>delete a component</h2></div>
+<div id="myDiv5"><h2>delete a component  "deleteComponent"</h2></div>
 <button id="b05" type="button">delete</button>
 
 <div id="myDiv6"><h2>create a composition</h2></div>
