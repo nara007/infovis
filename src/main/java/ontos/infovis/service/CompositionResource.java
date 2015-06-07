@@ -4,7 +4,6 @@ import ontos.infovis.pojo.Composition;
 import ontos.infovis.pojo.Param;
 import ontos.infovis.pojo.Response;
 import ontos.infovis.util.ApplicationManager;
-import ontos.infovis.util.MyContainer;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

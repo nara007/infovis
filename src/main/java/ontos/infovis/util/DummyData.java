@@ -72,8 +72,8 @@ public class DummyData {
   /**
    * get a component in the container
    * 
-   * @param uri,version
-   * @return false if failed,otherwise true
+   * @param uri, version
+   * @return false if failed, otherwise true
    */
   public Component getComponent(String uri, String version) {
     String key = uri + version;
