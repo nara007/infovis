@@ -129,7 +129,9 @@ public class CompositionResource {
 	      response.setBool(true);
 	      response.setError("deleteComposition no errors");
 	      response.setException("deleteComposition no exceptions");
-	      return
+	      return null;
+	      }
+	
   }
 
   /**
