@@ -22,6 +22,7 @@ public class Component {
   private String screenshot;
   private List<ComponentDependency> dependencies;
   private List<ComponentResource> resources;
+  private ComponentConfig config;
 
 
   /**
@@ -215,5 +216,23 @@ public class Component {
         + description + '\'' + ", version='" + version + '\'' + ", owner='" + owner + '\''
         + ", creation_date=" + creation_date + ", last_update=" + last_update + ", screenshot='"
         + screenshot + '\'' + ", dependencies=" + dependencies + ", resources=" + resources + '}';
+  }
+
+  /**
+   * Gets config.
+   *
+   * @return Value of config.
+   */
+  public ComponentConfig getConfig() {
+    return config;
+  }
+
+  /**
+   * Sets new config.
+   *
+   * @param config New value of config.
+   */
+  public void setConfig(ComponentConfig config) {
+    this.config = config;
   }
 }
