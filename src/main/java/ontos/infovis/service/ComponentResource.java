@@ -36,22 +36,24 @@ public class ComponentResource {
   @Produces(MediaType.APPLICATION_JSON)
   public Response registerComponent(Component cmp) {
 
-	  if (!DummyData.dummyData.addComponent(cmp)) {
-	      Response response =
-	          (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-	      response.setBool(false);
-	      response.setError("Component already exists...");
-	      response.setException("Component already exists...");
-	      return response;
-	    } else {
-	      Response response =
-	          (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-	      response.setBool(true);
-	      response.setError("registerComponent no error");
-	      response.setException("registerComponent no exception");
-	      return response;
 
-	    }
+    if (!DummyData.dummyData.addComponent(cmp)) {
+      Response response =
+          (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+      response.setBool(false);
+      response.setError("Component already exists...");
+      response.setException("Component already exists...");
+      return response;
+    } else {
+      Response response =
+          (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+      response.setBool(true);
+      response.setError("registerComponent no error");
+      response.setException("registerComponent no exception");
+      return response;
+
+    }
+
   }
 
   /**
@@ -66,21 +68,22 @@ public class ComponentResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public Response updateComponent(Component cmp) {
-	  if (!DummyData.dummyData.updateComponent(cmp)) {
-	      Response response =
-	          (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-	      response.setBool(false);
-	      response.setError("updateComponent failed");
-	      response.setException("updateComponent failed");
-	      return response;
-	    } else {
-	      Response response =
-	          (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-	      response.setBool(true);
-	      response.setError("updateComponent no error");
-	      response.setException("updateComponent no exception");
-	      return response;
-	    }
+
+    if (!DummyData.dummyData.updateComponent(cmp)) {
+      Response response =
+          (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+      response.setBool(false);
+      response.setError("updateComponent failed");
+      response.setException("updateComponent failed");
+      return response;
+    } else {
+      Response response =
+          (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+      response.setBool(true);
+      response.setError("updateComponent no error");
+      response.setException("updateComponent no exception");
+      return response;
+    }
   }
 
   /**
@@ -97,8 +100,8 @@ public class ComponentResource {
   @Produces(MediaType.APPLICATION_JSON)
   public Component getComponent(@QueryParam("uri") String uri,
       @DefaultValue("1.0.0") @QueryParam("version") String version) {
-	  
-	  return DummyData.dummyData.getComponent(uri, version);
+
+    return DummyData.dummyData.getComponent(uri, version);
   }
 
   /**
@@ -112,7 +115,7 @@ public class ComponentResource {
   @Produces(MediaType.APPLICATION_JSON)
   public List<Component> getAllComponents() {
 
-	  return DummyData.dummyData.getAllComponents();
+    return DummyData.dummyData.getAllComponents();
   }
 
   /**
@@ -126,15 +129,14 @@ public class ComponentResource {
   @Path("searchedComponents")
   @Produces(MediaType.APPLICATION_JSON)
   public List<Component> searchComponent(String conditions) {
-	  Component component1 = null;
-	  List<Component> list = new ArrayList<Component>();
-	  list.add(component1);
-	  return list;
+    Component component1 = null;
+    List<Component> list = new ArrayList<Component>();
+    list.add(component1);
+    return list;
   }
 
   /**
-   * Method handling HTTP DELETE requests.
-   * Method deletes a specific component.
+   * Method handling HTTP DELETE requests. Method deletes a specific component.
    *
    * @param Param POJO
    * @return Bool indicates if a specific component has been deleted successfully.
@@ -143,27 +145,25 @@ public class ComponentResource {
   @Path("components")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-//public Response deleteComponent(@QueryParam("uri") String uri, @QueryParam("version") String
- // version) {
-  	public Response deleteComponent(Param param) {
-	
-	  if (!DummyData.dummyData.deleteComponent(param.getUri(), param.getVersion())) {
-	     Response response =
-	         (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-	     response.setBool(false);
-	     response.setError("deleteComponent failed...");
-	     response.setException("deleteComponent failed...");
-	     return response;
-	  } else {
-	     Response response =
-	         (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-	     response.setBool(true);
-	     response.setError("deleteComponent no errors");
-	     response.setException("deleteComponent no exceptions");
-	     return response;
-	  }
-	
-	}
+  // public Response deleteComponent(@QueryParam("uri") String uri, @QueryParam("version") String
+  // version) {
+  public Response deleteComponent(Param param) {
 
+    if (!DummyData.dummyData.deleteComponent(param.getUri(), param.getVersion())) {
+      Response response =
+          (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+      response.setBool(false);
+      response.setError("deleteComponent failed...");
+      response.setException("deleteComponent failed...");
+      return response;
+    } else {
+      Response response =
+          (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+      response.setBool(true);
+      response.setError("deleteComponent no errors");
+      response.setException("deleteComponent no exceptions");
+      return response;
+    }
+
+  }
 }
-

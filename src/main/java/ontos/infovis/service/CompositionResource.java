@@ -31,29 +31,29 @@ public class CompositionResource {
    * @param Composition POJO (converted from json automatically)
    * @return Response object(converted to json automatically)
    */
-	  @POST
-	  @Path("compositions")
-	  @Consumes(MediaType.APPLICATION_JSON)
-	  @Produces(MediaType.APPLICATION_JSON)
-	  public Response createComposition(Composition composition) {
+  @POST
+  @Path("compositions")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response createComposition(Composition composition) {
 
-	    if (!DummyData.dummyData.addComposition(composition)) {
-	      Response response =
-	          (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-	      response.setBool(false);
-	      response.setError("Composition already exists...");
-	      response.setException("Composition already exists...");
-	      return response;
-	    } else {
-	      Response response =
-	          (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-	      response.setBool(true);
-	      response.setError("registerComposition no error");
-	      response.setException("registerComposition no exception");
-	      return response;
+    if (!DummyData.dummyData.addComposition(composition)) {
+      Response response =
+          (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+      response.setBool(false);
+      response.setError("Composition already exists...");
+      response.setException("Composition already exists...");
+      return response;
+    } else {
+      Response response =
+          (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+      response.setBool(true);
+      response.setError("registerComposition no error");
+      response.setException("registerComposition no exception");
+      return response;
 
-	    }
-	  }
+    }
+  }
 
   /**
    * Method handling HTTP PUT request. The returned object will be sent to the client as "json"
@@ -68,21 +68,21 @@ public class CompositionResource {
   @Produces(MediaType.APPLICATION_JSON)
   public Response updateComposition(Composition composition) {
 
-	  if (!DummyData.dummyData.updateComposition(composition)) {
-	      Response response =
-	          (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-	      response.setBool(false);
-	      response.setError("updateComposition failed");
-	      response.setException("updateComposition failed");
-	      return response;
-	    } else {
-	      Response response =
-	          (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-	      response.setBool(true);
-	      response.setError("updateComposition no error");
-	      response.setException("updateComposition no exception");
-	      return response;
-	    }
+    if (!DummyData.dummyData.updateComposition(composition)) {
+      Response response =
+          (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+      response.setBool(false);
+      response.setError("updateComposition failed");
+      response.setException("updateComposition failed");
+      return response;
+    } else {
+      Response response =
+          (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+      response.setBool(true);
+      response.setError("updateComposition no error");
+      response.setException("updateComposition no exception");
+      return response;
+    }
   }
 
   /**
@@ -116,22 +116,21 @@ public class CompositionResource {
   @Produces(MediaType.APPLICATION_JSON)
   public Response deleteComposition(Param param) {
 
-	  if (!DummyData.dummyData.deleteComposition(param.getUri(), param.getVersion())) {
-	      Response response =
-	          (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-	      response.setBool(false);
-	      response.setError("deleteComposition failed...");
-	      response.setException("deleteComposition failed...");
-	      return response;
-	    } else {
-	      Response response =
-	          (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-	      response.setBool(true);
-	      response.setError("deleteComposition no errors");
-	      response.setException("deleteComposition no exceptions");
-	      return null;
-	      }
-	
+    if (!DummyData.dummyData.deleteComposition(param.getUri(), param.getVersion())) {
+      Response response =
+          (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+      response.setBool(false);
+      response.setError("deleteComposition failed...");
+      response.setException("deleteComposition failed...");
+      return response;
+    } else {
+      Response response =
+          (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+      response.setBool(true);
+      response.setError("deleteComposition no errors");
+      response.setException("deleteComposition no exceptions");
+      return response;
+    }
   }
 
   /**
@@ -145,6 +144,6 @@ public class CompositionResource {
   @Produces(MediaType.APPLICATION_JSON)
   public List<Composition> getAllComponents() {
 
-	return DummyData.dummyData.getAllCompositions();
+    return DummyData.dummyData.getAllCompositions();
   }
 }

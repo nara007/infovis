@@ -1,0 +1,38 @@
+{
+  "id": "dummy-communes",
+  "title": "Dummy Component for Communes",
+  "description": "my first cool component",
+  "version": "0.0.1b",
+  "owner": "Max Muster",
+  "creation_date": 128734535,
+  "last_update": 12334234,
+  "screenshot": "http://image.pic/1234",
+  "dependencies": [
+    {
+      "name": "highcharts",
+      "path": "http://code.highcharts.com/highcharts.js"
+    },
+    {
+      "name": "highcharts-ng",
+      "path": "http://wwwpub.zih.tu-dresden.de/~s9504022/highcharts-ng.js"
+    }
+  ],
+  "resources": [
+    {
+      "type": "js",
+      "path": "scripts/widgets/communes/communes.js"
+    },
+    {
+      "type": "css",
+      "path": "components/bootstrap/dist/css/bootstrap.css"
+    },
+    {
+      "type": "html",
+      "path": "scripts/widgets/communes/communes.html"
+    }
+  ],
+  "config":  {
+    "query": "select distinct ?canton (count(?comm) as ?count) where {?cant a <http://lindas-data.ch/def/top/Canton>.?cant <http://www.w3.org/2004/02/skos/core#prefLabel> ?canton.?dist <http://lindas-data.ch/def/top/isPartOf> ?cant.?comm <http://lindas-data.ch/def/top/isPartOf> ?dist.?comm a <http://lindas-data.ch/def/top/Commune>.FILTER(LANGMATCHES(LANG(?canton), \"de\"))} group by ?canton order by ?count LIMIT",
+    "location":null
+  }
+}
