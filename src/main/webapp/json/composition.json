@@ -1,0 +1,27 @@
+{
+	"id": "dummy-compostion",
+	"title": "First Dummy Composition",
+	"description": "my first cool composition",
+	"version": "0.0.1b",
+	"owner": "Max Muster",
+	"rights": [
+		{
+			"user": "Bob Bauer",
+			"right": "w"
+		},
+		{
+			"user": "Alice A",
+			"right": "r"
+		}
+	],
+	"creation_date": 128734535,
+	"last_update": 12334234,
+	"structure": "4-8",
+	"components": [
+		{
+			"id": "dummy-communes",
+			"instance_id": "23423dsfs324",
+			"version": "1.2.3"
+		}
+	]
+}

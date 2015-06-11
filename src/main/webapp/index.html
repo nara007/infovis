@@ -1,283 +1,317 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
-    <meta charset="UTF-8">
+
+<head>
     <title></title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#b01").click(function () {
-
-                $.ajax({
-                    type: 'POST',
-                    url: 'http://localhost:8080/rest/components',
-                    data: JSON.stringify({
-                        "id": "dummy-communes",
-                        "title": "Dummy Component for Communes",
-                        "description": "my first cool component",
-                        "version": "0.0.1b",
-                        "owner": "Max Muster",
-                        "creation_date": 128734535,
-                        "last_update": 12334234,
-                        "screenshot": "http://image.pic/1234",
-                        "dependencies": [
-                            {
-                                "name": "highcharts",
-                                "path": "http://code.highcharts.com/highcharts.js"
-                            },
-                            {
-                                "name": "highcharts-ng",
-                                "path": "http://wwwpub.zih.tu-dresden.de/~s9504022/highcharts-ng.js"
-                            }
-                        ],
-                        "resources": [
-                            {
-                                "type": "js",
-                                "path": "scripts/widgets/communes/communes.js"
-                            },
-                            {
-                                "type": "css",
-                                "path": "components/bootstrap/dist/css/bootstrap.css"
-                            },
-                            {
-                                "type": "html",
-                                "path": "scripts/widgets/communes/communes.html"
-                            }
-                        ]
-                    }),
-                    contentType: 'application/json',
-                    cache: false,
-                    dataType: 'json',
-                    success: function (data) {
-                        console.log(data);
-                    }
-                });
-            });
-
-            $("#b02").click(function () {
-                $.ajax({
-                    type: 'PUT',
-                    url: 'http://localhost:8080/rest/components',
-                    data: JSON.stringify({
-                        "id": "dummy-weather",
-                        "title": "Dummy Weather Component",
-                        "description": "Dummy for Weather",
-                        "version": "0.1.1b",
-                        "owner": "Max Mustermann",
-                        "creation_date": 12123535,
-                        "last_update": 12367634,
-                        "screenshot": "http://image.pic/134",
-                        "dependencies": [],
-                        "resources": [
-                            {
-                                "type": "js",
-                                "path": "scripts/widgets/weather/weather.js"
-                            },
-                            {
-                                "type": "html",
-                                "path": "scripts/widgets/weather/weather.html"
-                            }
-                        ]
-                    }),
-//                    contentType:'text/plain',
-                    contentType: 'application/json',
-                    cache: false,
-                    dataType: 'json',
-                    success: function (data) {
-                        console.log(data);
-                    }
-                });
-            });
-
-            $("#b03").click(function () {
-                $.ajax({
-                    type: 'GET',
-                    url: 'http://localhost:8080/rest/components',
-                    data: {"uri": "abc", "version": "1.0"},
-                    contentType: 'text/plain',
-                    cache: false,
-                    dataType: 'json',
-                    success: function (data) {
-                        console.log(data);
-                    }
-                });
-            });
-
-            $("#b04").click(function () {
-                $.ajax({
-                    type: 'GET',
-                    url: 'http://localhost:8080/rest/allcomponents',
-                    cache: false,
-                    dataType: 'json',
-                    success: function (data) {
-                        console.log(data);
-                    }
-                });
-            });
-
-            $("#b05").click(function () {
-                $.ajax({
-                    type: 'DELETE',
-                    url: 'http://localhost:8080/rest/components',
-                    cache: false,
-                    data: JSON.stringify({"uri": "myuri", "version": "1.0"}),
-                    contentType: "application/json",
-                    dataType: 'json',
-                    success: function (data) {
-                        console.log(data);
-                    }
-                });
-            });
-
-            $("#b06").click(function () {
-                $.ajax({
-                    type: 'POST',
-                    url: 'http://localhost:8080/rest/compositions',
-                    cache: false,
-                    data: JSON.stringify({
-                        "id": "dummy-compostion",
-                        "title": "First Dummy Composition",
-                        "description": "my first cool composition",
-                        "version": "0.0.1b",
-                        "owner": "Max Muster",
-                        "rights": [
-                            {
-                                "user": "Bob Bauer",
-                                "right": "w"
-                            },
-                            {
-                                "user": "Alice A",
-                                "right": "r"
-                            }
-                        ],
-                        "creation_date": 128734535,
-                        "last_update": 12334234,
-                        "structure": "4-8",
-                        "components": [{
-                            "id": "dummy-communes",
-                            "instance_id": "23423dsfs324",
-                            "version": "1.2.3"
-                        }]
-                    }),
-                    contentType: "application/json",
-                    dataType: 'json',
-                    success: function (data) {
-                        console.log(data);
-                    }
-                });
-            });
-
-            $("#b07").click(function () {
-                $.ajax({
-                    type: 'PUT',
-                    url: 'http://localhost:8080/rest/compositions',
-                    cache: false,
-                    data: JSON.stringify({
-                        "id": "dummy-compostion",
-                        "title": "First Dummy Composition",
-                        "description": "my first cool composition",
-                        "version": "0.0.1b",
-                        "owner": "Max Muster",
-                        "rights": [
-                            {
-                                "user": "Bob Bauer",
-                                "right": "w"
-                            },
-                            {
-                                "user": "Alice A",
-                                "right": "r"
-                            }
-                        ],
-                        "creation_date": 128734535,
-                        "last_update": 12334234,
-                        "structure": "4-8",
-                        "components": [{
-                            "id": "dummy-communes",
-                            "instance_id": "23423dsfs324",
-                            "version": "1.2.3"
-                        }]
-                    }),
-                    contentType: "application/json",
-                    dataType: 'json',
-                    success: function (data) {
-                        console.log(data);
-                    }
-                });
-            });
-
-            $("#b08").click(function () {
-                $.ajax({
-                    type: 'GET',
-                    url: 'http://localhost:8080/rest/compositions',
-                    contentType: 'text/plain',
-                    data: {"uri": "def", "version": "1.0.0"},
-                    cache: false,
-                    dataType: 'json',
-                    success: function (data) {
-                        console.log(data);
-                    }
-                });
-            });
-
-            $("#b09").click(function () {
-                $.ajax({
-                    type: 'DELETE',
-                    url: 'http://localhost:8080/rest/compositions',
-                    cache: false,
-                    data: JSON.stringify({"uri": "myuri.delete.composition", "version": "1.0"}),
-                    contentType: "application/json",
-                    dataType: 'json',
-                    success: function (data) {
-                        console.log(data);
-                    }
-                });
-            });
-
-            $("#b10").click(function () {
-                $.ajax({
-                    type: 'GET',
-                    url: 'http://localhost:8080/rest/allcompositions',
-                    cache: false,
-                    dataType: 'json',
-                    success: function (data) {
-                        console.log(data);
-                    }
-                });
-            });
-
-        });
-    </script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 </head>
+
 <body>
-<div id="myDiv"><h2>post request json</h2></div>
-<button id="b01" type="button">get json</button>
+<!-- <form role="form" ng-app> -->
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="inputfile">register a component</label>
+            <input type="file" id="registerComponent">
+            <input type="button" class="btn btn-default" value="submit" id="register"></input>
+        </div>
 
-<div id="myDiv2"><h2>put request json</h2></div>
-<button id="b02" type="button">get json</button>
+        <div class="form-group">
+            <label for="inputfile">update a component</label>
+            <input type="file" id="updateComponent">
+            <input type="button" class="btn btn-default" value="submit" id="update"></input>
+        </div>
 
-<div id="myDiv3"><h2>get request json</h2></div>
-<button id="b03" type="button">get json</button>
+        <div class="form-group">
+            <label for="inputfile">get a component</label>
 
-<div id="myDiv4"><h2>get json array</h2></div>
-<button id="b04" type="button">get json array</button>
+            <div class="row">
+                <div class="col-xs-2">
+                    <input type="text" class="form-control" placeholder="uri" id="uriOfGetComponent">
+                </div>
+                <div class="col-xs-3">
+                    <input type="text" class="form-control" placeholder="version" id="versionOfGetComponent">
+                </div>
+            </div>
+            <input type="button" class="btn btn-default" value="submit" id="getcomponent"></input>
+        </div>
 
-<div id="myDiv5"><h2>delete a component</h2></div>
-<button id="b05" type="button">delete</button>
+        <div class="form-group">
+            <label for="inputfile">get all components</label><br/>
+            <input type="button" class="btn btn-default" value="submit" id="getAllComponents"></input>
+        </div>
 
-<div id="myDiv6"><h2>create a composition</h2></div>
-<button id="b06" type="button">create a composition</button>
+        <div class="form-group">
+            <label for="inputfile">delete a component</label>
 
-<div id="myDiv7"><h2>update a composition</h2></div>
-<button id="b07" type="button">update a composition</button>
+            <div class="row">
+                <div class="col-xs-2">
+                    <input type="text" class="form-control" placeholder="uri" id="uriOfDeleteComponent">
+                </div>
+                <div class="col-xs-3">
+                    <input type="text" class="form-control" placeholder="version" id="versionOfDeleteComponent">
+                </div>
+            </div>
+            <input type="button" class="btn btn-default" value="submit" id="deletecomponent"></input>
+        </div>
+    </div>
 
-<div id="myDiv8"><h2>get a composition</h2></div>
-<button id="b08" type="button">get a composition</button>
 
-<div id="myDiv9"><h2>delete a composition</h2></div>
-<button id="b09" type="button">delete a composition</button>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="inputfile">create a composition</label>
+            <input type="file" id="createComposition">
+            <input type="button" class="btn btn-default" value="submit" id="createCompositionSubmit"></input>
+        </div>
 
-<div id="myDiv10"><h2>get all compositions</h2></div>
-<button id="b10" type="button">get all compositions</button>
+        <div class="form-group">
+            <label for="inputfile">update a composition</label>
+            <input type="file" id="updateComposition">
+            <input type="button" class="btn btn-default" value="submit" id="updateCompositionSubmit"></input>
+        </div>
+        <div class="form-group">
+            <label for="inputfile">get a composition</label>
+            <div class="row">
+                <div class="col-xs-2">
+                    <input type="text" class="form-control" placeholder="uri" id="uriOfGetComposition">
+                </div>
+                <div class="col-xs-3">
+                    <input type="text" class="form-control" placeholder="version" id="versionOfGetComposition">
+                </div>
+            </div>
+            <input type="button" class="btn btn-default" value="submit" id="getcomposition"></input>
+        </div>
+        <div class="form-group">
+            <label for="inputfile">delete a composition</label>
 
+            <div class="row">
+                <div class="col-xs-2">
+                    <input type="text" class="form-control" placeholder="uri" id="uriOfDeleteComposition">
+                </div>
+                <div class="col-xs-3">
+                    <input type="text" class="form-control" placeholder="version" id="versionOfDeleteComposition">
+                </div>
+            </div>
+            <input type="button" class="btn btn-default" value="submit" id="deletecomposition"></input>
+        </div>
+        <div class="form-group">
+            <label for="inputfile">get all compositions</label><br/>
+            <input type="button" class="btn btn-default" value="submit" id="getAllCompositions"></input>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- </form> -->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower_components/angular/angular.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        /**
+         * register a component
+         */
+        $("#register").click(function () {
+
+            var fileName = "json/" + $("#registerComponent").val().replace("C:\\fakepath\\", "");
+            $.getJSON(fileName, function (data) {
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://localhost:8080/rest/components',
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    cache: false,
+                    dataType: 'json',
+                    success: function (response) {
+                        console.log(response);
+                    }
+                });
+
+            });
+        });
+        /**
+         * update a component
+         */
+        $("#update").click(function () {
+
+            var fileName = "json/" + $("#updateComponent").val().replace("C:\\fakepath\\", "");
+            $.getJSON(fileName, function (data) {
+
+                $.ajax({
+                    type: 'PUT',
+                    url: 'http://localhost:8080/rest/components',
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    cache: false,
+                    dataType: 'json',
+                    success: function (response) {
+                        console.log(response);
+                    }
+                });
+            });
+        });
+
+        /**
+         * get a component
+         */
+        $("#getcomponent").click(function () {
+
+//           console.log($("#uriOfGetComponent").val()+" "+$("#versionOfGetComponent").val());
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:8080/rest/components',
+                data: {"uri": $("#uriOfGetComponent").val(), "version": $("#versionOfGetComponent").val()},
+                contentType: 'text/plain',
+                cache: false,
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                }
+            });
+        });
+
+        /**
+         * get all components
+         */
+        $("#getAllComponents").click(function () {
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:8080/rest/allcomponents',
+                cache: false,
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                }
+            });
+        });
+
+
+        /**
+         * delete a component
+         */
+        $("#deletecomponent").click(function () {
+
+            $.ajax({
+                type: 'DELETE',
+                url: 'http://localhost:8080/rest/components',
+                cache: false,
+                data: JSON.stringify({
+                    "uri": $("#uriOfDeleteComponent").val(),
+                    "version": $("#versionOfDeleteComponent").val()
+                }),
+                contentType: "application/json",
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                }
+            });
+        });
+
+        /**
+         * create a composition
+         */
+        $("#createCompositionSubmit").click(function () {
+
+            var fileName = "json/" + $("#createComposition").val().replace("C:\\fakepath\\", "");
+            $.getJSON(fileName, function (data) {
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://localhost:8080/rest/compositions',
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    cache: false,
+                    dataType: 'json',
+                    success: function (response) {
+                        console.log(response);
+                    }
+                });
+
+            });
+        });
+
+        /**
+         * update a composition
+         */
+        $("#updateCompositionSubmit").click(function () {
+
+            var fileName = "json/" + $("#updateComposition").val().replace("C:\\fakepath\\", "");
+            $.getJSON(fileName, function (data) {
+
+                $.ajax({
+                    type: 'PUT',
+                    url: 'http://localhost:8080/rest/compositions',
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    cache: false,
+                    dataType: 'json',
+                    success: function (response) {
+                        console.log(response);
+                    }
+                });
+            });
+        });
+
+
+        /**
+         * get a composition
+         */
+        $("#getcomposition").click(function () {
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:8080/rest/compositions',
+                data: {"uri": $("#uriOfGetComposition").val(), "version": $("#versionOfGetComposition").val()},
+                contentType: 'text/plain',
+                cache: false,
+                dataType: 'json',
+                success: function (response) {
+                    console.log(response);
+                }
+            });
+        });
+
+        /**
+         * delete a composition
+         */
+        $("#deletecomposition").click(function () {
+
+            $.ajax({
+                type: 'DELETE',
+                url: 'http://localhost:8080/rest/compositions',
+                cache: false,
+                data: JSON.stringify({
+                    "uri": $("#uriOfDeleteComposition").val(),
+                    "version": $("#versionOfDeleteComposition").val()
+                }),
+                contentType: "application/json",
+                dataType: 'json',
+                success: function (response) {
+                    console.log(response);
+                }
+            });
+        });
+
+        /**
+         * get all compositions
+         */
+        $("#getAllCompositions").click(function () {
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:8080/rest/allcompositions',
+                cache: false,
+                dataType: 'json',
+                success: function (response) {
+                    console.log(response);
+                }
+            });
+        });
+
+    });
+</script>
 </body>
+
 </html>

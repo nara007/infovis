@@ -6,7 +6,7 @@
     <groupId>ontos.infovis</groupId>
     <artifactId>service</artifactId>
     <packaging>war</packaging>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>ontos</version>
     <name>service</name>
 
     <dependencies>
@@ -48,6 +48,7 @@
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
+                    <inplace>true</inplace>
                 </configuration>
             </plugin>
             <plugin>
@@ -63,7 +64,13 @@
                 <version>2.4</version>
                 <configuration>
                     <warSourceDirectory>WebContent</warSourceDirectory>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <failOnMissingWebXml>true</failOnMissingWebXml>
+                    <inplace>true</inplace>
+                    <webResources>
+                    	<resource>
+                    		<directory>src/main/webapp</directory>
+                    	</resource>
+                    </webResources>
                 </configuration>
             </plugin>
         </plugins>

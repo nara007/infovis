@@ -11,7 +11,7 @@ http://localhost:8080/myapp/myresource
 https://jersey.java.net/documentation/latest/getting-started.html
 
 
-================
+================  
 jetty:run
 
 This starts Jetty and serves up the project on http://localhost:8080/.
@@ -20,7 +20,20 @@ Jetty continues to run until you stop it. While it runs, it periodically scans f
 You can terminate the plugin with in the terminal window where it is running.
 
 
-=================
+=================  
 WAR
 
--> For more information visit: http://crunchify.com/how-to-create-a-war-file-from-eclipse-using-maven-plugin-apache-maven-war-plugin-usage/
+- Clone Repo
+- Checkout dummyData-Branch
+- Start deploying of WAR with command "war:war"
+- The WAR will be saved under .../target/service-ontos.war
+- Copy WAR File from target folder to tomcat webapps folder
+	--> cp target/service-ontos.war /path/to/tomcat/webapps
+- Start Tomcat for autodeploying the WAR file
+- Then open http://localhost:8080/service-ontos/ in your browser
+
+
+
+-> For more information visit:   
+https://maven.apache.org/plugins/maven-war-plugin/war-mojo.html  
+http://crunchify.com/how-to-create-a-war-file-from-eclipse-using-maven-plugin-apache-maven-war-plugin-usage/
