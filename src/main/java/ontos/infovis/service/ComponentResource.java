@@ -7,7 +7,9 @@ import ontos.infovis.util.ApplicationManager;
 import ontos.infovis.util.DummyData;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.UriInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -138,18 +140,16 @@ public class ComponentResource {
   /**
    * Method handling HTTP DELETE requests. Method deletes a specific component.
    *
-   * @param Param POJO
-   * @return Bool indicates if a specific component has been deleted successfully.
+   * @param uri
+   * @param version
+   * @return Response json object.
    */
   @DELETE
-  @Path("components")
-  @Consumes(MediaType.APPLICATION_JSON)
+  @Path("components/{uri}/{version}")
   @Produces(MediaType.APPLICATION_JSON)
-  // public Response deleteComponent(@QueryParam("uri") String uri, @QueryParam("version") String
-  // version) {
-  public Response deleteComponent(Param param) {
+  public Response deleteComponent(@PathParam("uri") String uri, @PathParam("version") String version) {
 
-    if (!DummyData.dummyData.deleteComponent(param.getUri(), param.getVersion())) {
+    if (!DummyData.dummyData.deleteComponent(uri, version)) {
       Response response =
           (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
       response.setBool(false);
@@ -166,4 +166,5 @@ public class ComponentResource {
     }
 
   }
+
 }

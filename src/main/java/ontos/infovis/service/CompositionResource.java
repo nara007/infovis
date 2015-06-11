@@ -106,17 +106,18 @@ public class CompositionResource {
   /**
    * Method handling HTTP DELETE requests. Method deletes a specific composition.
    *
-   * @param Param POJO
+   * @param uri
+   * @param version
    * @return Bool indicates if a specific composition has been deleted successfully.
    */
 
   @DELETE
-  @Path("compositions")
-  @Consumes(MediaType.APPLICATION_JSON)
+  @Path("compositions/{uri}/{version}")
   @Produces(MediaType.APPLICATION_JSON)
-  public Response deleteComposition(Param param) {
+  public Response deleteComposition(@PathParam("uri") String uri,
+      @PathParam("version") String version) {
 
-    if (!DummyData.dummyData.deleteComposition(param.getUri(), param.getVersion())) {
+    if (!DummyData.dummyData.deleteComposition(uri, version)) {
       Response response =
           (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
       response.setBool(false);

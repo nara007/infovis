@@ -73,6 +73,7 @@
         </div>
         <div class="form-group">
             <label for="inputfile">get a composition</label>
+
             <div class="row">
                 <div class="col-xs-2">
                     <input type="text" class="form-control" placeholder="uri" id="uriOfGetComposition">
@@ -102,9 +103,6 @@
         </div>
     </div>
 </div>
-
-
-
 
 
 <!-- </form> -->
@@ -192,22 +190,21 @@
 
 
         /**
-         * delete a component
+         * delete a component.The request uri must contain the parameters,
+         * or the @PathParam does not work.
+         * Jquery does not append the parameters after the uri.
          */
         $("#deletecomponent").click(function () {
 
+            var request = 'http://localhost:8080/rest/components/';
+            request = request + $("#uriOfDeleteComponent").val() + '/' + $("#versionOfDeleteComponent").val();
             $.ajax({
                 type: 'DELETE',
-                url: 'http://localhost:8080/rest/components',
+                url: request,
                 cache: false,
-                data: JSON.stringify({
-                    "uri": $("#uriOfDeleteComponent").val(),
-                    "version": $("#versionOfDeleteComponent").val()
-                }),
-                contentType: "application/json",
                 dataType: 'json',
-                success: function (data) {
-                    console.log(data);
+                success: function (response) {
+                    console.log(response);
                 }
             });
         });
@@ -275,19 +272,18 @@
         });
 
         /**
-         * delete a composition
+         * delete a composition.The request uri must contain the parameters,
+         * or the @PathParam does not work.
+         * Jquery does not append the parameters after the uri.
          */
         $("#deletecomposition").click(function () {
 
+            var request = 'http://localhost:8080/rest/compositions/';
+            request = request + $("#uriOfDeleteComposition").val() + '/' + $("#versionOfDeleteComposition").val();
             $.ajax({
                 type: 'DELETE',
-                url: 'http://localhost:8080/rest/compositions',
+                url: request,
                 cache: false,
-                data: JSON.stringify({
-                    "uri": $("#uriOfDeleteComposition").val(),
-                    "version": $("#versionOfDeleteComposition").val()
-                }),
-                contentType: "application/json",
                 dataType: 'json',
                 success: function (response) {
                     console.log(response);
