@@ -85,9 +85,6 @@ public class EntryManager {
 		String uri = param.getUri();
 		String version = param.getVersion();
 		
-		uri = "dummy-communes";
-		version = "0.0.1a";
-		
 		String versionUri = PojoModelParser.BASE_URL + "version";
 		String versionsUri = PojoModelParser.BASE_URL + "versions";
 		uri = PojoModelParser.BASE_URL + uri;
