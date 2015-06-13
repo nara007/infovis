@@ -1,15 +1,12 @@
 package ontos.infovis.service;
 
 import ontos.infovis.pojo.Component;
-import ontos.infovis.pojo.Param;
 import ontos.infovis.pojo.Response;
 import ontos.infovis.util.ApplicationManager;
 import ontos.infovis.util.DummyData;
 
 import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.UriInfo;
 
 import java.util.ArrayList;
 import java.util.List;
