@@ -31,7 +31,7 @@ public class EntryManager {
 	private URL targetURL = null;
 	
 	private EntryManager() {
-		this.setTargetURL("ontology/local.ttl");
+		this.setTargetURL("src/main/resources/local-ontology.ttl");
 	}
 
 	public URL getTargetURL() {

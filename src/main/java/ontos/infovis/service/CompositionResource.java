@@ -1,5 +1,8 @@
 package ontos.infovis.service;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
@@ -119,7 +122,7 @@ public class CompositionResource {
   @GET
   @Path("allcompositions")
   @Produces(MediaType.APPLICATION_JSON)
-  public Composition[] getAllCompositions() {
-    return EntryManager.getInstance().getAllCompositions();
+  public List<Composition> getAllCompositions() {
+    return Arrays.asList(EntryManager.getInstance().getAllCompositions());
   }
 }

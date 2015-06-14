@@ -1,5 +1,8 @@
 package ontos.infovis.service;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
@@ -96,8 +99,8 @@ public class ComponentResource {
   @GET
   @Path("allcomponents")
   @Produces(MediaType.APPLICATION_JSON)
-  public Component[] getAllComponents() {
-    return EntryManager.getInstance().getAllComponents();
+  public List<Component> getAllComponents() {
+    return Arrays.asList(EntryManager.getInstance().getAllComponents());
   }
 
   /**
@@ -110,8 +113,8 @@ public class ComponentResource {
   @GET
   @Path("searchedComponents")
   @Produces(MediaType.APPLICATION_JSON)
-  public Component[] searchComponent(String conditions) {
-    return EntryManager.getInstance().searchComponent(conditions);
+  public List<Component> searchComponent(String conditions) {
+    return Arrays.asList(EntryManager.getInstance().searchComponent(conditions));
   }
 
   /**
