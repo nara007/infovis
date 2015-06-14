@@ -15,11 +15,18 @@ import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.update.UpdateFactory;
 import com.hp.hpl.jena.update.UpdateRequest;
+import com.hp.hpl.jena.vocabulary.RDF;
 
 //TODO remove redundant code 
 
 public class EntryManager {
 	static private EntryManager instance; 
+	
+	// some URIs
+	private String versionUri = PojoModelParser.BASE_URL + "version";
+	private String versionsUri = PojoModelParser.BASE_URL + "versions";
+	private String componentUri = PojoModelParser.BASE_URL + "Component";
+	private String compositionUri = PojoModelParser.BASE_URL + "Composition";
 	
 	static public EntryManager getInstance() {
 		if(instance == null) instance = new EntryManager();
@@ -50,13 +57,24 @@ public class EntryManager {
 	/* manage components */
 	
 	public boolean registerComponent(Component component) {
+		String uri = PojoModelParser.BASE_URL + component.getId();
+		String version = component.getVersion();
+		
+		Query askQuery = QueryFactory.create("ASK  {<"+uri+"> <"+versionsUri+"> ?version . ?version <"+RDF.type+"> \""+componentUri+"\" . ?version <"+versionUri+"> \""+version+"\" .}");
+		
 		Component[] components = {component};
-		return pService.saveComponents(this.targetURL, components);
+		if(pService.checkComponent(targetURL, askQuery)) return false;
+		else return pService.saveComponents(this.targetURL, components);
 	}
 	
 	public boolean updateComponent(Component component) {
-		// TODO this delegates to registerComponent
-		return registerComponent(component);
+		String uri = PojoModelParser.BASE_URL + component.getId();
+		String version = component.getVersion();
+		
+		Query askQuery = QueryFactory.create("ASK  {<"+uri+"> <"+versionsUri+"> ?version . ?version <"+RDF.type+"> \""+componentUri+"\" . ?version <"+versionUri+"> \""+version+"\" .}");
+		
+		if(!pService.checkComponent(targetURL, askQuery)) return false;
+		else return registerComponent(component); // TODO this delegates to registerComponent
 	}
 
 	public Component[] searchComponent(String searchString) {
@@ -67,75 +85,78 @@ public class EntryManager {
 	
 	public Component getComponent(String uri, String version) {
 		uri = PojoModelParser.BASE_URL + uri;
-		String versionUri = PojoModelParser.BASE_URL + "version";
-		String versionsUri = PojoModelParser.BASE_URL + "versions";
-		Query searchQuery = QueryFactory.create("CONSTRUCT {?version ?p ?o .} WHERE{<"+uri+"> <"+versionsUri+"> ?version . ?version ?p ?o . ?version <"+versionUri+"> \""+version+"\" .}");
 		
-		return pService.loadComponents(targetURL, searchQuery)[0];
+		Query askQuery = QueryFactory.create("ASK  {<"+uri+"> <"+versionsUri+"> ?version . ?version <"+RDF.type+"> \""+componentUri+"\" . ?version <"+versionUri+"> \""+version+"\" .}");
+		Query searchQuery = QueryFactory.create("CONSTRUCT {?version ?p ?o .} WHERE{<"+uri+"> <"+versionsUri+"> ?version . ?version ?p ?o . ?version <"+versionUri+"> \""+version+"\" .}");
+
+		if(!pService.checkComponent(targetURL, askQuery)) return null;
+		else return pService.loadComponents(targetURL, searchQuery)[0];
 	}
 	
 	public Component[] getAllComponents() {
-		String versionsUri = PojoModelParser.BASE_URL+"versions";
 		Query searchQuery = QueryFactory.create("CONSTRUCT {?version ?p ?o .} WHERE{?component <"+versionsUri+"> ?version . ?version ?p ?o .}");
 		
 		return pService.loadComponents(targetURL, searchQuery);
 	}
 
 	public boolean deleteComponent(Param param) {
-		String uri = param.getUri();
+		String uri = PojoModelParser.BASE_URL + param.getUri();
 		String version = param.getVersion();
-		
-		String versionUri = PojoModelParser.BASE_URL + "version";
-		String versionsUri = PojoModelParser.BASE_URL + "versions";
-		uri = PojoModelParser.BASE_URL + uri;
+
+		Query askQuery = QueryFactory.create("ASK  {<"+uri+"> <"+versionsUri+"> ?version . ?version <"+RDF.type+"> \""+componentUri+"\" . ?version <"+versionUri+"> \""+version+"\" .}");
 		UpdateRequest deleteUpdateRequest = UpdateFactory.create("DELETE WHERE{<"+uri+"> <"+versionsUri+"> ?version . ?version ?p ?o . ?version <"+versionUri+"> \""+version+"\" .}");
 		
-		return pService.deleteComponents(this.targetURL, deleteUpdateRequest);
+		if(!pService.checkComponent(targetURL, askQuery)) return false;
+		else return pService.deleteComponents(this.targetURL, deleteUpdateRequest);
 	}
 	
 	/* manage compositions */
 	
 	public boolean registerComposition(Composition composition) {
+		String uri = PojoModelParser.BASE_URL + composition.getId();
+		String version = composition.getVersion();
+		
+		Query askQuery = QueryFactory.create("ASK  {<"+uri+"> <"+versionsUri+"> ?version . ?version <"+RDF.type+"> \""+compositionUri+"\" . ?version <"+versionUri+"> \""+version+"\" .}");
+		
 		Composition[] compositions = {composition};
-		return pService.saveCompositions(this.targetURL, compositions);
+		if(pService.checkComposition(targetURL, askQuery)) return false;
+		else return pService.saveCompositions(this.targetURL, compositions);
 	}
 	
 	public boolean updateComposition(Composition composition) {
-		// TODO this delegates to registerComposition
-		return registerComposition(composition);
-	}
-
-	public Composition[] searchComposition(String searchString) {
-		// TODO implement this
-		Composition[] compositions = {};
-		return compositions;
+		String uri = PojoModelParser.BASE_URL + composition.getId();
+		String version = composition.getVersion();
+		
+		Query askQuery = QueryFactory.create("ASK  {<"+uri+"> <"+versionsUri+"> ?version . ?version <"+RDF.type+"> \""+compositionUri+"\" . ?version <"+versionUri+"> \""+version+"\" .}");
+		
+		if(!pService.checkComposition(targetURL, askQuery)) return false;
+		else return registerComposition(composition); // TODO this delegates to registerComposition
 	}
 	
 	public Composition getComposition(String uri, String version) {
 		uri = PojoModelParser.BASE_URL + uri;
-		String versionUri = PojoModelParser.BASE_URL + "version";
-		String versionsUri = PojoModelParser.BASE_URL + "versions";
-		Query searchQuery = QueryFactory.create("CONSTRUCT {?version ?p ?o .} WHERE{<"+uri+"> <"+versionsUri+"> ?version . ?version ?p ?o . ?version <"+versionUri+"> \""+version+"\" .}");
 		
-		return pService.loadCompositions(targetURL, searchQuery)[0];
+		Query askQuery = QueryFactory.create("ASK  {<"+uri+"> <"+versionsUri+"> ?version . ?version <"+RDF.type+"> \""+compositionUri+"\" . ?version <"+versionUri+"> \""+version+"\" .}");
+		Query searchQuery = QueryFactory.create("CONSTRUCT {?version ?p ?o .} WHERE{<"+uri+"> <"+versionsUri+"> ?version . ?version ?p ?o . ?version <"+versionUri+"> \""+version+"\" .}");
+
+		if(!pService.checkComposition(targetURL, askQuery)) return null;
+		else return pService.loadCompositions(targetURL, searchQuery)[0];
 	}
 	
 	public Composition[] getAllCompositions() {
-		String versionsUri = PojoModelParser.BASE_URL+"versions";
 		Query searchQuery = QueryFactory.create("CONSTRUCT {?version ?p ?o .} WHERE{?composition <"+versionsUri+"> ?version . ?version ?p ?o .}");
 		
 		return pService.loadCompositions(targetURL, searchQuery);
 	}
 
 	public boolean deleteComposition(Param param) {
-		String uri = param.getUri();
+		String uri = PojoModelParser.BASE_URL + param.getUri();
 		String version = param.getVersion();
-		
-		String versionUri = PojoModelParser.BASE_URL + "version";
-		String versionsUri = PojoModelParser.BASE_URL + "versions";
-		uri = PojoModelParser.BASE_URL + uri;
+
+		Query askQuery = QueryFactory.create("ASK  {<"+uri+"> <"+versionsUri+"> ?version . ?version <"+RDF.type+"> \""+compositionUri+"\" . ?version <"+versionUri+"> \""+version+"\" .}");
 		UpdateRequest deleteUpdateRequest = UpdateFactory.create("DELETE WHERE{<"+uri+"> <"+versionsUri+"> ?version . ?version ?p ?o . ?version <"+versionUri+"> \""+version+"\" .}");
 		
-		return pService.deleteCompositions(this.targetURL, deleteUpdateRequest);
+		if(!pService.checkComposition(targetURL, askQuery)) return false;
+		else return pService.deleteCompositions(this.targetURL, deleteUpdateRequest);
 	}
 }

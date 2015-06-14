@@ -56,4 +56,7 @@ public interface IPersistenceService {
 	 * @return boolean true if the compositions have been deleted, false if not
 	 */
 	public boolean deleteCompositions(URL sourceURL, UpdateRequest deleteUpdateRequest);
+	
+	public boolean checkComponent(URL targetURL, Query askQuery);
+	public boolean checkComposition(URL targetURL, Query askQuery);
 }

@@ -128,4 +128,20 @@ public class FilesystemService implements IPersistenceService {
 		// save back to the file		
 		return FilesystemManager.saveModel(targetURL, model);
 	}
+	
+	public boolean checkComponent(URL targetURL, Query askQuery) {
+		// read an existing or empty model from the file
+		Model model = FilesystemManager.readModel(targetURL);
+		
+	    // ask for the component
+		return QueryExecutionFactory.create(askQuery, model).execAsk();
+	}
+	
+	public boolean checkComposition(URL targetURL, Query askQuery){
+		// read an existing or empty model from the file
+		Model model = FilesystemManager.readModel(targetURL);
+		
+	    // ask for the composition
+		return QueryExecutionFactory.create(askQuery, model).execAsk();
+	}
 }
