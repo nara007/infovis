@@ -17,6 +17,7 @@ import javax.ws.rs.core.MediaType;
 import ontos.infovis.pojo.Component;
 import ontos.infovis.pojo.Param;
 import ontos.infovis.pojo.Response;
+import ontos.infovis.serviceimpl.EntryException.EntryAlreadyExistsException;
 import ontos.infovis.serviceimpl.EntryManager;
 import ontos.infovis.util.ApplicationManager;
 
@@ -42,12 +43,17 @@ public class ComponentResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public Response registerComponent(Component cmp) { cmp.setVersion("0.0.1c");
-	boolean registeredComponent = EntryManager.getInstance().registerComponent(cmp);
-    
     Response response = (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-    response.setBool(registeredComponent);
-    response.setError("registerComponent no error");
-    response.setException("registerComponent no exception");
+  
+    try {
+		boolean registeredComponent = EntryManager.getInstance().registerComponent(cmp);
+	    response.setBool(registeredComponent);
+	    response.setError("registerComponent no error");
+	    response.setException("registerComponent no exception");
+	}
+	catch (EntryAlreadyExistsException ex) {
+		// TODO handle error
+	}
 
     return response;
   }

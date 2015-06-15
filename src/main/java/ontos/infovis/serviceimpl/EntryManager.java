@@ -10,6 +10,7 @@ import ontos.infovis.pojo.Param;
 import ontos.infovis.service.db.FilesystemService;
 import ontos.infovis.service.db.IPersistenceService;
 import ontos.infovis.service.db.PojoModelParser;
+import ontos.infovis.serviceimpl.EntryException.EntryAlreadyExistsException;
 
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryFactory;
@@ -56,7 +57,7 @@ public class EntryManager {
 	
 	/* manage components */
 	
-	public boolean registerComponent(Component component) {
+	public boolean registerComponent(Component component) throws EntryAlreadyExistsException {
 		String uri = PojoModelParser.BASE_URL + component.getId();
 		String version = component.getVersion();
 		
@@ -74,7 +75,7 @@ public class EntryManager {
 		Query askQuery = QueryFactory.create("ASK  {<"+uri+"> <"+versionsUri+"> ?version . ?version <"+RDF.type+"> \""+componentUri+"\" . ?version <"+versionUri+"> \""+version+"\" .}");
 		
 		if(!pService.checkComponent(targetURL, askQuery)) return false;
-		else return registerComponent(component); // TODO this delegates to registerComponent
+		else return false; // TODO implement this
 	}
 
 	public Component[] searchComponent(String searchString) {
