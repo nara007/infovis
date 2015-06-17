@@ -17,6 +17,8 @@ import javax.ws.rs.core.MediaType;
 import ontos.infovis.pojo.Composition;
 import ontos.infovis.pojo.Param;
 import ontos.infovis.pojo.Response;
+import ontos.infovis.serviceimpl.EntryException.EntryAlreadyExistsException;
+import ontos.infovis.serviceimpl.EntryException.EntryNotFoundException;
 import ontos.infovis.serviceimpl.EntryManager;
 import ontos.infovis.util.ApplicationManager;
 
@@ -44,12 +46,17 @@ public class CompositionResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public Response createComposition(Composition composition) {
-	boolean registeredComposition = EntryManager.getInstance().registerComposition(composition);
-
-    Response response = (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-    response.setBool(registeredComposition);
-    response.setError("createComposition  no error");
-    response.setException("createComposition  no exception");
+	Response response = (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+	
+	try {
+		boolean registeredComposition = EntryManager.getInstance().registerComposition(composition);
+	    response.setBool(registeredComposition);
+	    response.setError("createComposition  no error");
+	    response.setException("createComposition  no exception");
+	}
+	catch (EntryAlreadyExistsException ex) {
+		// TODO handle error
+	}
 
     return response;
   }
@@ -66,12 +73,17 @@ public class CompositionResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public Response updateComposition(Composition composition) {
-    boolean updatedComposition = EntryManager.getInstance().updateComposition(composition);
-
-    Response response = (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-    response.setBool(updatedComposition);
-    response.setError("updateComposition no error");
-    response.setException("updateComposition no error");
+	Response response = (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+	  
+	try {
+		boolean updatedComposition = EntryManager.getInstance().updateComposition(composition);
+	    response.setBool(updatedComposition);
+	    response.setError("updateComposition no error");
+	    response.setException("updateComposition no error");
+	}
+	catch (EntryNotFoundException ex) {
+		// TODO handle error
+	}
 
     return response;
   }
@@ -89,7 +101,16 @@ public class CompositionResource {
   @Consumes(MediaType.TEXT_PLAIN)
   @Produces(MediaType.APPLICATION_JSON)
   public Composition getComposition(@QueryParam("uri") String uri, @DefaultValue("1.0.0") @QueryParam("version") String version) {
-    return EntryManager.getInstance().getComposition(uri, version);
+    Composition composition = null;
+	
+    try {
+    	composition = EntryManager.getInstance().getComposition(uri, version);
+    }
+    catch (EntryNotFoundException ex) {
+    	// TODO handle error
+    }
+    
+	return composition;
   }
 
   /**
@@ -104,12 +125,18 @@ public class CompositionResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public Response deleteComposition(Param param) {
-    boolean deletedComposition = EntryManager.getInstance().deleteComposition(param);
+	Response response = (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
 	  
-    Response response = (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-    response.setBool(deletedComposition);
-    response.setError("deleteComposition no errors");
-    response.setException("deleteComposition no errors");
+	try {
+		boolean deletedComposition = EntryManager.getInstance().deleteComposition(param);
+    	response.setBool(deletedComposition);
+    	response.setError("deleteComposition no errors");
+    	response.setException("deleteComposition no errors");
+	}
+	catch (EntryNotFoundException ex) {
+		// TODO handle error
+	}
+	
     return response;
   }
 

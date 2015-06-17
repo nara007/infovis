@@ -18,6 +18,7 @@ import ontos.infovis.pojo.Component;
 import ontos.infovis.pojo.Param;
 import ontos.infovis.pojo.Response;
 import ontos.infovis.serviceimpl.EntryException.EntryAlreadyExistsException;
+import ontos.infovis.serviceimpl.EntryException.EntryNotFoundException;
 import ontos.infovis.serviceimpl.EntryManager;
 import ontos.infovis.util.ApplicationManager;
 
@@ -42,7 +43,7 @@ public class ComponentResource {
   @Path("components")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  public Response registerComponent(Component cmp) { cmp.setVersion("0.0.1c");
+  public Response registerComponent(Component cmp) {
     Response response = (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
   
     try {
@@ -70,12 +71,17 @@ public class ComponentResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public Response updateComponent(Component cmp) {
-	boolean updatedComponent = EntryManager.getInstance().updateComponent(cmp);
-	  
 	Response response = (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-    response.setBool(updatedComponent);
-    response.setError("updateComponent no error");
-    response.setException("updateComponent no exception");
+	  
+	try {
+		boolean updatedComponent = EntryManager.getInstance().updateComponent(cmp);
+	    response.setBool(updatedComponent);
+	    response.setError("updateComponent no error");
+	    response.setException("updateComponent no exception");
+	}
+	catch (EntryNotFoundException ex) {
+		// TODO handle error
+	}
     
     return response;
   }
@@ -93,7 +99,16 @@ public class ComponentResource {
   @Consumes(MediaType.TEXT_PLAIN)
   @Produces(MediaType.APPLICATION_JSON)
   public Component getComponent(@QueryParam("uri") String uri, @DefaultValue("1.0.0") @QueryParam("version") String version) {
-    return  EntryManager.getInstance().getComponent(uri, version);
+    Component cmp = null;
+	  
+	try {
+    	cmp = EntryManager.getInstance().getComponent(uri, version);
+    }
+	catch (EntryNotFoundException ex) {
+		// TODO handle error
+	}
+    
+	return cmp;
   }
 
   /**
@@ -109,6 +124,7 @@ public class ComponentResource {
     return Arrays.asList(EntryManager.getInstance().getAllComponents());
   }
 
+  //TODO Is this needed?
   /**
    * Method handling HTTP GET requests. The returned object will be sent to the client as
    * "array of json" media type.Method returns all components that respect specific conditions.
@@ -120,7 +136,7 @@ public class ComponentResource {
   @Path("searchedComponents")
   @Produces(MediaType.APPLICATION_JSON)
   public List<Component> searchComponent(String conditions) {
-    return Arrays.asList(EntryManager.getInstance().searchComponent(conditions));
+    return Arrays.asList(EntryManager.getInstance().getAllComponents());
   }
 
   /**
@@ -136,12 +152,18 @@ public class ComponentResource {
   @Produces(MediaType.APPLICATION_JSON)
 //  public Response deleteComponent(@QueryParam("uri") String uri, @QueryParam("version") String version) {
       public Response deleteComponent(Param param){
-	  boolean deletedComponent = EntryManager.getInstance().deleteComponent(param);
+	  Response response = (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
 	  
-      Response response = (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-      response.setBool(deletedComponent);
-      response.setError("deleteComponent no errors");
-      response.setException("deleteComponent no exceptions");
+	  try {
+		  boolean deletedComponent = EntryManager.getInstance().deleteComponent(param);
+	      response.setBool(deletedComponent);
+	      response.setError("deleteComponent no errors");
+	      response.setException("deleteComponent no exceptions");
+	  }
+	  catch (EntryNotFoundException ex) {
+		  // TODO handle error
+	  }
+	  
       return response;
   }
 }

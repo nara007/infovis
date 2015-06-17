@@ -1,6 +1,6 @@
 <http://ontos.infovis/dummy-communes>
         <http://ontos.infovis/latestVersion>
-                <http://ontos.infovis/dummy-communes/0.0.1a> , <http://ontos.infovis/dummy-communes/0.0.1b> , <http://ontos.infovis/dummy-communes/0.0.1c> ;
+                <http://ontos.infovis/dummy-communes/0.0.1c> ;
         <http://ontos.infovis/versions>
                 <http://ontos.infovis/dummy-communes/0.0.1b> , <http://ontos.infovis/dummy-communes/0.0.1c> .
 
