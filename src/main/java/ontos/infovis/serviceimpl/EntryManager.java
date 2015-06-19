@@ -60,9 +60,11 @@ public class EntryManager {
 	
 	public boolean updateComponent(Component component) throws EntryNotFoundException {
 		Query askQuery = askEntryQuery(component.getId(), component.getVersion(), "Component");
+		UpdateRequest deleteUpdateRequest = deleteEntryUpdateRequest(component.getId(), component.getVersion(), "Component");
+		Component[] components = {component};
 		
 		if(!pService.checkComponent(targetURL, askQuery)) throw new EntryNotFoundException();
-		else return false; // TODO implement this
+		else return pService.deleteComponents(this.targetURL, deleteUpdateRequest) && pService.saveComponents(this.targetURL, components);
 	}
 	
 	public Component getComponent(String id, String version) throws EntryNotFoundException {
@@ -99,9 +101,11 @@ public class EntryManager {
 	
 	public boolean updateComposition(Composition composition) throws EntryNotFoundException {
 		Query askQuery = askEntryQuery(composition.getId(), composition.getVersion(), "Composition");
+		UpdateRequest deleteUpdateRequest = deleteEntryUpdateRequest(composition.getId(), composition.getVersion(), "Composition");
+		Composition[] compositions = {composition};
 		
 		if(!pService.checkComposition(targetURL, askQuery)) throw new EntryNotFoundException();
-		else return false; // TODO implement this
+		else return pService.deleteCompositions(this.targetURL, deleteUpdateRequest) && pService.saveCompositions(this.targetURL, compositions);
 	}
 	
 	public Composition getComposition(String id, String version) throws EntryNotFoundException {
