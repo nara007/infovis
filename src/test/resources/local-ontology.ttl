@@ -1,0 +1,1199 @@
+<http://ontos.infovis/component-23>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-23/2.0.0> , <http://ontos.infovis/component-23/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-23/2.0.0> .
+
+<http://ontos.infovis/component-36>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-36/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-36/1.0.0> .
+
+<http://ontos.infovis/component-32/1.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "1.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 32"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "component 32 has been updated"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 32"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-32> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-49>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-49/2.0.0> , <http://ontos.infovis/component-49/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-49/2.0.0> .
+
+<http://ontos.infovis/component-9/2.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "2.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 9"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "this is test component number 9"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 9"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-9> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-47/2.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "2.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 47"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "this is test component number 47"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 47"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-47> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-11/2.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "2.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 11"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "this is test component number 11"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 11"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-11> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-30>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-30/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-30/1.0.0> .
+
+<http://ontos.infovis/component-19/2.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "2.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 19"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "this is test component number 19"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 19"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-19> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-43>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-43/2.0.0> , <http://ontos.infovis/component-43/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-43/2.0.0> .
+
+<http://ontos.infovis/component-38/1.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "1.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 38"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "component 38 has been updated"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 38"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-38> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-7>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-7/2.0.0> , <http://ontos.infovis/component-7/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-7/2.0.0> .
+
+<http://ontos.infovis/component-15>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-15/2.0.0> , <http://ontos.infovis/component-15/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-15/2.0.0> .
+
+<http://ontos.infovis/component-20/1.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "1.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 20"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "component 20 has been updated"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 20"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-20> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-28>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-28/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-28/1.0.0> .
+
+<http://ontos.infovis/component-35/2.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "2.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 35"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "this is test component number 35"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 35"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-35> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-1>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-1/2.0.0> , <http://ontos.infovis/component-1/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-1/2.0.0> .
+
+<http://ontos.infovis/component-22>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-22/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-22/1.0.0> .
+
+<http://ontos.infovis/component-6/1.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "1.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 6"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "component 6 has been updated"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 6"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-6> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-26/1.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "1.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 26"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "component 26 has been updated"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 26"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-26> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-35>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-35/2.0.0> , <http://ontos.infovis/component-35/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-35/2.0.0> .
+
+<http://ontos.infovis/component-48>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-48/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-48/1.0.0> .
+
+<http://ontos.infovis/component-23/2.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "2.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 23"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "this is test component number 23"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 23"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-23> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-4/1.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "1.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 4"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "component 4 has been updated"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 4"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-4> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-42/1.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "1.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 42"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "component 42 has been updated"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 42"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-42> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-14/1.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "1.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 14"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "component 14 has been updated"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 14"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-14> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-1/2.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "2.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 1"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "this is test component number 1"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 1"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-1> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-42>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-42/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-42/1.0.0> .
+
+<http://ontos.infovis/component-6>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-6/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-6/1.0.0> .
+
+<http://ontos.infovis/component-14>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-14/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-14/1.0.0> .
+
+<http://ontos.infovis/component-21/2.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "2.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 21"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "this is test component number 21"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 21"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-21> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-27>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-27/2.0.0> , <http://ontos.infovis/component-27/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-27/2.0.0> .
+
+<http://ontos.infovis/component-29/2.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "2.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 29"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "this is test component number 29"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 29"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-29> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-48/1.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "1.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 48"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "component 48 has been updated"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 48"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-48> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-0>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-0/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-0/1.0.0> .
+
+<http://ontos.infovis/component-30/1.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "1.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 30"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "component 30 has been updated"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 30"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-30> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-7/2.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "2.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 7"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "this is test component number 7"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 7"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-7> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-21>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-21/2.0.0> , <http://ontos.infovis/component-21/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-21/2.0.0> .
+
+<http://ontos.infovis/component-45/2.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "2.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 45"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "this is test component number 45"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 45"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-45> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-34>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-34/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-34/1.0.0> .
+
+<http://ontos.infovis/component-47>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-47/2.0.0> , <http://ontos.infovis/component-47/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-47/2.0.0> .
+
+<http://ontos.infovis/component-17/2.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "2.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 17"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "this is test component number 17"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 17"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-17> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-19>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-19/2.0.0> , <http://ontos.infovis/component-19/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-19/2.0.0> .
+
+<http://ontos.infovis/component-36/1.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "1.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 36"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "component 36 has been updated"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 36"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-36> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-33/2.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "2.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 33"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "this is test component number 33"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 33"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-33> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-41>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-41/2.0.0> , <http://ontos.infovis/component-41/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-41/2.0.0> .
+
+<http://ontos.infovis/component-5>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-5/2.0.0> , <http://ontos.infovis/component-5/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-5/2.0.0> .
+
+<http://ontos.infovis/component-13>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-13/2.0.0> , <http://ontos.infovis/component-13/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-13/2.0.0> .
+
+<http://ontos.infovis/component-26>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-26/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-26/1.0.0> .
+
+<http://ontos.infovis/component-39>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-39/2.0.0> , <http://ontos.infovis/component-39/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-39/2.0.0> .
+
+<http://ontos.infovis/component-24/1.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "1.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "component 24 has been updated"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-24> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-39/2.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "2.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 39"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "this is test component number 39"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 39"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-39> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-20>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-20/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-20/1.0.0> .
+
+<http://ontos.infovis/component-2/1.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "1.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 2"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "component 2 has been updated"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 2"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-2> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-33>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-33/2.0.0> , <http://ontos.infovis/component-33/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-33/2.0.0> .
+
+<http://ontos.infovis/component-40/1.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "1.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 40"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "component 40 has been updated"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 40"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-40> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-46>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-46/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-46/1.0.0> .
+
+<http://ontos.infovis/component-18>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-18/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-18/1.0.0> .
+
+<http://ontos.infovis/component-12/1.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "1.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 12"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "component 12 has been updated"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 12"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-12> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-27/2.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "2.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 27"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "this is test component number 27"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 27"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-27> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-40>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-40/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-40/1.0.0> .
+
+<http://ontos.infovis/component-46/1.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "1.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 46"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "component 46 has been updated"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 46"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-46> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-4>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-4/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-4/1.0.0> .
+
+<http://ontos.infovis/component-12>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-12/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-12/1.0.0> .
+
+<http://ontos.infovis/component-25>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-25/2.0.0> , <http://ontos.infovis/component-25/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-25/2.0.0> .
+
+<http://ontos.infovis/component-5/2.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "2.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 5"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "this is test component number 5"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 5"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-5> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-18/1.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "1.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 18"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "component 18 has been updated"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 18"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-18> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-43/2.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "2.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 43"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "this is test component number 43"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 43"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-43> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-38>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-38/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-38/1.0.0> .
+
+<http://ontos.infovis/component-15/2.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "2.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 15"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "this is test component number 15"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 15"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-15> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-34/1.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "1.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 34"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "component 34 has been updated"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 34"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-34> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-32>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-32/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-32/1.0.0> .
+
+<http://ontos.infovis/component-49/2.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "2.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 49"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "this is test component number 49"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 49"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-49> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-45>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-45/2.0.0> , <http://ontos.infovis/component-45/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-45/2.0.0> .
+
+<http://ontos.infovis/component-9>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-9/2.0.0> , <http://ontos.infovis/component-9/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-9/2.0.0> .
+
+<http://ontos.infovis/component-17>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-17/2.0.0> , <http://ontos.infovis/component-17/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-17/2.0.0> .
+
+<http://ontos.infovis/component-13/2.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "2.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 13"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "this is test component number 13"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 13"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-13> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-31/2.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "2.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 31"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "this is test component number 31"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 31"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-31> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-11>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-11/2.0.0> , <http://ontos.infovis/component-11/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-11/2.0.0> .
+
+<http://ontos.infovis/component-3>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-3/2.0.0> , <http://ontos.infovis/component-3/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-3/2.0.0> .
+
+<http://ontos.infovis/component-22/1.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "1.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 22"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "component 22 has been updated"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 22"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-22> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-24>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-24/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-24/1.0.0> .
+
+<http://ontos.infovis/component-37/2.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "2.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 37"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "this is test component number 37"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 37"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-37> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-37>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-37/2.0.0> , <http://ontos.infovis/component-37/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-37/2.0.0> .
+
+<http://ontos.infovis/component-0/1.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "1.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "component 0 has been updated"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-0> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-8/1.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "1.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 8"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "component 8 has been updated"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 8"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-8> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-28/1.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "1.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 28"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "component 28 has been updated"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 28"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-28> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-10/1.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "1.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 10"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "component 10 has been updated"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 10"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-10> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-31>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-31/2.0.0> , <http://ontos.infovis/component-31/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-31/2.0.0> .
+
+<http://ontos.infovis/component-25/2.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "2.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 25"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "this is test component number 25"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 25"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-25> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-44>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-44/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-44/1.0.0> .
+
+<http://ontos.infovis/component-8>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-8/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-8/1.0.0> .
+
+<http://ontos.infovis/component-16>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-16/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-16/1.0.0> .
+
+<http://ontos.infovis/component-44/1.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "1.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 44"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "component 44 has been updated"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 44"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-44> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-29>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-29/2.0.0> , <http://ontos.infovis/component-29/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-29/2.0.0> .
+
+<http://ontos.infovis/component-16/1.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "1.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 16"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "component 16 has been updated"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 16"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-16> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-3/2.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "2.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 3"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "this is test component number 3"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 3"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-3> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-41/2.0.0>
+        a                               "http://ontos.infovis/Component" ;
+        <http://ontos.infovis/screenshot>
+                "http://image.pic/1234"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://ontos.infovis/version>  "2.0.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "agent nr. 41"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/description>
+                "this is test component number 41"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "test component 41"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/created>
+                "1434883049922"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        <http://purl.org/dc/terms/isVersionOf>
+                <http://ontos.infovis/component-41> ;
+        <http://purl.org/dc/terms/modified>
+                "1434883070130"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://ontos.infovis/component-2>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-2/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-2/1.0.0> .
+
+<http://ontos.infovis/component-10>
+        <http://ontos.infovis/latestVersion>
+                <http://ontos.infovis/component-10/1.0.0> ;
+        <http://purl.org/dc/terms/hasVersion>
+                <http://ontos.infovis/component-10/1.0.0> .

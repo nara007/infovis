@@ -136,18 +136,14 @@ public class EntryManager {
 	
 	/* construct queries */
 	
-	// some URIs
-	private String versionUri = PojoModelParser.BASE_URL + "version";
-	private String versionsUri = PojoModelParser.BASE_URL + "versions";
-	
 	private Query askEntryQuery(String id, String version, String entryType) {
 		final String uri = PojoModelParser.BASE_URL + id;
 		final String type = PojoModelParser.BASE_URL + entryType;
 		
 		final String query = "ASK  {"
-				+ "<"+uri+"> <"+versionsUri+"> ?version . "
+				+ "<"+uri+"> <"+PojoModelParser.HAS_VERSION_PROP_URI+"> ?version . "
 				+ "?version <"+RDF.type+"> \""+type+"\" . "
-				+ "?version <"+versionUri+"> \""+version+"\" ."
+				+ "?version <"+PojoModelParser.VERSION_PROP_URI+"> \""+version+"\" ."
 		+ "}";
 		
 		return QueryFactory.create(query);
@@ -158,10 +154,10 @@ public class EntryManager {
 		final String type = PojoModelParser.BASE_URL + entryType;
 		
 		final String query = "CONSTRUCT {?version ?p ?o .} WHERE{"
-				+ "<"+uri+"> <"+versionsUri+"> ?version . "
+				+ "<"+uri+"> <"+PojoModelParser.HAS_VERSION_PROP_URI+"> ?version . "
 				+ "?version ?p ?o . "
 				+ "?version <"+RDF.type+"> \""+type+"\" . "
-				+ "?version <"+versionUri+"> \""+version+"\" ."
+				+ "?version <"+PojoModelParser.VERSION_PROP_URI+"> \""+version+"\" ."
 		+ "}";
 		
 		return QueryFactory.create(query);
@@ -171,7 +167,7 @@ public class EntryManager {
 		final String type = PojoModelParser.BASE_URL + entryType;
 		
 		final String query = "CONSTRUCT {?version ?p ?o .} WHERE{"
-				+ "?entry <"+versionsUri+"> ?version . "
+				+ "?entry <"+PojoModelParser.HAS_VERSION_PROP_URI+"> ?version . "
 				+ "?version ?p ?o ."
 				+ "?version <"+RDF.type+"> \""+type+"\" . "
 		+ "}";
@@ -184,9 +180,9 @@ public class EntryManager {
 		final String type = PojoModelParser.BASE_URL + entryType;
 		
 		final String updateRequest = "DELETE WHERE{"
-				+ "<"+uri+"> <"+versionsUri+"> ?version . "
+				+ "<"+uri+"> <"+PojoModelParser.HAS_VERSION_PROP_URI+"> ?version . "
 				+ "?version ?p ?o . "
-				+ "?version <"+versionUri+"> \""+version+"\" ."
+				+ "?version <"+PojoModelParser.VERSION_PROP_URI+"> \""+version+"\" ."
 				+ "?version <"+RDF.type+"> \""+type+"\" . "
 		+ "}";
 

@@ -211,6 +211,6 @@ public class EntryManagerTest {
 	@After
 	public void after() {
 		// clear file after testing
-		FilesystemManager.clearFile(entryManager.getTargetURL());
+		//FilesystemManager.clearFile(entryManager.getTargetURL());
 	}
 }
