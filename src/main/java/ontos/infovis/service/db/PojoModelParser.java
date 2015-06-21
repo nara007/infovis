@@ -39,6 +39,7 @@ public class PojoModelParser {
 	static public final String STRUCTURE_PROP_URI = BASE_URL+"structure";
 	static public final String VERSION_OF_PROP_URI = DCTerms.isVersionOf.getURI();
 	static public final String HAS_VERSION_PROP_URI = DCTerms.hasVersion.getURI();
+	static public final String LATEST_VERSION_PROP_URI = BASE_URL+"latestVersion";
 	
 	// type URIs
 	static public final String COMPONENT_TYPE_URI = BASE_URL+"Component";
@@ -103,20 +104,20 @@ public class PojoModelParser {
 		// iterate trough all components
 		for(Component c: components) {
 			// create or get a resource for all versions of this component
-			Resource r = model.createResource(BASE_URL+c.getId());
+			Resource parentResource = model.createResource(BASE_URL+c.getId());
 			
 			// a resource of type Component represents this version of the component
 			Resource componentResource = model.createResource(BASE_URL+c.getId()+"/"+c.getVersion());
 			componentResource.addProperty(RDF.type, COMPONENT_TYPE_URI);
-			componentResource.addProperty(model.createProperty(VERSION_OF_PROP_URI), r);
+			componentResource.addProperty(model.createProperty(VERSION_OF_PROP_URI), parentResource);
 			
 			// add this version and set it as the latest
 			Property versions = model.createProperty(HAS_VERSION_PROP_URI);
-			r.addProperty(versions, componentResource);
+			parentResource.addProperty(versions, componentResource);
 			// TODO this is currently overwritten by the model merge in FilesystemManager.java
-			Property latestVersion = model.createProperty(BASE_URL, "latestVersion");
-			r.removeAll(latestVersion);
-			r.addProperty(latestVersion, componentResource);
+			Property latestVersion = model.createProperty(LATEST_VERSION_PROP_URI);
+			parentResource.removeAll(latestVersion);
+			parentResource.addProperty(latestVersion, componentResource);
 			
 			// get all fields and turn them into literals
 			Literal title = model.createTypedLiteral(c.getTitle(), XSD.xstring.getURI());
@@ -211,20 +212,20 @@ public class PojoModelParser {
 		// iterate trough all compositions
 		for(Composition c: compositions) {
 			// create or get a resource for all versions of this composition
-			Resource r = model.createResource(BASE_URL+c.getId());
+			Resource parentResource = model.createResource(BASE_URL+c.getId());
 			
 			// a resource of type Composition represents this version of the composition
 			Resource compositionResource = model.createResource(BASE_URL+c.getId()+"/"+c.getVersion());
 			compositionResource.addProperty(RDF.type, COMPOSITION_TYPE_URI);
-			compositionResource.addProperty(model.createProperty(VERSION_OF_PROP_URI), r);
+			compositionResource.addProperty(model.createProperty(VERSION_OF_PROP_URI), parentResource);
 			
 			// add this version and set it as the latest
 			Property versions = model.createProperty(HAS_VERSION_PROP_URI);
-			r.addProperty(versions, compositionResource);
+			parentResource.addProperty(versions, compositionResource);
 			// TODO this is currently overwritten by the model merge in FilesystemManager.java
-			Property latestVersion = model.createProperty(BASE_URL, "latestVersion");
-			r.removeAll(latestVersion);
-			r.addProperty(latestVersion, compositionResource);
+			Property latestVersion = model.createProperty(LATEST_VERSION_PROP_URI);
+			parentResource.removeAll(latestVersion);
+			parentResource.addProperty(latestVersion, compositionResource);
 			
 			
 			// get all fields and turn them into literals
