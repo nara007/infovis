@@ -32,20 +32,24 @@ public class EntryManager {
 	private URL targetURL = null;
 	
 	private EntryManager() {
-		this.setTargetURL("src/main/resources/local-ontology.ttl");
+		try {
+			this.setTargetURL("src/main/resources/local-ontology.ttl");
+		} catch (MalformedURLException mUrlEx) {
+			// TODO handle MalformedURLException
+			mUrlEx.printStackTrace(System.out);
+		}
 	}
 
 	public URL getTargetURL() {
 		return targetURL;
 	}
 
-	public void setTargetURL(String targetURLPath) {
-		try {
-			this.targetURL = new File(targetURLPath).toURI().toURL();
-		} catch (MalformedURLException mUrlEx) {
-			// TODO handle MalformedURLException
-			mUrlEx.printStackTrace(System.out);
-		}
+	public void setTargetURL(String filePath) throws MalformedURLException {
+		this.targetURL = new File(filePath).toURI().toURL();
+	}
+	
+	public void setTargetURL(URL url) {
+		this.targetURL = url;
 	}
 	
 	/* manage components */
