@@ -51,11 +51,15 @@ public class CompositionResource {
 	try {
 		boolean registeredComposition = EntryManager.getInstance().registerComposition(composition);
 	    response.setBool(registeredComposition);
-	    response.setError("createComposition  no error");
-	    response.setException("createComposition  no exception");
+	    response.setError("Creation of Component was successfully. No errors.");
+	    response.setException("Creation of Component was successfully. No exception");
 	}
 	catch (EntryAlreadyExistsException ex) {
-		// TODO handle error
+		System.out.println("Couldn't create Composition, because an entry for Composition: " + composition.getId() + " with the name: " + composition.getDescription() + " and version: " + composition.getVersion() + " already exists.");
+		
+		response.setError("Couldn't creat Composition!");
+	    response.setException("Entry for Composition: " + composition.getId() + " with the name: " + composition.getDescription() + " and version: " + composition.getVersion() + " already exists.");
+	   
 	}
 
     return response;
@@ -78,11 +82,15 @@ public class CompositionResource {
 	try {
 		boolean updatedComposition = EntryManager.getInstance().updateComposition(composition);
 	    response.setBool(updatedComposition);
-	    response.setError("updateComposition no error");
-	    response.setException("updateComposition no error");
+	    response.setError("Updated Composition successfully. No Error occured.");
+	    response.setException("Updated Composition successfully. No Exception occured.");
 	}
 	catch (EntryNotFoundException ex) {
-		// TODO handle error
+		System.out.println("Couldn't update Composition, because an entry for Composition: " + composition.getId() + " with the name: " + composition.getDescription() + " and version: " + composition.getVersion() + " was not found.");
+
+		response.setError("Couldn't update Composition");
+	    response.setException("Entry for Composition: " + composition.getId() + " with the name: " + composition.getDescription() + " and version: " + composition.getVersion() + " was not found."); 	
+
 	}
 
     return response;
@@ -107,7 +115,7 @@ public class CompositionResource {
     	composition = EntryManager.getInstance().getComposition(uri, version);
     }
     catch (EntryNotFoundException ex) {
-    	// TODO handle error
+    	System.out.println("Couldn't find requested Composition with uri: " + uri + " and version: " + version );
     }
     
 	return composition;
@@ -130,11 +138,13 @@ public class CompositionResource {
 	try {
 		boolean deletedComposition = EntryManager.getInstance().deleteComposition(param);
     	response.setBool(deletedComposition);
-    	response.setError("deleteComposition no errors");
-    	response.setException("deleteComposition no errors");
+    	response.setError("Deleted Composition successfully. No errors occured.");
+    	response.setException("Deleted Composition successfully. No exception occured.");
 	}
 	catch (EntryNotFoundException ex) {
-		// TODO handle error
+		System.out.println("Couldn't find Composition with requested uri: " + param.getVersion() + " and version: " + param.getUri() + " was found.");
+		response.setError("Couldn't delete Composition.");
+	   	response.setException("No entry with requested uri: " + param.getVersion() + " and version: " + param.getUri() +" was found");
 	}
 	
     return response;
