@@ -17,8 +17,8 @@ public class Component {
   private String description;
   private String version;
   private String owner;
-  private int creation_date;
-  private int last_update;
+  private long creation_date;
+  private long last_update;
   private String screenshot;
   private List<ComponentDependency> dependencies;
   private List<ComponentResource> resources;
@@ -39,7 +39,7 @@ public class Component {
    *
    * @param creation_date New value of creation_date.
    */
-  public void setCreation_date(int creation_date) {
+  public void setCreation_date(long creation_date) {
     this.creation_date = creation_date;
   }
 
@@ -66,7 +66,7 @@ public class Component {
    *
    * @param last_update New value of last_update.
    */
-  public void setLast_update(int last_update) {
+  public void setLast_update(long last_update) {
     this.last_update = last_update;
   }
 
@@ -84,7 +84,7 @@ public class Component {
    *
    * @return Value of creation_date.
    */
-  public int getCreation_date() {
+  public long getCreation_date() {
     return creation_date;
   }
 
@@ -120,7 +120,7 @@ public class Component {
    *
    * @return Value of last_update.
    */
-  public int getLast_update() {
+  public long getLast_update() {
     return last_update;
   }
 

@@ -62,8 +62,8 @@ public class PojoModelParser {
         				case "description": c.setDescription(l.getString()); break;
         				case "version": c.setVersion(l.getString()); break;
         				case "owner": c.setOwner(l.getString()); break;
-        				case "creationDate": c.setCreation_date(l.getInt()); break;
-        				case "lastUpdate": c.setLast_update(l.getInt()); break;
+        				case "creationDate": c.setCreation_date(l.getLong()); break;
+        				case "lastUpdate": c.setLast_update(l.getLong()); break;
         				case "screenshot": c.setScreenshot(l.getString()); break;
         				//case "dependencies": break;
         				//case "resources": break;
@@ -110,8 +110,8 @@ public class PojoModelParser {
 			Literal description = model.createTypedLiteral(c.getDescription(), XSD.xstring.getURI());
 			Literal version = model.createTypedLiteral(c.getVersion(), XSD.xstring.getURI());
 			Literal owner = model.createTypedLiteral(c.getOwner(), XSD.xstring.getURI());
-			Literal creationDate = model.createTypedLiteral(c.getCreation_date(), XSD.xint.getURI());
-			Literal lastUpdate = model.createTypedLiteral(c.getLast_update(), XSD.xint.getURI());
+			Literal creationDate = model.createTypedLiteral(c.getCreation_date(), XSD.xlong.getURI());
+			Literal lastUpdate = model.createTypedLiteral(c.getLast_update(), XSD.xlong.getURI());
 			Literal screenshot = model.createTypedLiteral(c.getScreenshot(), XSD.xstring.getURI());
 			//Literal dependencies = model.createTypedLiteral(c.getDependencies(), XSD.xstring.getURI());
 			//Literal resources = model.createTypedLiteral(c.getResources(), XSD.xstring.getURI());
@@ -178,8 +178,8 @@ public class PojoModelParser {
         				case "description": c.setDescription(l.getString()); break;
         				case "version": c.setVersion(l.getString()); break;
         				case "owner": c.setOwner(l.getString()); break;
-        				case "creationDate": c.setCreation_date(l.getInt()); break;
-        				case "lastUpdate": c.setLast_update(l.getInt()); break;
+        				case "creationDate": c.setCreation_date(l.getLong()); break;
+        				case "lastUpdate": c.setLast_update(l.getLong()); break;
         				case "structure": c.setStructure(l.getString()); break;
         				//case "rights": break;
         				//case "components": break;
@@ -226,8 +226,8 @@ public class PojoModelParser {
 			Literal description = model.createTypedLiteral(c.getDescription(), XSD.xstring.getURI());
 			Literal version = model.createTypedLiteral(c.getVersion(), XSD.xstring.getURI());
 			Literal owner = model.createTypedLiteral(c.getOwner(), XSD.xstring.getURI());
-			Literal creationDate = model.createTypedLiteral(c.getCreation_date(), XSD.xint.getURI());
-			Literal lastUpdate = model.createTypedLiteral(c.getLast_update(), XSD.xint.getURI());
+			Literal creationDate = model.createTypedLiteral(c.getCreation_date(), XSD.xlong.getURI());
+			Literal lastUpdate = model.createTypedLiteral(c.getLast_update(), XSD.xlong.getURI());
 			Literal structure = model.createTypedLiteral(c.getStructure(), XSD.xstring.getURI());
 			//Literal rights = model.createTypedLiteral(c.getRights(), XSD.xstring.getURI());
 			//Literal components = model.createTypedLiteral(c.getComponents(), XSD.xstring.getURI());
