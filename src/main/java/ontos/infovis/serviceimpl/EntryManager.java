@@ -6,7 +6,6 @@ import java.net.URL;
 
 import ontos.infovis.pojo.Component;
 import ontos.infovis.pojo.Composition;
-import ontos.infovis.pojo.Param;
 import ontos.infovis.service.db.FilesystemService;
 import ontos.infovis.service.db.IPersistenceService;
 import ontos.infovis.service.db.PojoModelParser;
@@ -85,9 +84,9 @@ public class EntryManager {
 		return pService.loadComponents(targetURL, constructAllQuery);
 	}
 
-	public boolean deleteComponent(Param param) throws EntryNotFoundException {
-		Query askQuery = askEntryQuery(param.getUri(), param.getVersion(), "Component");
-		UpdateRequest deleteUpdateRequest = deleteEntryUpdateRequest(param.getUri(), param.getVersion(), "Component");
+	public boolean deleteComponent(String uri, String version) throws EntryNotFoundException {
+		Query askQuery = askEntryQuery(uri, version, "Component");
+		UpdateRequest deleteUpdateRequest = deleteEntryUpdateRequest(uri, version, "Component");
 		
 		if(!pService.checkComponent(targetURL, askQuery)) throw new EntryNotFoundException();
 		else return pService.deleteComponents(this.targetURL, deleteUpdateRequest);
@@ -126,9 +125,9 @@ public class EntryManager {
 		return pService.loadCompositions(targetURL, constructAllQuery);
 	}
 
-	public boolean deleteComposition(Param param) throws EntryNotFoundException {
-		Query askQuery = askEntryQuery(param.getUri(), param.getVersion(), "Composition");
-		UpdateRequest deleteUpdateRequest = deleteEntryUpdateRequest(param.getUri(), param.getVersion(), "Composition");
+	public boolean deleteComposition(String uri, String version) throws EntryNotFoundException {
+		Query askQuery = askEntryQuery(uri, version, "Composition");
+		UpdateRequest deleteUpdateRequest = deleteEntryUpdateRequest(uri, version, "Composition");
 		
 		if(!pService.checkComposition(targetURL, askQuery)) throw new EntryNotFoundException();
 		else return pService.deleteCompositions(this.targetURL, deleteUpdateRequest);

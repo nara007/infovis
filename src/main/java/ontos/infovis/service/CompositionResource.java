@@ -10,12 +10,12 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import ontos.infovis.pojo.Composition;
-import ontos.infovis.pojo.Param;
 import ontos.infovis.pojo.Response;
 import ontos.infovis.serviceimpl.EntryException.EntryAlreadyExistsException;
 import ontos.infovis.serviceimpl.EntryException.EntryNotFoundException;
@@ -124,27 +124,27 @@ public class CompositionResource {
   /**
    * Method handling HTTP DELETE requests. Method deletes a specific composition.
    *
-   * @param Param POJO
+   * @param uri
+   * @param version
    * @return Bool indicates if a specific composition has been deleted successfully.
    */
 
   @DELETE
-  @Path("compositions")
-  @Consumes(MediaType.APPLICATION_JSON)
+  @Path("compositions/{uri}/{version}")
   @Produces(MediaType.APPLICATION_JSON)
-  public Response deleteComposition(Param param) {
+  public Response deleteComposition(@PathParam("uri") String uri, @PathParam("version") String version) {
 	Response response = (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
 	  
 	try {
-		boolean deletedComposition = EntryManager.getInstance().deleteComposition(param);
+		boolean deletedComposition = EntryManager.getInstance().deleteComposition(uri, version);
     	response.setBool(deletedComposition);
     	response.setError("Deleted Composition successfully. No errors occured.");
     	response.setException("Deleted Composition successfully. No exception occured.");
 	}
 	catch (EntryNotFoundException ex) {
-		System.out.println("Couldn't find Composition with requested uri: " + param.getVersion() + " and version: " + param.getUri() + " was found.");
+		System.out.println("Couldn't find Composition with requested uri: " + version + " and version: " + uri + " was found.");
 		response.setError("Couldn't delete Composition.");
-	   	response.setException("No entry with requested uri: " + param.getVersion() + " and version: " + param.getUri() +" was found");
+	   	response.setException("No entry with requested uri: " + version + " and version: " + uri +" was found");
 	}
 	
     return response;
@@ -163,3 +163,4 @@ public class CompositionResource {
     return Arrays.asList(EntryManager.getInstance().getAllCompositions());
   }
 }
+

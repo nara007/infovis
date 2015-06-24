@@ -16,5 +16,6 @@
     </bean>
     <bean id="composition" class="ontos.infovis.pojo.Composition" scope="prototype">
     </bean>
-
+    <bean id="unzip" class="ontos.infovis.util.Unzip" scope="prototype">
+    </bean>
 </beans>

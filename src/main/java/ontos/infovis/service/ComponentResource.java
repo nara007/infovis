@@ -10,12 +10,12 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import ontos.infovis.pojo.Component;
-import ontos.infovis.pojo.Param;
 import ontos.infovis.pojo.Response;
 import ontos.infovis.serviceimpl.EntryException.EntryAlreadyExistsException;
 import ontos.infovis.serviceimpl.EntryException.EntryNotFoundException;
@@ -153,29 +153,30 @@ public class ComponentResource {
    * Method handling HTTP DELETE requests.
    * Method deletes a specific component.
    *
-   * @param Param POJO
-   * @return Bool indicates if a specific component has been deleted successfully.
+   * @param uri
+   * @param version
+   * @return Response json object.
    */
   @DELETE
-  @Path("components")
-  @Consumes(MediaType.APPLICATION_JSON)
+  @Path("components/{uri}/{version}")
   @Produces(MediaType.APPLICATION_JSON)
-//  public Response deleteComponent(@QueryParam("uri") String uri, @QueryParam("version") String version) {
-      public Response deleteComponent(Param param){
-	  Response response = (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+  public Response deleteComponent(@PathParam("uri") String uri, @PathParam("version") String version) {
+      Response response = (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
 	  
 	  try {
-		  boolean deletedComponent = EntryManager.getInstance().deleteComponent(param);
+		  boolean deletedComponent = EntryManager.getInstance().deleteComponent(uri, version);
 	      response.setBool(deletedComponent);
 	      response.setError("Deleted Component successfully. No errors occured.");
 	      response.setException("Deleted Component successfully. No excpetion occured.");
 	  }
 	  catch (EntryNotFoundException ex) {
-		  System.out.println("Couldn't find Component with requested uri: " + param.getVersion() + " and version: " + param.getUri() + " was found.");
+		  System.out.println("Couldn't find Component with requested uri: " + version + " and version: " + uri + " was found.");
 		  response.setError("Couldn't delete Component.");
-	      response.setException("No entry with requested uri: " + param.getVersion() + " and version: " + param.getUri() +" was found");
+	      response.setException("No entry with requested uri: " + version + " and version: " + uri +" was found");
 	  }
 	  
       return response;
   }
+
 }
+
