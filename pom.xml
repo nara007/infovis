@@ -6,7 +6,7 @@
     <groupId>ontos.infovis</groupId>
     <artifactId>service</artifactId>
     <packaging>war</packaging>
-    <version>ontos</version>
+    <version>0.0.1</version>
     <name>service</name>
 
     <dependencies>
@@ -74,6 +74,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>${name}</finalName>
     </build>
 
     <properties>
