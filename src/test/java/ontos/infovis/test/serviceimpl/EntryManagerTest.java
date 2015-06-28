@@ -13,8 +13,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.sun.research.ws.wadl.Param;
-
 public class EntryManagerTest {
 	private final String filePath = "src/test/resources/local-ontology.ttl";
 	private final EntryManager entryManager = EntryManager.getInstance();
@@ -157,18 +155,17 @@ public class EntryManagerTest {
     	}
     	
     	// delete version 1.0.0 of every second component
-    	/*for (int i = 1; i < cmpCount; i+=2) {
+    	for (int i = 1; i < cmpCount; i+=2) {
     		try {
-    			Param param = new Param();
-    			param.setUri(getComponentId(i));
-    			param.setVersion("1.0.0");
+    			String id = getComponentId(i);
+    			String version = "1.0.0";
     			
-    			//Assert.assertTrue(entryManager.deleteComponent(param));
+    			Assert.assertTrue(entryManager.deleteComponent(id, version));
     		}
     		catch (EntryNotFoundException ex) {
     			Assert.fail("version 1.0.0 of component number "+i+" not found");
     		}
-    	}*/
+    	}
     	
     	// update version 1.0.0 of every first component
     	for (int i = 0; i < cmpCount; i+=2) {
