@@ -7,7 +7,10 @@ import java.util.List;
 import junit.framework.Assert;
 import ontos.infovis.pojo.Component;
 import ontos.infovis.pojo.ComponentDependency;
+import ontos.infovis.pojo.ComponentInstance;
 import ontos.infovis.pojo.ComponentResource;
+import ontos.infovis.pojo.Composition;
+import ontos.infovis.pojo.Right;
 import ontos.infovis.service.db.FilesystemManager;
 import ontos.infovis.serviceimpl.EntryException.EntryAlreadyExistsException;
 import ontos.infovis.serviceimpl.EntryException.EntryNotFoundException;
@@ -248,11 +251,62 @@ public class EntryManagerTest {
 		catch (EntryNotFoundException ex) {
 			Assert.fail("version 1.0.0 of component number 0 not found");
 		}
+		
+		// create a composition with some components
+		try {
+			Composition cmp = new Composition();
+			cmp.setId("testId");
+			cmp.setTitle("testTitle");
+			cmp.setDescription("testDescription");
+			cmp.setVersion("3.0.0");
+			cmp.setOwner("testOwner");
+			cmp.setCreation_date(cmpCreationDate);
+			cmp.setLast_update(cmpLastUpdate);
+			cmp.setStructure("testStructure");
+			
+			List<Right> rights = new ArrayList<Right>();
+			Right r = new Right();
+			r.setRight("testRight");
+			r.setUser("testUser");
+			rights.add(r);
+			cmp.setRights(rights);
+			
+			List<ComponentInstance> components = new ArrayList<ComponentInstance>();
+			ComponentInstance cmpInst = new ComponentInstance();
+			cmpInst.setId("testID");
+			cmpInst.setInstance_id("testInstId");
+			cmpInst.setVersion("1.0.0");
+			components.add(cmpInst);
+			cmp.setComponents(components);
+			
+			Assert.assertTrue(entryManager.registerComposition(cmp));
+		}
+		catch (EntryAlreadyExistsException ex) {
+			Assert.fail("version 3.0.0 of the compostion already exists");
+		}
+		
+    	// get the added composition
+		try {
+			Composition cmp = entryManager.getComposition("testId", "3.0.0");
+			
+			// check if all values are correct			
+			Assert.assertEquals("testId", cmp.getId());
+			Assert.assertEquals("testTitle", cmp.getTitle());
+			Assert.assertEquals("testDescription", cmp.getDescription());
+			Assert.assertEquals("3.0.0", cmp.getVersion());
+			Assert.assertEquals("testOwner", cmp.getOwner());
+			Assert.assertEquals(cmpCreationDate, cmp.getCreation_date());
+			Assert.assertEquals(cmpLastUpdate, cmp.getLast_update());
+			Assert.assertEquals("testStructure", cmp.getStructure());
+		}
+		catch (EntryNotFoundException ex) {
+			Assert.fail("version 3.0.0 of the compistion not found");
+		}
     }
 	
 	@After
 	public void after() {
 		// clear file after testing
-		//FilesystemManager.clearFile(entryManager.getTargetURL());
+		FilesystemManager.clearFile(entryManager.getTargetURL());
 	}
 }
