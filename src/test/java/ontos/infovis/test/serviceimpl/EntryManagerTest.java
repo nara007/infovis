@@ -1,9 +1,13 @@
 package ontos.infovis.test.serviceimpl;
 
 import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import junit.framework.Assert;
 import ontos.infovis.pojo.Component;
+import ontos.infovis.pojo.ComponentDependency;
+import ontos.infovis.pojo.ComponentResource;
 import ontos.infovis.service.db.FilesystemManager;
 import ontos.infovis.serviceimpl.EntryException.EntryAlreadyExistsException;
 import ontos.infovis.serviceimpl.EntryException.EntryNotFoundException;
@@ -81,6 +85,8 @@ public class EntryManagerTest {
 	
 	@Before
 	public void before() {
+		org.apache.log4j.BasicConfigurator.configure();
+		
 		// set the local test file as target
 		try {
 			entryManager.setTargetURL(filePath);
@@ -204,11 +210,49 @@ public class EntryManagerTest {
     			Assert.fail("version 1.0.0 of component number "+i+" not found");
     		}
     	}
+    	
+    	// add a resource and dependency to the first component
+    	try {
+			Component cmp = createComponent(0, "1.0.0");
+			List<ComponentResource> resources = new ArrayList<ComponentResource>();
+			ComponentResource cmpRes = new ComponentResource();
+			cmpRes.setType("testType");
+			cmpRes.setPath("testPath");
+			resources.add(cmpRes);
+			
+			List<ComponentDependency> dependencies = new ArrayList<ComponentDependency>();
+			ComponentDependency cmpDep = new ComponentDependency();
+			cmpDep.setName("testName");
+			cmpDep.setPath("testPath");
+			dependencies.add(cmpDep);
+			
+			cmp.setResources(resources);
+			cmp.setDependencies(dependencies);
+			
+			Assert.assertTrue(entryManager.updateComponent(cmp));
+    	}
+    	catch (EntryNotFoundException ex) {
+    		Assert.fail("version 1.0.0 of component number 0 not found");
+    	}
+    	
+    	// get the added resource and dependency
+		try {
+			Component cmp = entryManager.getComponent(getComponentId(0), "1.0.0");
+			
+			// check if all values are correct
+			Assert.assertEquals("testType", cmp.getResources().get(0).getType());
+			Assert.assertEquals("testPath", cmp.getResources().get(0).getPath());
+			Assert.assertEquals("testName", cmp.getDependencies().get(0).getName());
+			Assert.assertEquals("testPath", cmp.getDependencies().get(0).getPath());
+		}
+		catch (EntryNotFoundException ex) {
+			Assert.fail("version 1.0.0 of component number 0 not found");
+		}
     }
 	
 	@After
 	public void after() {
 		// clear file after testing
-		FilesystemManager.clearFile(entryManager.getTargetURL());
+		//FilesystemManager.clearFile(entryManager.getTargetURL());
 	}
 }

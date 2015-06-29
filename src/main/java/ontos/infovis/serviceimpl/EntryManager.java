@@ -152,11 +152,16 @@ public class EntryManager {
 		final String uri = PojoModelParser.BASE_URL + id;
 		final String type = PojoModelParser.BASE_URL + entryType;
 		
-		final String query = "CONSTRUCT {?version ?p ?o .} WHERE{"
+		final String query = "CONSTRUCT {?version ?p ?o . ?dependency ?dependencyP ?dependencyO . ?resource ?resourceP ?resourceO .} WHERE{"
 				+ "<"+uri+"> <"+PojoModelParser.HAS_VERSION_PROP_URI+"> ?version . "
 				+ "?version ?p ?o . "
 				+ "?version <"+RDF.type+"> \""+type+"\" . "
 				+ "?version <"+PojoModelParser.VERSION_PROP_URI+"> \""+version+"\" ."
+				// TODO this is only for components
+				+ "OPTIONAL {?version <"+PojoModelParser.REQUIRES_PROP_URI+"> ?dependency ."
+				+ "?dependency ?dependencyP ?dependencyO} ."
+				+ "OPTIONAL {?version <"+PojoModelParser.REFERENCES_PROP_URI+"> ?resource ."
+				+ "?resource ?resourceP ?resourceO} ."
 		+ "}";
 		
 		return QueryFactory.create(query);
