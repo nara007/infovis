@@ -1,14 +1,18 @@
 package ontos.infovis.service.db;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ontos.infovis.pojo.Component;
+import ontos.infovis.pojo.ComponentDependency;
+import ontos.infovis.pojo.ComponentResource;
 import ontos.infovis.pojo.Composition;
 
 import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
+import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.ResIterator;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
@@ -40,6 +44,10 @@ public class PojoModelParser {
 	static public final String VERSION_OF_PROP_URI = DCTerms.isVersionOf.getURI();
 	static public final String HAS_VERSION_PROP_URI = DCTerms.hasVersion.getURI();
 	static public final String LATEST_VERSION_PROP_URI = BASE_URL+"latestVersion";
+	static public final String REQUIRES_PROP_URI = DCTerms.requires.getURI();
+	static public final String REFERENCES_PROP_URI = DCTerms.references.getURI();
+	static public final String PATH_PROP_URI = BASE_URL+"path";
+	static public final String TYPE_PROP_URI = DC_11.type.getURI();
 	
 	// type URIs
 	static public final String COMPONENT_TYPE_URI = BASE_URL+"Component";
@@ -65,28 +73,44 @@ public class PojoModelParser {
     		Statement parent = r.getProperty(model.createProperty(VERSION_OF_PROP_URI));
     		c.setId(parent.asTriple().getObject().getLocalName());
     		
+    		// the dependencies and resources of the component
+    		List<ComponentDependency> dependencies = new ArrayList<ComponentDependency>();
+    		List<ComponentResource> resources = new ArrayList<ComponentResource>();
+    		
     		// iterate over all triples
     		StmtIterator stmtIt = r.listProperties();
     		while(stmtIt.hasNext()) {
     			Statement s = stmtIt.next();
+    			Property p = s.getPredicate();
+    			RDFNode o = s.getObject();
     			
     			// all triples that end with a literal might be a component property
-    			if(s.getObject().isLiteral()) {
-    				Property p = s.getPredicate();
-        			Literal l = s.getObject().asLiteral();
+    			if(o.isLiteral()) {
+        			Literal oLit = o.asLiteral();	
         			
         			// set depending on the property URI
-        			if(p.getURI().equals(TITLE_PROP_URI)) c.setTitle(l.getString());
-        			else if(p.getURI().equals(DESCRIPTION_PROP_URI)) c.setDescription(l.getString());
-        			else if(p.getURI().equals(VERSION_PROP_URI)) c.setVersion(l.getString());
-        			else if(p.getURI().equals(CREATOR_PROP_URI)) c.setOwner(l.getString());
-        			else if(p.getURI().equals(CREATED_PROP_URI)) c.setCreation_date(l.getLong());
-        			else if(p.getURI().equals(MODIFIED_PROP_URI)) c.setLast_update(l.getLong());
-        			else if(p.getURI().equals(SCREENSHOT_PROP_URI)) c.setScreenshot(l.getString());
-        			// TODO dependencies and resources
+        			if(p.getURI().equals(TITLE_PROP_URI)) c.setTitle(oLit.getString());
+        			else if(p.getURI().equals(DESCRIPTION_PROP_URI)) c.setDescription(oLit.getString());
+        			else if(p.getURI().equals(VERSION_PROP_URI)) c.setVersion(oLit.getString());
+        			else if(p.getURI().equals(CREATOR_PROP_URI)) c.setOwner(oLit.getString());
+        			else if(p.getURI().equals(CREATED_PROP_URI)) c.setCreation_date(oLit.getLong());
+        			else if(p.getURI().equals(MODIFIED_PROP_URI)) c.setLast_update(oLit.getLong());
+        			else if(p.getURI().equals(SCREENSHOT_PROP_URI)) c.setScreenshot(oLit.getString());
+    			}
+    			// all triples ending with a resource might be a dependency or resource
+    			else if(o.isResource()) {
+    				Resource oRes = o.asResource();
+    				
+    				if(p.getURI().equals(REQUIRES_PROP_URI)) dependencies.add(resourceToComponentDependency(oRes));
+        			else if(p.getURI().equals(REFERENCES_PROP_URI)) resources.add(resourceToComponentResource(oRes));
     			}
     		}
     		
+    		// set the dependencies and resources
+    		c.setDependencies(dependencies);
+    		c.setResources(resources);
+    		
+    		// add the component to the list of results
     		components.add(c);
     	}
     	
@@ -127,7 +151,6 @@ public class PojoModelParser {
 			Literal creationDate = model.createTypedLiteral(c.getCreation_date(), XSD.xlong.getURI());
 			Literal lastUpdate = model.createTypedLiteral(c.getLast_update(), XSD.xlong.getURI());
 			Literal screenshot = model.createTypedLiteral(c.getScreenshot(), XSD.xstring.getURI());
-			// TODO dependencies and resources
 			
 			// create matching properties
 			Property titleProp = model.createProperty(TITLE_PROP_URI);
@@ -137,7 +160,6 @@ public class PojoModelParser {
 			Property creationDateProp = model.createProperty(CREATED_PROP_URI);
 			Property lastUpdateProp = model.createProperty(MODIFIED_PROP_URI);
 			Property screenshotProp = model.createProperty(SCREENSHOT_PROP_URI); 
-			// TODO dependencies and resources
 			
 			// the blank node holds all literals with their properties
 			componentResource.addLiteral(titleProp, title);
@@ -147,7 +169,46 @@ public class PojoModelParser {
 			componentResource.addLiteral(creationDateProp, creationDate);
 			componentResource.addLiteral(lastUpdateProp, lastUpdate);
 			componentResource.addLiteral(screenshotProp, screenshot);
-			// TODO dependencies and resources
+			
+			// now do the same for all dependencies
+			Property requiresProp = model.createProperty(REQUIRES_PROP_URI);
+			
+			if(c.getDependencies() != null) {
+				for(ComponentDependency cmpDep: c.getDependencies()) {
+					Resource dependency = model.createResource();
+	
+					Literal name = model.createTypedLiteral(cmpDep.getName(), XSD.xstring.getURI());
+					Literal path = model.createTypedLiteral(cmpDep.getPath(), XSD.xstring.getURI());
+					
+					Property nameProp = model.createProperty(TITLE_PROP_URI);
+					Property pathProp = model.createProperty(PATH_PROP_URI);
+					
+					dependency.addLiteral(nameProp, name);
+					dependency.addLiteral(pathProp, path);
+					
+					componentResource.addProperty(requiresProp, dependency);
+				}
+			}
+			
+			// at last the same for resources
+			Property referencesProp = model.createProperty(REFERENCES_PROP_URI);
+			
+			if(c.getResources() != null) {
+				for(ComponentResource cmpRes: c.getResources()) {
+					Resource resource = model.createResource();
+	
+					Literal type = model.createTypedLiteral(cmpRes.getType(), XSD.xstring.getURI());
+					Literal path = model.createTypedLiteral(cmpRes.getPath(), XSD.xstring.getURI());
+					
+					Property typeProp = model.createProperty(TYPE_PROP_URI);
+					Property pathProp = model.createProperty(PATH_PROP_URI);
+					
+					resource.addLiteral(typeProp, type);
+					resource.addLiteral(pathProp, path);
+					
+					componentResource.addProperty(referencesProp, resource);
+				}
+			}
 		}
 		
     	return model;
@@ -260,5 +321,49 @@ public class PojoModelParser {
 		}
 		
     	return model;
+    }
+    
+    static private ComponentDependency resourceToComponentDependency(Resource r) {
+    	ComponentDependency cmpDep = new ComponentDependency();
+    	
+		// iterate over all triples
+		StmtIterator stmtIt = r.listProperties();
+		while(stmtIt.hasNext()) {
+			Statement s = stmtIt.next();
+			Property p = s.getPredicate();
+			RDFNode o = s.getObject();
+			
+			if(o.isLiteral()) {
+    			Literal oLit = o.asLiteral();	
+    			
+    			// set depending on the property URI
+    			if(p.getURI().equals(TITLE_PROP_URI)) cmpDep.setName(oLit.getString());
+    			else if(p.getURI().equals(PATH_PROP_URI)) cmpDep.setPath(oLit.getString());
+			}
+		}
+    	
+    	return cmpDep;
+    }
+    
+    static private ComponentResource resourceToComponentResource(Resource r) {
+    	ComponentResource cmpRes = new ComponentResource();
+    	
+		// iterate over all triples
+		StmtIterator stmtIt = r.listProperties();
+		while(stmtIt.hasNext()) {
+			Statement s = stmtIt.next();
+			Property p = s.getPredicate();
+			RDFNode o = s.getObject();
+			
+			if(o.isLiteral()) {
+    			Literal oLit = o.asLiteral();	
+    			
+    			// set depending on the property URI
+    			if(p.getURI().equals(TYPE_PROP_URI)) cmpRes.setType(oLit.getString());
+    			else if(p.getURI().equals(PATH_PROP_URI)) cmpRes.setPath(oLit.getString());
+			}
+		}
+    	
+    	return cmpRes;
     }
 }
