@@ -57,14 +57,15 @@
             <input type="button" class="btn btn-default" value="submit" id="deletecomponent"></input>
         </div>
 
-
-
         <div class="form-group">
-            <form id="fileUploadForm" method="post" enctype="multipart/form-data" action="">
-                <label for="inputfile">please select a zip file</label><br/>
-                <input type="file" id="uploadedFile" class="btn btn-default" value='upload' name="file"/>
-                <input type="button" class="btn btn-default" value="upload" id="updateFile"></input>
+            <form id="fileUploadForm" enctype="multipart/form-data" action="http://localhost:8080/rest/fileReceiver"
+                  method="post">
+                <label for="inputfile">upload a zip file</label>
+                <input type="file" id="fileUploadSelector" value='select' name="file"/>
+                <input type="submit" class="btn btn-default" value="upload"
+                       name="fileUploader"></input>
             </form>
+            <!--<iframe id="id_iframe" name="id_iframe" style="display:none;"></iframe>-->
         </div>
     </div>
 
@@ -83,6 +84,7 @@
         </div>
         <div class="form-group">
             <label for="inputfile">get a composition</label>
+
             <div class="row">
                 <div class="col-xs-2">
                     <input type="text" class="form-control" placeholder="uri" id="uriOfGetComposition">
@@ -114,11 +116,9 @@
 </div>
 
 
-
-
-
 <!-- </form> -->
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/jquery-form/jquery.form.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="bower_components/angular/angular.min.js"></script>
 <script type="text/javascript">
@@ -139,6 +139,7 @@
                     dataType: 'json',
                     success: function (response) {
                         console.log(response);
+                        //alert(console.log(response));
                     }
                 });
 
@@ -202,37 +203,47 @@
 
 
         /**
-         * delete a component
+         * delete a component.The request uri must contain the parameters,
+         * or the @PathParam does not work.
+         * Jquery does not append the parameters after the uri.
          */
         $("#deletecomponent").click(function () {
 
+            var request = 'http://localhost:8080/rest/components/';
+            request = request + $("#uriOfDeleteComponent").val() + '/' + $("#versionOfDeleteComponent").val();
             $.ajax({
                 type: 'DELETE',
-                url: 'http://localhost:8080/rest/components',
+                url: request,
                 cache: false,
-                data: JSON.stringify({
-                    "uri": $("#uriOfDeleteComponent").val(),
-                    "version": $("#versionOfDeleteComponent").val()
-                }),
-                contentType: "application/json",
                 dataType: 'json',
-                success: function (data) {
-                    console.log(data);
+                success: function (response) {
+                    console.log(response);
                 }
             });
         });
 
-        $("#updateFile").click(function(){
-            var file=$("#uploadedFile").val();
-            if(file==""||file==null)
-            {
-                alert("please select a zip file");
-                return false;
-            }
-            else{
-                $("#fileUploadForm").submit();
+
+        /**
+         * upload a zip file,without page refresh
+         *
+         */
+        $("#fileUploadForm").ajaxForm({
+
+            type: "POST",
+            dataType: "json",
+            beforeSerialize: function () {
+            },
+            data: $(this).serialize(),
+            beforeSubmit: function () {
+            },
+            success: function (json) {
+                console.log(json)
+            },
+            error: function (err) {
+                alert("form submission error" + err.msg);
             }
         });
+
 
         /**
          * create a composition
@@ -243,7 +254,7 @@
             $.getJSON(fileName, function (data) {
                 $.ajax({
                     type: 'POST',
-                    url: 'http://localhost:8080/rest/compositions',
+                    url: 'http://loca:8080/rest/compositions',
                     data: JSON.stringify(data),
                     contentType: 'application/json',
                     cache: false,
@@ -297,19 +308,18 @@
         });
 
         /**
-         * delete a composition
+         * delete a composition.The request uri must contain the parameters,
+         * or the @PathParam does not work.
+         * Jquery does not append the parameters after the uri.
          */
         $("#deletecomposition").click(function () {
 
+            var request = 'http://localhost:8080/rest/compositions/';
+            request = request + $("#uriOfDeleteComposition").val() + '/' + $("#versionOfDeleteComposition").val();
             $.ajax({
                 type: 'DELETE',
-                url: 'http://localhost:8080/rest/compositions',
+                url: request,
                 cache: false,
-                data: JSON.stringify({
-                    "uri": $("#uriOfDeleteComposition").val(),
-                    "version": $("#versionOfDeleteComposition").val()
-                }),
-                contentType: "application/json",
                 dataType: 'json',
                 success: function (response) {
                     console.log(response);
@@ -331,7 +341,6 @@
                 }
             });
         });
-
     });
 </script>
 </body>

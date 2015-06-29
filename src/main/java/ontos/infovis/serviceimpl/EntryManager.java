@@ -6,17 +6,17 @@ import java.net.URL;
 
 import ontos.infovis.pojo.Component;
 import ontos.infovis.pojo.Composition;
-import ontos.infovis.pojo.Param;
 import ontos.infovis.service.db.FilesystemService;
 import ontos.infovis.service.db.IPersistenceService;
 import ontos.infovis.service.db.PojoModelParser;
+import ontos.infovis.serviceimpl.EntryException.EntryAlreadyExistsException;
+import ontos.infovis.serviceimpl.EntryException.EntryNotFoundException;
 
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.update.UpdateFactory;
 import com.hp.hpl.jena.update.UpdateRequest;
-
-//TODO remove redundant code 
+import com.hp.hpl.jena.vocabulary.RDF;
 
 public class EntryManager {
 	static private EntryManager instance; 
@@ -31,114 +31,160 @@ public class EntryManager {
 	private URL targetURL = null;
 	
 	private EntryManager() {
-		this.setTargetURL("ontology/local.ttl");
+		try {
+			this.setTargetURL("src/main/resources/local-ontology.ttl");
+		} catch (MalformedURLException mUrlEx) {
+			// TODO handle MalformedURLException
+			mUrlEx.printStackTrace(System.out);
+		}
 	}
 
 	public URL getTargetURL() {
 		return targetURL;
 	}
 
-	public void setTargetURL(String targetURLPath) {
-		try {
-			this.targetURL = new File(targetURLPath).toURI().toURL();
-		} catch (MalformedURLException mUrlEx) {
-			// TODO handle MalformedURLException
-			mUrlEx.printStackTrace(System.out);
-		}
+	public void setTargetURL(String filePath) throws MalformedURLException {
+		this.targetURL = new File(filePath).toURI().toURL();
+	}
+	
+	public void setTargetURL(URL url) {
+		this.targetURL = url;
 	}
 	
 	/* manage components */
 	
-	public boolean registerComponent(Component component) {
+	public boolean registerComponent(Component component) throws EntryAlreadyExistsException {
+		Query askQuery = askEntryQuery(component.getId(), component.getVersion(), "Component");
 		Component[] components = {component};
-		return pService.saveComponents(this.targetURL, components);
-	}
-	
-	public boolean updateComponent(Component component) {
-		// TODO this delegates to registerComponent
-		return registerComponent(component);
-	}
-
-	public Component[] searchComponent(String searchString) {
-		// TODO implement this
-		Component[] components = {};
-		return components;
-	}
-	
-	public Component getComponent(String uri, String version) {
-		uri = PojoModelParser.BASE_URL + uri;
-		String versionUri = PojoModelParser.BASE_URL + "version";
-		String versionsUri = PojoModelParser.BASE_URL + "versions";
-		Query searchQuery = QueryFactory.create("CONSTRUCT {?version ?p ?o .} WHERE{<"+uri+"> <"+versionsUri+"> ?version . ?version ?p ?o . ?version <"+versionUri+"> \""+version+"\" .}");
 		
-		return pService.loadComponents(targetURL, searchQuery)[0];
+		if(pService.checkComponent(targetURL, askQuery)) throw new EntryAlreadyExistsException();
+		else return pService.saveComponents(this.targetURL, components);
+	}
+	
+	public boolean updateComponent(Component component) throws EntryNotFoundException {
+		Query askQuery = askEntryQuery(component.getId(), component.getVersion(), "Component");
+		UpdateRequest deleteUpdateRequest = deleteEntryUpdateRequest(component.getId(), component.getVersion(), "Component");
+		Component[] components = {component};
+		
+		if(!pService.checkComponent(targetURL, askQuery)) throw new EntryNotFoundException();
+		else return pService.deleteComponents(this.targetURL, deleteUpdateRequest) && pService.saveComponents(this.targetURL, components);
+	}
+	
+	public Component getComponent(String id, String version) throws EntryNotFoundException {
+		Query askQuery = askEntryQuery(id, version, "Component");
+		Query constructQuery = constructEntryQuery(id, version, "Component");
+
+		if(!pService.checkComponent(targetURL, askQuery)) throw new EntryNotFoundException();
+		else return pService.loadComponents(targetURL, constructQuery)[0];
 	}
 	
 	public Component[] getAllComponents() {
-		String versionsUri = PojoModelParser.BASE_URL+"versions";
-		Query searchQuery = QueryFactory.create("CONSTRUCT {?version ?p ?o .} WHERE{?component <"+versionsUri+"> ?version . ?version ?p ?o .}");
+		Query constructAllQuery = constructAllEntriesQuery("Component");
 		
-		return pService.loadComponents(targetURL, searchQuery);
+		return pService.loadComponents(targetURL, constructAllQuery);
 	}
 
-	public boolean deleteComponent(Param param) {
-		String uri = param.getUri();
-		String version = param.getVersion();
+	public boolean deleteComponent(String uri, String version) throws EntryNotFoundException {
+		Query askQuery = askEntryQuery(uri, version, "Component");
+		UpdateRequest deleteUpdateRequest = deleteEntryUpdateRequest(uri, version, "Component");
 		
-		uri = "dummy-communes";
-		version = "0.0.1a";
-		
-		String versionUri = PojoModelParser.BASE_URL + "version";
-		String versionsUri = PojoModelParser.BASE_URL + "versions";
-		uri = PojoModelParser.BASE_URL + uri;
-		UpdateRequest deleteUpdateRequest = UpdateFactory.create("DELETE WHERE{<"+uri+"> <"+versionsUri+"> ?version . ?version ?p ?o . ?version <"+versionUri+"> \""+version+"\" .}");
-		
-		return pService.deleteComponents(this.targetURL, deleteUpdateRequest);
+		if(!pService.checkComponent(targetURL, askQuery)) throw new EntryNotFoundException();
+		else return pService.deleteComponents(this.targetURL, deleteUpdateRequest);
 	}
 	
 	/* manage compositions */
 	
-	public boolean registerComposition(Composition composition) {
+	public boolean registerComposition(Composition composition) throws EntryAlreadyExistsException {
+		Query askQuery = askEntryQuery(composition.getId(), composition.getVersion(), "Composition");
 		Composition[] compositions = {composition};
-		return pService.saveCompositions(this.targetURL, compositions);
-	}
-	
-	public boolean updateComposition(Composition composition) {
-		// TODO this delegates to registerComposition
-		return registerComposition(composition);
-	}
-
-	public Composition[] searchComposition(String searchString) {
-		// TODO implement this
-		Composition[] compositions = {};
-		return compositions;
-	}
-	
-	public Composition getComposition(String uri, String version) {
-		uri = PojoModelParser.BASE_URL + uri;
-		String versionUri = PojoModelParser.BASE_URL + "version";
-		String versionsUri = PojoModelParser.BASE_URL + "versions";
-		Query searchQuery = QueryFactory.create("CONSTRUCT {?version ?p ?o .} WHERE{<"+uri+"> <"+versionsUri+"> ?version . ?version ?p ?o . ?version <"+versionUri+"> \""+version+"\" .}");
 		
-		return pService.loadCompositions(targetURL, searchQuery)[0];
+		if(pService.checkComposition(targetURL, askQuery)) throw new EntryAlreadyExistsException();
+		else return pService.saveCompositions(this.targetURL, compositions);
+	}
+	
+	public boolean updateComposition(Composition composition) throws EntryNotFoundException {
+		Query askQuery = askEntryQuery(composition.getId(), composition.getVersion(), "Composition");
+		UpdateRequest deleteUpdateRequest = deleteEntryUpdateRequest(composition.getId(), composition.getVersion(), "Composition");
+		Composition[] compositions = {composition};
+		
+		if(!pService.checkComposition(targetURL, askQuery)) throw new EntryNotFoundException();
+		else return pService.deleteCompositions(this.targetURL, deleteUpdateRequest) && pService.saveCompositions(this.targetURL, compositions);
+	}
+	
+	public Composition getComposition(String id, String version) throws EntryNotFoundException {
+		Query askQuery = askEntryQuery(id, version, "Composition");
+		Query constructQuery = constructEntryQuery(id, version, "Composition");
+
+		if(!pService.checkComposition(targetURL, askQuery)) throw new EntryNotFoundException();
+		else return pService.loadCompositions(targetURL, constructQuery)[0];
 	}
 	
 	public Composition[] getAllCompositions() {
-		String versionsUri = PojoModelParser.BASE_URL+"versions";
-		Query searchQuery = QueryFactory.create("CONSTRUCT {?version ?p ?o .} WHERE{?composition <"+versionsUri+"> ?version . ?version ?p ?o .}");
+		Query constructAllQuery = constructAllEntriesQuery("Composition");
 		
-		return pService.loadCompositions(targetURL, searchQuery);
+		return pService.loadCompositions(targetURL, constructAllQuery);
 	}
 
-	public boolean deleteComposition(Param param) {
-		String uri = param.getUri();
-		String version = param.getVersion();
+	public boolean deleteComposition(String uri, String version) throws EntryNotFoundException {
+		Query askQuery = askEntryQuery(uri, version, "Composition");
+		UpdateRequest deleteUpdateRequest = deleteEntryUpdateRequest(uri, version, "Composition");
 		
-		String versionUri = PojoModelParser.BASE_URL + "version";
-		String versionsUri = PojoModelParser.BASE_URL + "versions";
-		uri = PojoModelParser.BASE_URL + uri;
-		UpdateRequest deleteUpdateRequest = UpdateFactory.create("DELETE WHERE{<"+uri+"> <"+versionsUri+"> ?version . ?version ?p ?o . ?version <"+versionUri+"> \""+version+"\" .}");
+		if(!pService.checkComposition(targetURL, askQuery)) throw new EntryNotFoundException();
+		else return pService.deleteCompositions(this.targetURL, deleteUpdateRequest);
+	}
+	
+	/* construct queries */
+	
+	private Query askEntryQuery(String id, String version, String entryType) {
+		final String uri = PojoModelParser.BASE_URL + id;
+		final String type = PojoModelParser.BASE_URL + entryType;
 		
-		return pService.deleteCompositions(this.targetURL, deleteUpdateRequest);
+		final String query = "ASK  {"
+				+ "<"+uri+"> <"+PojoModelParser.HAS_VERSION_PROP_URI+"> ?version . "
+				+ "?version <"+RDF.type+"> \""+type+"\" . "
+				+ "?version <"+PojoModelParser.VERSION_PROP_URI+"> \""+version+"\" ."
+		+ "}";
+		
+		return QueryFactory.create(query);
+	}
+	
+	private Query constructEntryQuery(String id, String version, String entryType) {
+		final String uri = PojoModelParser.BASE_URL + id;
+		final String type = PojoModelParser.BASE_URL + entryType;
+		
+		final String query = "CONSTRUCT {?version ?p ?o .} WHERE{"
+				+ "<"+uri+"> <"+PojoModelParser.HAS_VERSION_PROP_URI+"> ?version . "
+				+ "?version ?p ?o . "
+				+ "?version <"+RDF.type+"> \""+type+"\" . "
+				+ "?version <"+PojoModelParser.VERSION_PROP_URI+"> \""+version+"\" ."
+		+ "}";
+		
+		return QueryFactory.create(query);
+	}
+	
+	private Query constructAllEntriesQuery(String entryType) {
+		final String type = PojoModelParser.BASE_URL + entryType;
+		
+		final String query = "CONSTRUCT {?version ?p ?o .} WHERE{"
+				+ "?entry <"+PojoModelParser.HAS_VERSION_PROP_URI+"> ?version . "
+				+ "?version ?p ?o ."
+				+ "?version <"+RDF.type+"> \""+type+"\" . "
+		+ "}";
+		
+		return QueryFactory.create(query);
+	}
+	
+	private UpdateRequest deleteEntryUpdateRequest(String id, String version, String entryType) {
+		final String uri = PojoModelParser.BASE_URL + id;
+		final String type = PojoModelParser.BASE_URL + entryType;
+		
+		final String updateRequest = "DELETE WHERE{"
+				+ "<"+uri+"> <"+PojoModelParser.HAS_VERSION_PROP_URI+"> ?version . "
+				+ "?version ?p ?o . "
+				+ "?version <"+PojoModelParser.VERSION_PROP_URI+"> \""+version+"\" ."
+				+ "?version <"+RDF.type+"> \""+type+"\" . "
+		+ "}";
+
+		return UpdateFactory.create(updateRequest);
 	}
 }

@@ -13,6 +13,8 @@ import com.hp.hpl.jena.rdf.model.ResIterator;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
+import com.hp.hpl.jena.vocabulary.DCTerms;
+import com.hp.hpl.jena.vocabulary.DC_11;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.XSD;
 
@@ -23,8 +25,25 @@ import com.hp.hpl.jena.vocabulary.XSD;
  * @author Franz
  */
 public class PojoModelParser {
-	// namespace
+	// name space URI
 	static public final String BASE_URL = "http://ontos.infovis/";
+	
+	// property URIs
+	static public final String TITLE_PROP_URI = DC_11.title.getURI();
+	static public final String DESCRIPTION_PROP_URI = DC_11.description.getURI();
+	static public final String VERSION_PROP_URI = BASE_URL+"version";
+	static public final String CREATOR_PROP_URI = DC_11.creator.getURI();
+	static public final String CREATED_PROP_URI = DCTerms.created.getURI();
+	static public final String MODIFIED_PROP_URI = DCTerms.modified.getURI();
+	static public final String SCREENSHOT_PROP_URI = BASE_URL+"screenshot";
+	static public final String STRUCTURE_PROP_URI = BASE_URL+"structure";
+	static public final String VERSION_OF_PROP_URI = DCTerms.isVersionOf.getURI();
+	static public final String HAS_VERSION_PROP_URI = DCTerms.hasVersion.getURI();
+	static public final String LATEST_VERSION_PROP_URI = BASE_URL+"latestVersion";
+	
+	// type URIs
+	static public final String COMPONENT_TYPE_URI = BASE_URL+"Component";
+	static public final String COMPOSITION_TYPE_URI = BASE_URL+"Composition";
 	
 	/**
 	 * @param model the {@link Model} containing components, which will be parsed into a {@link Component} Array
@@ -35,7 +54,7 @@ public class PojoModelParser {
     	ArrayList<Component> components= new ArrayList<Component>();
 
     	// find all resources of the given type
-    	ResIterator resIt = model.listSubjectsWithProperty(RDF.type, BASE_URL+"Component");
+    	ResIterator resIt = model.listSubjectsWithProperty(RDF.type, COMPONENT_TYPE_URI);
     	
     	// parse all found resources into a component
     	while(resIt.hasNext()) {
@@ -43,7 +62,7 @@ public class PojoModelParser {
 
     		// the URI of the parent component is the ID
     		Resource r = resIt.next();
-    		Statement parent = r.getProperty(model.createProperty(BASE_URL, "parent"));
+    		Statement parent = r.getProperty(model.createProperty(VERSION_OF_PROP_URI));
     		c.setId(parent.asTriple().getObject().getLocalName());
     		
     		// iterate over all triples
@@ -51,24 +70,20 @@ public class PojoModelParser {
     		while(stmtIt.hasNext()) {
     			Statement s = stmtIt.next();
     			
-    			// all triples that end with a literal might be component property
+    			// all triples that end with a literal might be a component property
     			if(s.getObject().isLiteral()) {
     				Property p = s.getPredicate();
         			Literal l = s.getObject().asLiteral();
         			
-        			// switch depending on the property name
-        			switch(p.getLocalName()) {
-        				case "title": c.setTitle(l.getString()); break;
-        				case "description": c.setDescription(l.getString()); break;
-        				case "version": c.setVersion(l.getString()); break;
-        				case "owner": c.setOwner(l.getString()); break;
-        				case "creationDate": c.setCreation_date(l.getInt()); break;
-        				case "lastUpdate": c.setLast_update(l.getInt()); break;
-        				case "screenshot": c.setScreenshot(l.getString()); break;
-        				//case "dependencies": break;
-        				//case "resources": break;
-        				default: break; // properties that do not match a model field are ignored
-        			}
+        			// set depending on the property URI
+        			if(p.getURI().equals(TITLE_PROP_URI)) c.setTitle(l.getString());
+        			else if(p.getURI().equals(DESCRIPTION_PROP_URI)) c.setDescription(l.getString());
+        			else if(p.getURI().equals(VERSION_PROP_URI)) c.setVersion(l.getString());
+        			else if(p.getURI().equals(CREATOR_PROP_URI)) c.setOwner(l.getString());
+        			else if(p.getURI().equals(CREATED_PROP_URI)) c.setCreation_date(l.getLong());
+        			else if(p.getURI().equals(MODIFIED_PROP_URI)) c.setLast_update(l.getLong());
+        			else if(p.getURI().equals(SCREENSHOT_PROP_URI)) c.setScreenshot(l.getString());
+        			// TODO dependencies and resources
     			}
     		}
     		
@@ -89,43 +104,40 @@ public class PojoModelParser {
 		// iterate trough all components
 		for(Component c: components) {
 			// create or get a resource for all versions of this component
-			Resource r = model.createResource(BASE_URL+c.getId());
+			Resource parentResource = model.createResource(BASE_URL+c.getId());
 			
 			// a resource of type Component represents this version of the component
 			Resource componentResource = model.createResource(BASE_URL+c.getId()+"/"+c.getVersion());
-			componentResource.addProperty(RDF.type, BASE_URL+"Component");
-			componentResource.addProperty(model.createProperty(BASE_URL, "parent"), r);
+			componentResource.addProperty(RDF.type, COMPONENT_TYPE_URI);
+			componentResource.addProperty(model.createProperty(VERSION_OF_PROP_URI), parentResource);
 			
 			// add this version and set it as the latest
-			Property versions = model.createProperty(BASE_URL, "versions");
-			r.addProperty(versions, componentResource);
-			// TODO: This is currently overwritten by the model merge in FilesystemManager.java
-			Property latestVersion = model.createProperty(BASE_URL, "latestVersion");
-			r.removeAll(latestVersion);
-			r.addProperty(latestVersion, componentResource);
-			
+			Property versions = model.createProperty(HAS_VERSION_PROP_URI);
+			parentResource.addProperty(versions, componentResource);
+			// TODO this is currently overwritten by the model merge in FilesystemManager.java
+			Property latestVersion = model.createProperty(LATEST_VERSION_PROP_URI);
+			parentResource.removeAll(latestVersion);
+			parentResource.addProperty(latestVersion, componentResource);
 			
 			// get all fields and turn them into literals
 			Literal title = model.createTypedLiteral(c.getTitle(), XSD.xstring.getURI());
 			Literal description = model.createTypedLiteral(c.getDescription(), XSD.xstring.getURI());
 			Literal version = model.createTypedLiteral(c.getVersion(), XSD.xstring.getURI());
 			Literal owner = model.createTypedLiteral(c.getOwner(), XSD.xstring.getURI());
-			Literal creationDate = model.createTypedLiteral(c.getCreation_date(), XSD.xint.getURI());
-			Literal lastUpdate = model.createTypedLiteral(c.getLast_update(), XSD.xint.getURI());
+			Literal creationDate = model.createTypedLiteral(c.getCreation_date(), XSD.xlong.getURI());
+			Literal lastUpdate = model.createTypedLiteral(c.getLast_update(), XSD.xlong.getURI());
 			Literal screenshot = model.createTypedLiteral(c.getScreenshot(), XSD.xstring.getURI());
-			//Literal dependencies = model.createTypedLiteral(c.getDependencies(), XSD.xstring.getURI());
-			//Literal resources = model.createTypedLiteral(c.getResources(), XSD.xstring.getURI());
+			// TODO dependencies and resources
 			
 			// create matching properties
-			Property titleProp = model.createProperty(BASE_URL, "title");
-			Property descriptionProp = model.createProperty(BASE_URL, "description");
-			Property versionProp = model.createProperty(BASE_URL, "version");
-			Property ownerProp = model.createProperty(BASE_URL, "owner");
-			Property creationDateProp = model.createProperty(BASE_URL, "creationDate");
-			Property lastUpdateProp = model.createProperty(BASE_URL, "lastUpdate");
-			Property screenshotProp = model.createProperty(BASE_URL, "screenshot");
-			//Property dependenciesProp = model.createProperty(BASE_URL, "dependencies");
-			//Property resourcesProp = model.createProperty(BASE_URL, "resources");
+			Property titleProp = model.createProperty(TITLE_PROP_URI);
+			Property descriptionProp = model.createProperty(DESCRIPTION_PROP_URI);
+			Property versionProp = model.createProperty(VERSION_PROP_URI); 
+			Property ownerProp = model.createProperty(CREATOR_PROP_URI);
+			Property creationDateProp = model.createProperty(CREATED_PROP_URI);
+			Property lastUpdateProp = model.createProperty(MODIFIED_PROP_URI);
+			Property screenshotProp = model.createProperty(SCREENSHOT_PROP_URI); 
+			// TODO dependencies and resources
 			
 			// the blank node holds all literals with their properties
 			componentResource.addLiteral(titleProp, title);
@@ -135,8 +147,7 @@ public class PojoModelParser {
 			componentResource.addLiteral(creationDateProp, creationDate);
 			componentResource.addLiteral(lastUpdateProp, lastUpdate);
 			componentResource.addLiteral(screenshotProp, screenshot);
-			//componentResource.addLiteral(dependenciesProp, dependencies);
-			//componentResource.addLiteral(resourcesProp, resources);
+			// TODO dependencies and resources
 		}
 		
     	return model;
@@ -151,7 +162,7 @@ public class PojoModelParser {
     	ArrayList<Composition> compositions= new ArrayList<Composition>();
 
     	// find all resources of the given type
-    	ResIterator resIt = model.listSubjectsWithProperty(RDF.type, BASE_URL+"Composition");
+    	ResIterator resIt = model.listSubjectsWithProperty(RDF.type, COMPOSITION_TYPE_URI);
     	
     	// parse all found resources into a composition
     	while(resIt.hasNext()) {
@@ -159,7 +170,7 @@ public class PojoModelParser {
 
     		// the URI of the parent component is the ID
     		Resource r = resIt.next();
-    		Statement parent = r.getProperty(model.createProperty(BASE_URL, "parent"));
+    		Statement parent = r.getProperty(model.createProperty(VERSION_OF_PROP_URI));
     		c.setId(parent.asTriple().getObject().getLocalName());
     		
     		// iterate over all triples
@@ -167,24 +178,20 @@ public class PojoModelParser {
     		while(stmtIt.hasNext()) {
     			Statement s = stmtIt.next();
     			
-    			// all triples that end with a literal might be composition property
+    			// all triples that end with a literal might be a composition property
     			if(s.getObject().isLiteral()) {
     				Property p = s.getPredicate();
         			Literal l = s.getObject().asLiteral();
         			
-        			// switch depending on the property name
-        			switch(p.getLocalName()) {
-        				case "title": c.setTitle(l.getString()); break;
-        				case "description": c.setDescription(l.getString()); break;
-        				case "version": c.setVersion(l.getString()); break;
-        				case "owner": c.setOwner(l.getString()); break;
-        				case "creationDate": c.setCreation_date(l.getInt()); break;
-        				case "lastUpdate": c.setLast_update(l.getInt()); break;
-        				case "structure": c.setStructure(l.getString()); break;
-        				//case "rights": break;
-        				//case "components": break;
-        				default: break; // properties that do not match a model field are ignored
-        			}
+        			// set depending on the property URI
+        			if(p.getURI().equals(TITLE_PROP_URI)) c.setTitle(l.getString());
+        			else if(p.getURI().equals(DESCRIPTION_PROP_URI)) c.setDescription(l.getString());
+        			else if(p.getURI().equals(VERSION_PROP_URI)) c.setVersion(l.getString());
+        			else if(p.getURI().equals(CREATOR_PROP_URI)) c.setOwner(l.getString());
+        			else if(p.getURI().equals(CREATED_PROP_URI)) c.setCreation_date(l.getLong());
+        			else if(p.getURI().equals(MODIFIED_PROP_URI)) c.setLast_update(l.getLong());
+        			else if(p.getURI().equals(STRUCTURE_PROP_URI)) c.setStructure(l.getString());
+        			// TODO rights and components
     			}
     		}
     		
@@ -205,20 +212,20 @@ public class PojoModelParser {
 		// iterate trough all compositions
 		for(Composition c: compositions) {
 			// create or get a resource for all versions of this composition
-			Resource r = model.createResource(BASE_URL+c.getId());
+			Resource parentResource = model.createResource(BASE_URL+c.getId());
 			
 			// a resource of type Composition represents this version of the composition
 			Resource compositionResource = model.createResource(BASE_URL+c.getId()+"/"+c.getVersion());
-			compositionResource.addProperty(RDF.type, BASE_URL+"Composition");
-			compositionResource.addProperty(model.createProperty(BASE_URL, "parent"), r);
+			compositionResource.addProperty(RDF.type, COMPOSITION_TYPE_URI);
+			compositionResource.addProperty(model.createProperty(VERSION_OF_PROP_URI), parentResource);
 			
 			// add this version and set it as the latest
-			Property versions = model.createProperty(BASE_URL, "versions");
-			r.addProperty(versions, compositionResource);
-			// TODO: This is currently overwritten by the model merge in FilesystemManager.java
-			Property latestVersion = model.createProperty(BASE_URL, "latestVersion");
-			r.removeAll(latestVersion);
-			r.addProperty(latestVersion, compositionResource);
+			Property versions = model.createProperty(HAS_VERSION_PROP_URI);
+			parentResource.addProperty(versions, compositionResource);
+			// TODO this is currently overwritten by the model merge in FilesystemManager.java
+			Property latestVersion = model.createProperty(LATEST_VERSION_PROP_URI);
+			parentResource.removeAll(latestVersion);
+			parentResource.addProperty(latestVersion, compositionResource);
 			
 			
 			// get all fields and turn them into literals
@@ -226,22 +233,20 @@ public class PojoModelParser {
 			Literal description = model.createTypedLiteral(c.getDescription(), XSD.xstring.getURI());
 			Literal version = model.createTypedLiteral(c.getVersion(), XSD.xstring.getURI());
 			Literal owner = model.createTypedLiteral(c.getOwner(), XSD.xstring.getURI());
-			Literal creationDate = model.createTypedLiteral(c.getCreation_date(), XSD.xint.getURI());
-			Literal lastUpdate = model.createTypedLiteral(c.getLast_update(), XSD.xint.getURI());
+			Literal creationDate = model.createTypedLiteral(c.getCreation_date(), XSD.xlong.getURI());
+			Literal lastUpdate = model.createTypedLiteral(c.getLast_update(), XSD.xlong.getURI());
 			Literal structure = model.createTypedLiteral(c.getStructure(), XSD.xstring.getURI());
-			//Literal rights = model.createTypedLiteral(c.getRights(), XSD.xstring.getURI());
-			//Literal components = model.createTypedLiteral(c.getComponents(), XSD.xstring.getURI());
+			// TODO rights and components
 			
 			// create matching properties
-			Property titleProp = model.createProperty(BASE_URL, "title");
-			Property descriptionProp = model.createProperty(BASE_URL, "description");
-			Property versionProp = model.createProperty(BASE_URL, "version");
-			Property ownerProp = model.createProperty(BASE_URL, "owner");
-			Property creationDateProp = model.createProperty(BASE_URL, "creationDate");
-			Property lastUpdateProp = model.createProperty(BASE_URL, "lastUpdate");
-			Property structureProp = model.createProperty(BASE_URL, "structure");
-			//Property rightsProp = model.createProperty(BASE_URL, "rights");
-			//Property componentsProp = model.createProperty(BASE_URL, "components");
+			Property titleProp = model.createProperty(TITLE_PROP_URI);
+			Property descriptionProp = model.createProperty(DESCRIPTION_PROP_URI);
+			Property versionProp = model.createProperty(VERSION_PROP_URI);
+			Property ownerProp = model.createProperty(CREATOR_PROP_URI);
+			Property creationDateProp = model.createProperty(CREATED_PROP_URI);
+			Property lastUpdateProp = model.createProperty(MODIFIED_PROP_URI);
+			Property structureProp = model.createProperty(STRUCTURE_PROP_URI);
+			// TODO rights and components
 			
 			// the blank node holds all literals with their properties
 			compositionResource.addLiteral(titleProp, title);
@@ -251,8 +256,7 @@ public class PojoModelParser {
 			compositionResource.addLiteral(creationDateProp, creationDate);
 			compositionResource.addLiteral(lastUpdateProp, lastUpdate);
 			compositionResource.addLiteral(structureProp, structure);
-			//compositionResource.addLiteral(rightsProp, rights);
-			//compositionResource.addLiteral(componentsProp, components);
+			// TODO rights and components
 		}
 		
     	return model;

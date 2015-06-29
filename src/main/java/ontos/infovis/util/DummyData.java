@@ -35,18 +35,13 @@ public class DummyData {
   public boolean addComponent(Component cmp) {
 
     String key = cmp.getId() + cmp.getVersion();
-    if (key == null) {
-      System.out.println("key of the component is null !");
-      return false;
-    } else {
-      if (componentContainer.get(key) != null) {
+    if (componentContainer.get(key) != null) {
         System.out.println("key of the component already exists!");
         return false;
       } else {
         componentContainer.put(key, cmp);
         return true;
       }
-    }
   }
 
   /**
@@ -77,17 +72,12 @@ public class DummyData {
    */
   public Component getComponent(String uri, String version) {
     String key = uri + version;
-    if (key == null) {
-      System.out.println("key of the component is null...");
-      return null;
-    } else {
-      if (componentContainer.get(key) == null) {
+    if (componentContainer.get(key) == null) {
         System.out.println("component does not exist...");
         return null;
       } else {
         return componentContainer.get(key);
       }
-    }
   }
 
   /**
@@ -116,18 +106,13 @@ public class DummyData {
   public boolean deleteComponent(String uri, String version) {
 
     String key = uri + version;
-    if (key == null) {
-      System.out.println("key of component is null...");
-      return false;
-    } else {
-      if (componentContainer.get(key) == null) {
+    if (componentContainer.get(key) == null) {
         System.out.println("component does not exist...");
         return false;
       } else {
         componentContainer.remove(key);
         return true;
       }
-    }
   }
 
   /**
@@ -139,18 +124,13 @@ public class DummyData {
   public boolean addComposition(Composition cmp) {
 
     String key = cmp.getId() + cmp.getVersion();
-    if (key == null) {
-      System.out.println("key of the composition is null !");
-      return false;
-    } else {
-      if (compositionContainer.get(key) != null) {
+    if (compositionContainer.get(key) != null) {
         System.out.println("key of the composition already exists!");
         return false;
       } else {
         compositionContainer.put(key, cmp);
         return true;
       }
-    }
   }
 
   /**
@@ -181,17 +161,12 @@ public class DummyData {
    */
   public Composition getComposition(String uri, String version) {
     String key = uri + version;
-    if (key == null) {
-      System.out.println("key of the composition is null...");
-      return null;
-    } else {
-      if (compositionContainer.get(key) == null) {
+    if (compositionContainer.get(key) == null) {
         System.out.println("composition does not exist...");
         return null;
       } else {
         return compositionContainer.get(key);
       }
-    }
   }
 
   /**
@@ -220,17 +195,12 @@ public class DummyData {
   public boolean deleteComposition(String uri, String version) {
 
     String key = uri + version;
-    if (key == null) {
-      System.out.println("key of composition is null...");
-      return false;
-    } else {
-      if (compositionContainer.get(key) == null) {
+    if (compositionContainer.get(key) == null) {
         System.out.println("composition does not exist...");
         return false;
       } else {
         compositionContainer.remove(key);
         return true;
       }
-    }
   }
 }

@@ -1,5 +1,6 @@
 package ontos.infovis.service;
 
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 
 /**
@@ -17,5 +18,7 @@ public class ResourcesConfiguration extends ResourceConfig {
   public ResourcesConfiguration() {
     register(ComponentResource.class);
     register(CompositionResource.class);
+    register(FileUploadResource.class);
+    register(MultiPartFeature.class);
   }
 }
