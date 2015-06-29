@@ -13,7 +13,7 @@ public class ComponentInstance {
   private String id;
   private String instance_id;
   private String version;
-//  private List<ComponentConfig> config;
+  private String config;
 
   /**
    * Sets new instance_id.
@@ -74,16 +74,16 @@ public class ComponentInstance {
    *
    * @return Value of config.
    */
-//  public List<ComponentConfig> getConfig() {
-//    return config;
-//  }
-//
-//  /**
-//   * Sets new config.
-//   *
-//   * @param config New value of config.
-//   */
-//  public void setConfig(List<ComponentConfig> config) {
-//    this.config = config;
-//  }
+  public String getConfig() {
+    return config;
+  }
+
+  /**
+   * Sets new config.
+   *
+   * @param config New value of config.
+   */
+  public void setConfig(String config) {
+    this.config = config;
+  }
 }

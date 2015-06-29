@@ -46,23 +46,31 @@ public class CompositionResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public Response createComposition(Composition composition) {
-	Response response = (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
-	
-	try {
-		boolean registeredComposition = EntryManager.getInstance().registerComposition(composition);
-	    response.setBool(registeredComposition);
-	    response.setError("Creation of Component was successfully. No errors.");
-	    response.setException("Creation of Component was successfully. No exception");
-	}
-	catch (EntryAlreadyExistsException ex) {
-		System.out.println("Couldn't create Composition, because an entry for Composition: " + composition.getId() + " with the name: " + composition.getDescription() + " and version: " + composition.getVersion() + " already exists.");
-		
-		response.setError("Couldn't creat Composition!");
-	    response.setException("Entry for Composition: " + composition.getId() + " with the name: " + composition.getDescription() + " and version: " + composition.getVersion() + " already exists.");
-	   
-	}
+//	Response response = (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+//
+//	try {
+//		boolean registeredComposition = EntryManager.getInstance().registerComposition(composition);
+//	    response.setBool(registeredComposition);
+//	    response.setError("Creation of Component was successfully. No errors.");
+//	    response.setException("Creation of Component was successfully. No exception");
+//	}
+//	catch (EntryAlreadyExistsException ex) {
+//		System.out.println("Couldn't create Composition, because an entry for Composition: " + composition.getId() + " with the name: " + composition.getDescription() + " and version: " + composition.getVersion() + " already exists.");
+//
+//		response.setError("Couldn't creat Composition!");
+//	    response.setException("Entry for Composition: " + composition.getId() + " with the name: " + composition.getDescription() + " and version: " + composition.getVersion() + " already exists.");
+//
+//	}
+//
+//    return response;
 
-    return response;
+      System.out.println(composition);
+
+	Response response = (Response) ApplicationManager.appManager.getSpringContext().getBean("response");
+      response.setBool(true);
+      response.setError("Creation of Component was successfully. No errors.");
+      response.setException("Creation of Component was successfully. No exception");
+      return response;
   }
 
   /**

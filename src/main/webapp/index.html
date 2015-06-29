@@ -254,7 +254,7 @@
             $.getJSON(fileName, function (data) {
                 $.ajax({
                     type: 'POST',
-                    url: 'http://loca:8080/rest/compositions',
+                    url: 'http://localhost:8080/rest/compositions',
                     data: JSON.stringify(data),
                     contentType: 'application/json',
                     cache: false,

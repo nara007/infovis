@@ -21,7 +21,8 @@
 		{
 			"id": "dummy-communes",
 			"instance_id": "23423dsfs324",
-			"version": "1.2.3"
+			"version": "1.2.3",
+            "config": "testABC"
 		}
 	]
 }

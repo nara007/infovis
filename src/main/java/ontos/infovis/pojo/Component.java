@@ -22,7 +22,7 @@ public class Component {
   private String screenshot;
   private List<ComponentDependency> dependencies;
   private List<ComponentResource> resources;
-  private ComponentConfig config;
+  private String config;
 
 
   /**
@@ -219,20 +219,20 @@ public class Component {
   }
 
   /**
-   * Gets config.
-   *
-   * @return Value of config.
-   */
-  public ComponentConfig getConfig() {
-    return config;
-  }
-
-  /**
    * Sets new config.
    *
    * @param config New value of config.
    */
-  public void setConfig(ComponentConfig config) {
+  public void setConfig(String config) {
     this.config = config;
+  }
+
+  /**
+   * Gets config.
+   *
+   * @return Value of config.
+   */
+  public String getConfig() {
+    return config;
   }
 }
