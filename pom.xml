@@ -9,6 +9,20 @@
     <version>0.0.1</version>
     <name>service</name>
 
+    <repositories>
+        <repository>
+            <id>maven.aksw.internal</id>
+            <name>University Leipzig, AKSW Maven2 Repository</name>
+            <url>http://maven.aksw.org/archiva/repository/internal</url>
+        </repository>
+
+        <repository>
+            <id>maven.aksw.snapshots</id>
+            <name>University Leipzig, AKSW Maven2 Repository</name>
+            <url>http://maven.aksw.org/archiva/repository/snapshots</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
@@ -42,6 +56,21 @@
             <artifactId>spring-context</artifactId>
             <version>4.1.6.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>org.aksw.jena-sparql-api</groupId>
+            <artifactId>jena-sparql-api-core</artifactId>
+            <version>2.12.1-9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aksw.jena-sparql-api</groupId>
+            <artifactId>jena-sparql-api-server</artifactId>
+            <version>2.12.1-9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aksw.jena-sparql-api</groupId>
+            <artifactId>jena-sparql-api-cache-h2</artifactId>
+            <version>2.12.1-9</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -53,7 +82,7 @@
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
-                    <inplace>true</inplace>
+                    <!--<inplace>true</inplace>-->
                 </configuration>
             </plugin>
             <plugin>
@@ -70,7 +99,7 @@
                 <configuration>
                     <warSourceDirectory>WebContent</warSourceDirectory>
                     <failOnMissingWebXml>true</failOnMissingWebXml>
-                    <inplace>true</inplace>
+                    <!--<inplace>true</inplace>-->
                     <webResources>
                     	<resource>
                     		<directory>src/main/webapp</directory>
